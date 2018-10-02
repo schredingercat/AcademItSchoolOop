@@ -58,7 +58,7 @@ namespace Shapes
         public static IShape FindByMaxArea(List<IShape> shapes, int index)
         {
             shapes.Sort(new AreaComparer());
-            if (index >= 0 && shapes.Count > index)
+            if (index >= 0 && index < shapes.Count)
             {
                 return shapes[index];
             }
@@ -71,7 +71,7 @@ namespace Shapes
         public static IShape FindByMaxPerimeter(List<IShape> shapes, int index)
         {
             shapes.Sort(new PerimeterComparer());
-            if (index >= 0 && shapes.Count > index)
+            if (index >= 0 && index < shapes.Count)
             {
                 return shapes[index];
             }
