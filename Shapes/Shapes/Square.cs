@@ -43,19 +43,19 @@ namespace Shapes.Shapes
 
         public override bool Equals(object objectToCompare)
         {
-            if (!(objectToCompare is Square square))
+            if (ReferenceEquals(objectToCompare, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(objectToCompare, null) || objectToCompare.GetType() != GetType())
             {
                 return false;
             }
 
-            if (Math.Abs(square._sideLength - _sideLength) < 1E-10)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var square = (Square)objectToCompare;
+
+            return square._sideLength.Equals(_sideLength);
         }
     }
 }

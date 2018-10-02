@@ -68,26 +68,36 @@ namespace Shapes.Shapes
 
         public override int GetHashCode()
         {
-            return (_x1 + _x2 + _x3 + _y1 + _y2 + _y3).GetHashCode();
+            var prime = 19;
+            var hash = 1;
+
+            hash = prime * hash + _x1.GetHashCode();
+            hash = prime * hash + _x2.GetHashCode();
+            hash = prime * hash + _x3.GetHashCode();
+            hash = prime * hash + _y1.GetHashCode();
+            hash = prime * hash + _y2.GetHashCode();
+            hash = prime * hash + _y3.GetHashCode();
+
+            return hash;
         }
 
         public override bool Equals(object objectToCompare)
         {
-            if (!(objectToCompare is Triangle triangle))
+            if (ReferenceEquals(objectToCompare, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(objectToCompare, null) || objectToCompare.GetType() != GetType())
             {
                 return false;
             }
 
-            if ((Math.Abs(triangle._x1 - _x1) < 1E-10) && (Math.Abs(triangle._y1 - _y1) < 1E-10)
-                                                       && (Math.Abs(triangle._x2 - _x2) < 1E-10) && (Math.Abs(triangle._y2 - _y2) < 1E-10)
-                                                       && (Math.Abs(triangle._x3 - _x3) < 1E-10) && (Math.Abs(triangle._y3 - _y3) < 1E-10))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var triangle = (Triangle)objectToCompare;
+
+            return triangle._x1.Equals(_x1) && triangle._y1.Equals(_y1)
+                                            && triangle._x2.Equals(_x2) && triangle._y2.Equals(_y2)
+                                            && triangle._x3.Equals(_x3) && triangle._y3.Equals(_y3);
         }
     }
 }

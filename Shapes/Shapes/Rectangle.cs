@@ -40,24 +40,30 @@ namespace Shapes.Shapes
 
         public override int GetHashCode()
         {
-            return (_width + _height).GetHashCode();
+            var prime = 19;
+            var hash = 1;
+
+            hash = prime * hash + _width.GetHashCode();
+            hash = prime * hash + _height.GetHashCode();
+
+            return hash;
         }
 
         public override bool Equals(object objectToCompare)
         {
-            if (!(objectToCompare is Rectangle rectangle))
+            if (ReferenceEquals(objectToCompare, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(objectToCompare, null) || objectToCompare.GetType() != GetType())
             {
                 return false;
             }
 
-            if ((Math.Abs(rectangle._width - _width) < 1E-10) && (Math.Abs(rectangle._height - _height) < 1E-10))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var rectangle = (Rectangle)objectToCompare;
+
+            return rectangle._width.Equals(_width) && rectangle._height.Equals(_height);
         }
     }
 }

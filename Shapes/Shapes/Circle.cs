@@ -43,19 +43,19 @@ namespace Shapes.Shapes
 
         public override bool Equals(object objectToCompare)
         {
-            if (!(objectToCompare is Circle circle))
+            if (ReferenceEquals(objectToCompare, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(objectToCompare, null) || objectToCompare.GetType() != GetType())
             {
                 return false;
             }
 
-            if (Math.Abs(circle._radius - _radius) < 1E-10)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var circle = (Circle)objectToCompare;
+
+            return circle._radius.Equals(_radius);
         }
     }
 }
