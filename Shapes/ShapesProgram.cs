@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Shapes.Comparers;
+using Shapes.Shapes;
 
 namespace Shapes
 {
