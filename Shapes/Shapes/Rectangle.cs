@@ -63,7 +63,7 @@ namespace Shapes.Shapes
 
             var rectangle = (Rectangle)objectToCompare;
 
-            return rectangle._width.Equals(_width) && rectangle._height.Equals(_height);
+            return rectangle._width == _width && rectangle._height == _height;
         }
     }
 }

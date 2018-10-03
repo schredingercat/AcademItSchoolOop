@@ -55,7 +55,7 @@ namespace Shapes.Shapes
 
             var square = (Square)objectToCompare;
 
-            return square._sideLength.Equals(_sideLength);
+            return square._sideLength == _sideLength;
         }
     }
 }

@@ -95,9 +95,9 @@ namespace Shapes.Shapes
 
             var triangle = (Triangle)objectToCompare;
 
-            return triangle._x1.Equals(_x1) && triangle._y1.Equals(_y1)
-                                            && triangle._x2.Equals(_x2) && triangle._y2.Equals(_y2)
-                                            && triangle._x3.Equals(_x3) && triangle._y3.Equals(_y3);
+            return triangle._x1 == _x1 && triangle._y1 == _y1
+                                       && triangle._x2 == _x2 && triangle._y2 == _y2
+                                       && triangle._x3 == _x3 && triangle._y3 == _y3;
         }
     }
 }

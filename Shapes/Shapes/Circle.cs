@@ -55,7 +55,7 @@ namespace Shapes.Shapes
 
             var circle = (Circle)objectToCompare;
 
-            return circle._radius.Equals(_radius);
+            return circle._radius == _radius;
         }
     }
 }
