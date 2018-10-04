@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C127E1C9-822A-4945-91CF-AB67A6A8E51E}</ProjectGuid>
+    <ProjectGuid>{0A1B9F79-5FB9-4918-A170-000EDB426250}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Range</RootNamespace>
-    <AssemblyName>Range</AssemblyName>
+    <RootNamespace>Vector</RootNamespace>
+    <AssemblyName>Vector</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,9 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RangeProgram.cs" />
+    <Compile Include="Vector.cs" />
+    <Compile Include="VectorProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Range.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
