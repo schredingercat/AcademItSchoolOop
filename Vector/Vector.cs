@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vector
 {
@@ -14,7 +11,7 @@ namespace Vector
         {
             if (n <= 0)
             {
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException();
             }
             Components = new double[n];
         }
@@ -26,14 +23,18 @@ namespace Vector
 
         public Vector(double[] components)
         {
+            if (components.Length == 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             Components = (double[])components.Clone();
         }
 
         public Vector(int n, double[] components)
         {
-            if (n <= 0)
+            if (n <= 0 || components.Length == 0)
             {
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException();
             }
             Components = new double[n];
             Array.Copy(components, Components, Math.Min(components.Length, Components.Length));
@@ -51,31 +52,33 @@ namespace Vector
 
         public void Merge(Vector vector)
         {
-            var vectorA = new double[Math.Max(vector.Components.Length, Components.Length)];
-            Array.Copy(Components, vectorA, Components.Length);
-            var vectorB = new double[vectorA.Length];
-            Array.Copy(vector.Components, vectorB, vector.Components.Length);
-            Components = new double[vectorA.Length];
+            var size = Math.Max(vector.GetSize(), GetSize());
 
-            for (int i = 0; i < Components.Length; i++)
+            var componentsA = new double[size];
+            Array.Copy(Components, componentsA, Components.Length);
+            var componentsB = new double[size];
+            Array.Copy(vector.Components, componentsB, vector.Components.Length);
+            Components = new double[size];
+
+            for (int i = 0; i < size; i++)
             {
-                Components[i] = vectorA[i] + vectorB[i];
+                Components[i] = componentsA[i] + componentsB[i];
             }
         }
 
         public void Subtract(Vector vector)
         {
-            var vectorA = new double[Math.Max(vector.GetSize(), GetSize())];
-            Array.Copy(Components, vectorA, GetSize());
+            var size = Math.Max(vector.GetSize(), GetSize());
 
-            var vectorB = new double[vectorA.Length];
-            Array.Copy(vector.Components, vectorB, vector.GetSize());
+            var componentsA = new double[size];
+            Array.Copy(Components, componentsA, Components.Length);
+            var componentsB = new double[size];
+            Array.Copy(vector.Components, componentsB, vector.Components.Length);
+            Components = new double[size];
 
-            Components = new double[vectorA.Length];
-
-            for (int i = 0; i < Components.Length; i++)
+            for (int i = 0; i < size; i++)
             {
-                Components[i] = vectorA[i] - vectorB[i];
+                Components[i] = componentsA[i] - componentsB[i];
             }
         }
 
@@ -92,7 +95,120 @@ namespace Vector
             Multiply(-1);
         }
 
+        public double GetLength()
+        {
+            double length = 0;
 
+            for (int i = 0; i < GetSize(); i++)
+            {
+                length += Math.Pow(Components[i], 2);
+            }
+            length = Math.Sqrt(length);
 
+            return length;
+        }
+
+        public double GetComponent(int index)
+        {
+            if (index < GetLength())
+            {
+                return Components[index];
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public void SetComponent(int index, double value)
+        {
+            if (index < GetLength())
+            {
+                Components[index] = value;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(obj, null) || obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            var vector = (Vector)obj;
+            return Components.SequenceEqual(vector.Components);
+        }
+
+        public override int GetHashCode()
+        {
+            var prime = 19;
+            var hash = 1;
+
+            for (int i = 0; i < GetSize(); i++)
+            {
+                hash = prime * hash + GetComponent(i).GetHashCode();
+            }
+            return hash;
+        }
+
+        public static Vector Merge(Vector vectorA, Vector vectorB)
+        {
+            var size = Math.Max(vectorA.GetSize(), vectorB.GetSize());
+            var componentsA = new double[size];
+            Array.Copy(vectorA.Components, componentsA, vectorA.Components.Length);
+            var componentsB = new double[size];
+            Array.Copy(vectorB.Components, componentsB, vectorB.Components.Length);
+
+            var resultVector = new Vector(size);
+
+            for (int i = 0; i < size; i++)
+            {
+                resultVector.Components[i] = componentsA[i] + componentsB[i];
+            }
+            return resultVector;
+        }
+
+        public static Vector Subtract(Vector vectorA, Vector vectorB)
+        {
+            var size = Math.Max(vectorA.GetSize(), vectorB.GetSize());
+            var componentsA = new double[size];
+            Array.Copy(vectorA.Components, componentsA, vectorA.Components.Length);
+            var componentsB = new double[size];
+            Array.Copy(vectorB.Components, componentsB, vectorB.Components.Length);
+
+            var resultVector = new Vector(size);
+
+            for (int i = 0; i < size; i++)
+            {
+                resultVector.Components[i] = componentsA[i] - componentsB[i];
+            }
+            return resultVector;
+        }
+
+        public static double ScalarProduct(Vector vectorA, Vector vectorB)
+        {
+            var size = Math.Max(vectorA.GetSize(), vectorB.GetSize());
+            var componentsA = new double[size];
+            Array.Copy(vectorA.Components, componentsA, vectorA.Components.Length);
+            var componentsB = new double[size];
+            Array.Copy(vectorB.Components, componentsB, vectorB.Components.Length);
+
+            double result = 0;
+
+            for (int i = 0; i < size; i++)
+            {
+                result += componentsA[i] * componentsB[i];
+            }
+            return result;
+        }
     }
 }
