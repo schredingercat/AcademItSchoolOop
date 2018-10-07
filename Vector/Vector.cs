@@ -50,7 +50,7 @@ namespace Vector
             return $"{{{string.Join(", ", Components)}}}";
         }
 
-        public void Merge(Vector vector)
+        public void Add(Vector vector)
         {
             var size = Math.Max(vector.GetSize(), GetSize());
 
@@ -160,7 +160,7 @@ namespace Vector
             return hash;
         }
 
-        public static Vector Merge(Vector vectorA, Vector vectorB)
+        public static Vector Add(Vector vectorA, Vector vectorB)
         {
             var size = Math.Max(vectorA.GetSize(), vectorB.GetSize());
             var componentsA = new double[size];

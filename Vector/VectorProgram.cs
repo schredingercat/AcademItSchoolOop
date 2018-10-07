@@ -31,7 +31,7 @@ namespace Vector
 
             Console.WriteLine();
             Console.Write($"{vector1} + {vector2} = ");
-            vector1.Merge(vector2);
+            vector1.Add(vector2);
             Console.WriteLine(vector1);
 
             Console.WriteLine();
@@ -63,7 +63,7 @@ namespace Vector
             Console.WriteLine($"Вектор {vector2} {(vector2.Equals(vector3) ? "равен" : "не равен")} вектору {vector3}");
 
             Console.WriteLine();
-            Console.WriteLine($"{vector1} + {vector2} = {Vector.Merge(vector1, vector2)}");
+            Console.WriteLine($"{vector1} + {vector2} = {Vector.Add(vector1, vector2)}");
             Console.WriteLine($"{vector1} - {vector3} = {Vector.Subtract(vector1, vector3)}");
             Console.WriteLine($"({vector1}, {vector2} ) = {Vector.ScalarProduct(vector1, vector2)}");
 
