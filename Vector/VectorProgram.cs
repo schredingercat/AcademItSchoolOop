@@ -56,7 +56,7 @@ namespace Vector
             Console.Write($"Второй компоненте вектора {vector1} присваивается 5.9 ");
             vector1[1] = 5.9;
             Console.WriteLine(vector1);
-            Console.WriteLine($"Теперь вторая компонента равна {vector1[1]}");
+            Console.WriteLine($"Теперь вторая компонента вектора равна {vector1[1]}");
 
             Console.WriteLine();
             try
