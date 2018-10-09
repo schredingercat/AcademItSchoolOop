@@ -54,9 +54,20 @@ namespace Vector
 
             Console.WriteLine();
             Console.Write($"Второй компоненте вектора {vector1} присваивается 5.9 ");
-            vector1.SetComponent(1, 5.9);
+            vector1[1] = 5.9;
             Console.WriteLine(vector1);
-            Console.WriteLine($"Теперь вторая компонента равна {vector1.GetComponent(1)}");
+            Console.WriteLine($"Теперь вторая компонента равна {vector1[1]}");
+
+            Console.WriteLine();
+            Console.WriteLine("Попытка обратиться к несуществующей компоненте вектора:");
+            try
+            {
+                Console.WriteLine(vector1[-5]);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             Console.WriteLine();
             Console.WriteLine($"Вектор {vector2} {(vector2.Equals(vector1) ? "равен" : "не равен")} вектору {vector1}");

@@ -11,7 +11,7 @@ namespace Vector
         {
             if (n <= 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(n), "Размерность вектора должна быть целым положительным числом");
             }
             Components = new double[n];
         }
@@ -25,7 +25,7 @@ namespace Vector
         {
             if (components.Length == 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(components.Length), "Размерность вектора должна быть целым положительным числом");
             }
             Components = (double[])components.Clone();
         }
@@ -34,7 +34,8 @@ namespace Vector
         {
             if (n <= 0 || components.Length == 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException($"{nameof(n)}, {nameof(components.Length)}",
+                    "Размерность вектора должна быть целым положительным числом");
             }
             Components = new double[n];
             Array.Copy(components, Components, Math.Min(components.Length, Components.Length));
@@ -109,27 +110,23 @@ namespace Vector
             return Math.Sqrt(lengthPow);
         }
 
-        public double GetComponent(int index)
+        public double this[int index]
         {
-            if (index < GetLength())
+            get
             {
+                if (index < 0 || index >= GetLength())
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за пределы размерности вектора");
+                }
                 return Components[index];
             }
-            else
+            set
             {
-                throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        public void SetComponent(int index, double value)
-        {
-            if (index < GetLength())
-            {
+                if (index < 0 || index >= GetLength())
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за пределы размерности вектора");
+                }
                 Components[index] = value;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -156,7 +153,7 @@ namespace Vector
 
             for (int i = 0; i < GetSize(); i++)
             {
-                hash = prime * hash + GetComponent(i).GetHashCode();
+                hash = prime * hash + this[i].GetHashCode();
             }
             return hash;
         }
