@@ -59,14 +59,13 @@ namespace Vector
             Console.WriteLine($"Теперь вторая компонента равна {vector1[1]}");
 
             Console.WriteLine();
-            Console.WriteLine("Попытка обратиться к несуществующей компоненте вектора:");
             try
             {
                 Console.WriteLine(vector1[-5]);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Попытка обратиться к несуществующей компоненте вектора: {ex.Message}");
             }
 
             Console.WriteLine();
