@@ -59,12 +59,12 @@ namespace Vector
             {
                 var componentsTemp = new double[size];
                 Array.Copy(Components, componentsTemp, Components.Length);
-                Components = (double[])componentsTemp.Clone();
+                Components = componentsTemp;
             }
 
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < vector.Components.Length; i++)
             {
-                Components[i] += (i < vector.Components.Length) ? vector.Components[i] : 0;
+                Components[i] += vector.Components[i];
             }
         }
 
@@ -76,12 +76,12 @@ namespace Vector
             {
                 var componentsTemp = new double[size];
                 Array.Copy(Components, componentsTemp, Components.Length);
-                Components = (double[])componentsTemp.Clone();
+                Components = componentsTemp;
             }
 
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < vector.Components.Length; i++)
             {
-                Components[i] -= (i < vector.Components.Length) ? vector.Components[i] : 0;
+                Components[i] -= vector.Components[i];
             }
         }
 
@@ -178,9 +178,9 @@ namespace Vector
         {
             double result = 0;
 
-            for (int i = 0; i < Math.Max(vectorA.GetSize(), vectorB.GetSize()); i++)
+            for (int i = 0; i < Math.Min(vectorA.GetSize(), vectorB.GetSize()); i++)
             {
-                result += ((i < vectorA.Components.Length) ? vectorA.Components[i] : 0) * ((i < vectorB.Components.Length) ? vectorB.Components[i] : 0);
+                result += vectorA.Components[i] * vectorB.Components[i];
             }
             return result;
         }
