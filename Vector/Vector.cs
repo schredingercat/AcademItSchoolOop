@@ -177,8 +177,9 @@ namespace Vector
         public static double ScalarProduct(Vector vectorA, Vector vectorB)
         {
             double result = 0;
+            double minSize = Math.Min(vectorA.GetSize(), vectorB.GetSize());
 
-            for (int i = 0; i < Math.Min(vectorA.GetSize(), vectorB.GetSize()); i++)
+            for (int i = 0; i < minSize; i++)
             {
                 result += vectorA.Components[i] * vectorB.Components[i];
             }
