@@ -154,7 +154,7 @@ namespace Matrix
         {
             if (vector.GetSize() != _data[0].GetSize())
             {
-                throw new ArgumentException("Матрица и вектор не согласованы");
+                throw new ArgumentException("Матрица и вектор не согласованы", nameof(vector));
             }
 
             var resultComponents = new double[_data.Length];
@@ -167,6 +167,46 @@ namespace Matrix
             }
 
             return new RowVector(resultComponents);
+        }
+
+        public void Add(Matrix matrix)
+        {
+            if (matrix._data.Length != _data.Length || matrix._data[0].GetSize() != _data[0].GetSize())
+            {
+                throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
+            }
+
+            for (int i = 0; i < _data.Length; i++)
+            {
+                _data[i].Add(matrix._data[i]);
+            }
+        }
+
+        public void Subtract(Matrix matrix)
+        {
+            if (matrix._data.Length != _data.Length || matrix._data[0].GetSize() != _data[0].GetSize())
+            {
+                throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
+            }
+
+            for (int i = 0; i < _data.Length; i++)
+            {
+                _data[i].Subtract(matrix._data[i]);
+            }
+        }
+
+        public static Matrix Add(Matrix matrixA, Matrix matrixB)
+        {
+            var resultMatrix = new Matrix(matrixA);
+            resultMatrix.Add(matrixB);
+            return matrixA;
+        }
+
+        public static Matrix Subtract(Matrix matrixA, Matrix matrixB)
+        {
+            var resultMatrix = new Matrix(matrixA);
+            resultMatrix.Subtract(matrixB);
+            return matrixA;
         }
 
         public override string ToString()

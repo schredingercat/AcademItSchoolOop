@@ -60,6 +60,17 @@ namespace Matrix
             var vector = new RowVector(new RowVector(new double[] { 1, 2, 4 }));
             Console.WriteLine($"{matrix4} x {vector} = {matrix4.MultiplyByVector(vector)}");
 
+            Console.WriteLine();
+            var matrix15 = new Matrix(new double[,] { { 3, 14, 15 }, { 92, 6, 5 }, { 4, 32, 17 } });
+            var matrix16 = new Matrix(new double[,] { { 13, 24, 45 }, { 2, 86, 15 }, { 24, 2, 7 } });
+            Console.Write($"{matrix15} + {matrix16} = ");
+            matrix15.Add(matrix16);
+            Console.WriteLine($"{matrix15}");
+            Console.Write($"{matrix15} - {matrix16} = ");
+            matrix15.Subtract(matrix16);
+            Console.WriteLine($"{matrix15}");
+
+
 
             Console.ReadLine();
 
