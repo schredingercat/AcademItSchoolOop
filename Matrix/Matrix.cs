@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RowVector= Vector.Vector;
+using RowVector = Vector.Vector;
 
 namespace Matrix
 {
@@ -108,6 +108,45 @@ namespace Matrix
             {
                 vector.Multiply(factor);
             }
+        }
+
+        public double GetDeterminant()
+        {
+            if (_data.Length != _data[0].GetSize())
+            {
+                throw new ArgumentException("Невозможно вычислить определитель не квадратной матрицы");
+            }
+
+            if (_data.Length == 1)
+            {
+                return _data[0].Components[0];
+            }
+
+            double determinant = 0;
+
+            for (int i = 0; i < _data.Length; i++)
+            {
+                determinant += Math.Pow(-1, i) * _data[0].Components[i] * GetMinor(i,0).GetDeterminant();
+            }
+
+            return determinant;
+        }
+
+        private Matrix GetMinor(int columnIndex, int rowIndex)
+        {
+            var resultData = new RowVector[_data.Length - 1];
+            for (int i = 0; i < resultData.Length; i++)
+            {
+                var vector = new RowVector(resultData.Length);
+
+                for (int j = 0; j < resultData.Length; j++)
+                {
+                    vector.Components[j] = (j < columnIndex) ? _data[(i < rowIndex) ? i : i + 1].Components[j] : _data[(i < rowIndex) ? i : i + 1].Components[j + 1];
+                }
+
+                resultData[i] = vector;
+            }
+            return new Matrix(resultData);
         }
 
         public override string ToString()

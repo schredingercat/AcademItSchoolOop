@@ -19,7 +19,7 @@ namespace Matrix
             Console.WriteLine(matrix2);
             Console.WriteLine(matrix2.GetSize());
 
-            var matrix3 = new Matrix(new double[,]{{1,2,3},{4,5,6}});
+            var matrix3 = new Matrix(new double[,]{{1,2,3},{4,5,6}, { 7, 8, 9 } });
             Console.WriteLine(matrix3);
             Console.WriteLine(matrix3.GetSize());
 
@@ -43,6 +43,16 @@ namespace Matrix
 
             matrix4.Multiply(10);
             Console.WriteLine(matrix4);
+
+            Console.WriteLine();
+            var matrix0 = new Matrix(new double[,] { { 3, 14, 15 }, { 92, 6, 5 }, {4, 32, 17} });
+            Console.WriteLine(matrix0);
+            Console.WriteLine(matrix0.GetDeterminant());
+
+
+            Console.WriteLine();
+            Console.WriteLine(matrix3);
+            Console.WriteLine(matrix3.GetDeterminant());
 
             Console.ReadLine();
 
