@@ -54,6 +54,13 @@ namespace Matrix
             Console.WriteLine(matrix3);
             Console.WriteLine(matrix3.GetDeterminant());
 
+            Console.WriteLine();
+            Console.WriteLine(matrix4);
+            Console.WriteLine(matrix4.GetSize());
+            var vector = new RowVector(new RowVector(new double[] { 1, 2, 4 }));
+            Console.WriteLine($"{matrix4} x {vector} = {matrix4.MultiplyByVector(vector)}");
+
+
             Console.ReadLine();
 
         }

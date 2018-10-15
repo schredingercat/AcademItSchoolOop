@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -147,6 +148,25 @@ namespace Matrix
                 resultData[i] = vector;
             }
             return new Matrix(resultData);
+        }
+
+        public RowVector MultiplyByVector(RowVector vector)
+        {
+            if (vector.GetSize() != _data[0].GetSize())
+            {
+                throw new ArgumentException("Матрица и вектор не согласованы");
+            }
+
+            var resultComponents = new double[_data.Length];
+            for (int i = 0; i < resultComponents.Length; i++)
+            {
+                for (int j = 0; j < vector.GetSize(); j++)
+                {
+                    resultComponents[i] += _data[i].Components[j] * vector.Components[j];
+                }
+            }
+
+            return new RowVector(resultComponents);
         }
 
         public override string ToString()
