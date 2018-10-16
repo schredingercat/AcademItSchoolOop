@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RowVector = Vector.Vector;
 
 namespace Matrix
@@ -69,6 +65,16 @@ namespace Matrix
             Console.Write($"{matrix15} - {matrix16} = ");
             matrix15.Subtract(matrix16);
             Console.WriteLine($"{matrix15}");
+
+            Console.WriteLine();
+            Console.WriteLine("Произведение матриц");
+
+            var matrix25 = new Matrix(new double[,] { { 1, 2, 3 ,4}, { 5, 6, 7, 8 }, { 9, 10, 11, 12 } });
+            var matrix26 = new Matrix(new double[,] { { 10, 12, 34 }, { 15, 8, 47 }, { 25, 19, 4 }, { 55, 2, 94 } });
+
+            Console.WriteLine(matrix25);
+            Console.WriteLine(matrix26);
+            Console.WriteLine(Matrix.Multiply(matrix25, matrix26));
 
 
 

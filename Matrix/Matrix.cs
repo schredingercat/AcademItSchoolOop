@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RowVector = Vector.Vector;
 
 namespace Matrix
@@ -127,7 +122,7 @@ namespace Matrix
 
             for (int i = 0; i < _data.Length; i++)
             {
-                determinant += Math.Pow(-1, i) * _data[0].Components[i] * GetMinor(i,0).GetDeterminant();
+                determinant += Math.Pow(-1, i) * _data[0].Components[i] * GetMinor(i, 0).GetDeterminant();
             }
 
             return determinant;
@@ -207,6 +202,29 @@ namespace Matrix
             var resultMatrix = new Matrix(matrixA);
             resultMatrix.Subtract(matrixB);
             return matrixA;
+        }
+
+        public static Matrix Multiply(Matrix matrixA, Matrix matrixB)
+        {
+            if (matrixA._data[0].GetSize() != matrixB._data.Length)
+            {
+                throw new ArgumentException("Матрицы не согласованы", $"{nameof(matrixA)}, {nameof(matrixB)}");
+            }
+
+            var wSize = matrixB._data[0].GetSize();
+            var hSize = matrixA._data.Length;
+
+            var resultData = new double[wSize, hSize];
+
+            for (int i = 0; i < wSize; i++)
+            {
+                for (int j = 0; j < hSize; j++)
+                {
+                    resultData[i, j] = RowVector.ScalarProduct(matrixA.GetRow(i), matrixB.GetColumn(j));
+                }
+            }
+
+            return new Matrix(resultData);
         }
 
         public override string ToString()
