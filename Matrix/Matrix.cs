@@ -210,14 +210,14 @@ namespace Matrix
         {
             var resultMatrix = new Matrix(matrixA);
             resultMatrix.Add(matrixB);
-            return matrixA;
+            return resultMatrix;
         }
 
         public static Matrix Subtract(Matrix matrixA, Matrix matrixB)
         {
             var resultMatrix = new Matrix(matrixA);
             resultMatrix.Subtract(matrixB);
-            return matrixA;
+            return resultMatrix;
         }
 
         public static Matrix Multiply(Matrix matrixA, Matrix matrixB)
