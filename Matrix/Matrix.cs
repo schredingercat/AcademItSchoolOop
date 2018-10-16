@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using RowVector = Vector.Vector;
 
 namespace Matrix
@@ -10,6 +11,7 @@ namespace Matrix
         public Matrix(int n, int m)
         {
             _data = new RowVector[m];
+
             for (int i = 0; i < m; i++)
             {
                 _data[i] = new RowVector(n);
@@ -20,6 +22,7 @@ namespace Matrix
         {
             var size = matrix._data.Length;
             _data = new RowVector[size];
+
             for (int i = 0; i < size; i++)
             {
                 _data[i] = new RowVector(matrix._data[i]);
@@ -28,12 +31,14 @@ namespace Matrix
 
         public Matrix(double[,] dataValues)
         {
-            _data = new RowVector[dataValues.GetLength(0)];
+            var wSize = dataValues.GetLength(0);
+            var hSize = dataValues.GetLength(1);
+            _data = new RowVector[wSize];
 
-            for (int i = 0; i < dataValues.GetLength(0); i++)
+            for (int i = 0; i < wSize; i++)
             {
-                _data[i] = new RowVector(dataValues.GetLength(1));
-                for (int j = 0; j < dataValues.GetLength(1); j++)
+                _data[i] = new RowVector(hSize);
+                for (int j = 0; j < hSize; j++)
                 {
                     _data[i].Components[j] = dataValues[i, j];
                 }
@@ -89,8 +94,9 @@ namespace Matrix
 
         public void Transpone()
         {
-            var resultData = new RowVector[_data[0].GetSize()];
-            for (int i = 0; i < resultData.Length; i++)
+            var size = _data[0].GetSize();
+            var resultData = new RowVector[size];
+            for (int i = 0; i < size; i++)
             {
                 resultData[i] = new RowVector(GetColumn(i));
             }
@@ -113,14 +119,16 @@ namespace Matrix
                 throw new ArgumentException("Невозможно вычислить определитель не квадратной матрицы");
             }
 
-            if (_data.Length == 1)
+            var size = _data.Length;
+
+            if (size == 1)
             {
                 return _data[0].Components[0];
             }
 
             double determinant = 0;
 
-            for (int i = 0; i < _data.Length; i++)
+            for (int i = 0; i < size; i++)
             {
                 determinant += Math.Pow(-1, i) * _data[0].Components[i] * GetMinor(i, 0).GetDeterminant();
             }
@@ -130,18 +138,21 @@ namespace Matrix
 
         private Matrix GetMinor(int columnIndex, int rowIndex)
         {
-            var resultData = new RowVector[_data.Length - 1];
-            for (int i = 0; i < resultData.Length; i++)
-            {
-                var vector = new RowVector(resultData.Length);
+            var size = _data.Length - 1;
+            var resultData = new RowVector[size];
 
-                for (int j = 0; j < resultData.Length; j++)
+            for (int i = 0; i < size; i++)
+            {
+                var vector = new RowVector(size);
+
+                for (int j = 0; j < size; j++)
                 {
                     vector.Components[j] = (j < columnIndex) ? _data[(i < rowIndex) ? i : i + 1].Components[j] : _data[(i < rowIndex) ? i : i + 1].Components[j + 1];
                 }
 
                 resultData[i] = vector;
             }
+
             return new Matrix(resultData);
         }
 
@@ -152,10 +163,13 @@ namespace Matrix
                 throw new ArgumentException("Матрица и вектор не согласованы", nameof(vector));
             }
 
-            var resultComponents = new double[_data.Length];
-            for (int i = 0; i < resultComponents.Length; i++)
+            var wSize = vector.GetSize();
+            var hSize = _data.Length;
+
+            var resultComponents = new double[hSize];
+            for (int i = 0; i < hSize; i++)
             {
-                for (int j = 0; j < vector.GetSize(); j++)
+                for (int j = 0; j < wSize; j++)
                 {
                     resultComponents[i] += _data[i].Components[j] * vector.Components[j];
                 }
@@ -171,7 +185,8 @@ namespace Matrix
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
 
-            for (int i = 0; i < _data.Length; i++)
+            var size = _data.Length;
+            for (int i = 0; i < size; i++)
             {
                 _data[i].Add(matrix._data[i]);
             }
@@ -184,7 +199,8 @@ namespace Matrix
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
 
-            for (int i = 0; i < _data.Length; i++)
+            var size = _data.Length;
+            for (int i = 0; i < size; i++)
             {
                 _data[i].Subtract(matrix._data[i]);
             }
@@ -229,12 +245,7 @@ namespace Matrix
 
         public override string ToString()
         {
-            string result = string.Empty;
-            foreach (var vector in _data)
-            {
-                result += vector;
-            }
-            return $"{{{result}}}";
+            return $"{{{string.Join(", ", _data.ToList())}}}";
         }
     }
 }
