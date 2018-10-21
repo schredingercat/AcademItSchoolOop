@@ -12,7 +12,7 @@ namespace Matrix
         {
             _data = new Vector.Vector[m];
 
-            for (int i = 0; i < m; i++)
+            for (var i = 0; i < m; i++)
             {
                 _data[i] = new Vector.Vector(n);
             }
@@ -23,7 +23,7 @@ namespace Matrix
             var size = matrix._data.Length;
             _data = new Vector.Vector[size];
 
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
                 _data[i] = new Vector.Vector(matrix._data[i]);
             }
@@ -35,10 +35,10 @@ namespace Matrix
             var hSize = dataValues.GetLength(1);
             _data = new Vector.Vector[wSize];
 
-            for (int i = 0; i < wSize; i++)
+            for (var i = 0; i < wSize; i++)
             {
                 _data[i] = new Vector.Vector(hSize);
-                for (int j = 0; j < hSize; j++)
+                for (var j = 0; j < hSize; j++)
                 {
                     _data[i].Components[j] = dataValues[i, j];
                 }
@@ -50,7 +50,7 @@ namespace Matrix
             var size = data.Length;
             _data = new Vector.Vector[size];
 
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
                 _data[i] = new Vector.Vector(data[i]);
             }
@@ -76,7 +76,7 @@ namespace Matrix
         public Vector.Vector GetColumn(int index)
         {
             var resultVector = new Vector.Vector(_data.Length);
-            for (int i = 0; i < _data.Length; i++)
+            for (var i = 0; i < _data.Length; i++)
             {
                 resultVector.Components[i] = _data[i].Components[index];
             }
@@ -86,7 +86,7 @@ namespace Matrix
 
         public void SetColumn(Vector.Vector vector, int index)
         {
-            for (int i = 0; i < _data.Length; i++)
+            for (var i = 0; i < _data.Length; i++)
             {
                 _data[i].Components[index] = vector.Components[i];
             }
@@ -96,7 +96,7 @@ namespace Matrix
         {
             var size = _data[0].GetSize();
             var resultData = new Vector.Vector[size];
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
                 resultData[i] = new Vector.Vector(GetColumn(i));
             }
@@ -128,7 +128,7 @@ namespace Matrix
 
             double determinant = 0;
 
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
                 determinant += Math.Pow(-1, i) * _data[0].Components[i] * GetMinor(i, 0).GetDeterminant();
             }
@@ -141,11 +141,11 @@ namespace Matrix
             var size = _data.Length - 1;
             var resultData = new Vector.Vector[size];
 
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
                 var vector = new Vector.Vector(size);
 
-                for (int j = 0; j < size; j++)
+                for (var j = 0; j < size; j++)
                 {
                     vector.Components[j] = (j < columnIndex) ? _data[(i < rowIndex) ? i : i + 1].Components[j] : _data[(i < rowIndex) ? i : i + 1].Components[j + 1];
                 }
@@ -167,9 +167,9 @@ namespace Matrix
             var hSize = _data.Length;
 
             var resultComponents = new double[hSize];
-            for (int i = 0; i < hSize; i++)
+            for (var i = 0; i < hSize; i++)
             {
-                for (int j = 0; j < wSize; j++)
+                for (var j = 0; j < wSize; j++)
                 {
                     resultComponents[i] += _data[i].Components[j] * vector.Components[j];
                 }
@@ -186,7 +186,7 @@ namespace Matrix
             }
 
             var size = _data.Length;
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
                 _data[i].Add(matrix._data[i]);
             }
@@ -200,7 +200,7 @@ namespace Matrix
             }
 
             var size = _data.Length;
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
                 _data[i].Subtract(matrix._data[i]);
             }
@@ -232,9 +232,9 @@ namespace Matrix
 
             var resultData = new double[wSize, hSize];
 
-            for (int i = 0; i < wSize; i++)
+            for (var i = 0; i < wSize; i++)
             {
-                for (int j = 0; j < hSize; j++)
+                for (var j = 0; j < hSize; j++)
                 {
                     resultData[i, j] = Vector.Vector.ScalarProduct(matrixA.GetRow(i), matrixB.GetColumn(j));
                 }
