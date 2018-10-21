@@ -1,5 +1,4 @@
 ﻿using System;
-using RowVector = Vector.Vector;
 
 namespace Matrix
 {
@@ -16,7 +15,7 @@ namespace Matrix
             var matrix3 = new Matrix(new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
             Console.WriteLine($"{nameof(matrix3)}: {matrix3}");
 
-            var matrix4 = new Matrix(new[] { new RowVector(new double[] { 12, 23, 34, 56 }), new RowVector(new double[] { 65, 83, 45, 44 }), new RowVector(new double[] { 3, 5, 8, 9 }) });
+            var matrix4 = new Matrix(new[] { new Vector.Vector(new double[] { 12, 23, 34, 56 }), new Vector.Vector(new double[] { 65, 83, 45, 44 }), new Vector.Vector(new double[] { 3, 5, 8, 9 }) });
             Console.WriteLine($"{nameof(matrix4)}: {matrix4}");
 
             Console.WriteLine();
@@ -25,13 +24,13 @@ namespace Matrix
             Console.WriteLine();
             Console.WriteLine($"Получение строки: {matrix4.GetRow(1)}");
             Console.Write($"Установка строки: ");
-            matrix4.SetRow(new RowVector(new double[] { 18, 19, 20, 21 }), 0);
+            matrix4.SetRow(new Vector.Vector(new double[] { 18, 19, 20, 21 }), 0);
             Console.WriteLine(matrix4);
 
             Console.WriteLine();
             Console.WriteLine($"Получение столбца {matrix4.GetColumn(1)}");
             Console.Write($"Установка столбца: ");
-            matrix4.SetColumn(new RowVector(new double[] { 16, 17, 25 }), 2);
+            matrix4.SetColumn(new Vector.Vector(new double[] { 16, 17, 25 }), 2);
             Console.WriteLine(matrix4);
 
             Console.WriteLine();
@@ -51,7 +50,7 @@ namespace Matrix
 
             Console.WriteLine();
             Console.WriteLine("Умножение матрицы на вектор");
-            var vector = new RowVector(new RowVector(new double[] { 1, 2, 4 }));
+            var vector = new Vector.Vector(new Vector.Vector(new double[] { 1, 2, 4 }));
             Console.WriteLine($"{matrix4} x {vector} = {matrix4.MultiplyByVector(vector)}");
 
             Console.WriteLine();

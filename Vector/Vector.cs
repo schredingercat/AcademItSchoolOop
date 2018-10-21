@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Vector
 {
-    class Vector
+    public class Vector
     {
         public double[] Components { get; private set; }
 

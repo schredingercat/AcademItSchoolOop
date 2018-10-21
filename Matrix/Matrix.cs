@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Linq;
-using RowVector = Vector.Vector;
+
 
 namespace Matrix
 {
     class Matrix
     {
-        private RowVector[] _data;
+        private Vector.Vector[] _data;
 
         public Matrix(int n, int m)
         {
-            _data = new RowVector[m];
+            _data = new Vector.Vector[m];
 
             for (int i = 0; i < m; i++)
             {
-                _data[i] = new RowVector(n);
+                _data[i] = new Vector.Vector(n);
             }
         }
 
         public Matrix(Matrix matrix)
         {
             var size = matrix._data.Length;
-            _data = new RowVector[size];
+            _data = new Vector.Vector[size];
 
             for (int i = 0; i < size; i++)
             {
-                _data[i] = new RowVector(matrix._data[i]);
+                _data[i] = new Vector.Vector(matrix._data[i]);
             }
         }
 
@@ -33,11 +33,11 @@ namespace Matrix
         {
             var wSize = dataValues.GetLength(0);
             var hSize = dataValues.GetLength(1);
-            _data = new RowVector[wSize];
+            _data = new Vector.Vector[wSize];
 
             for (int i = 0; i < wSize; i++)
             {
-                _data[i] = new RowVector(hSize);
+                _data[i] = new Vector.Vector(hSize);
                 for (int j = 0; j < hSize; j++)
                 {
                     _data[i].Components[j] = dataValues[i, j];
@@ -45,14 +45,14 @@ namespace Matrix
             }
         }
 
-        public Matrix(RowVector[] data)
+        public Matrix(Vector.Vector[] data)
         {
             var size = data.Length;
-            _data = new RowVector[size];
+            _data = new Vector.Vector[size];
 
             for (int i = 0; i < size; i++)
             {
-                _data[i] = new RowVector(data[i]);
+                _data[i] = new Vector.Vector(data[i]);
             }
         }
 
@@ -61,21 +61,21 @@ namespace Matrix
             return $"{_data[0].GetSize()}x{_data.Length}";
         }
 
-        public RowVector GetRow(int index)
+        public Vector.Vector GetRow(int index)
         {
             return _data[index];
         }
 
-        public void SetRow(RowVector vector, int index)
+        public void SetRow(Vector.Vector vector, int index)
         {
-            var resultVector = new RowVector(_data[0].GetSize());
+            var resultVector = new Vector.Vector(_data[0].GetSize());
             Array.Copy(vector.Components, resultVector.Components, Math.Min(vector.GetSize(), resultVector.GetSize()));
             _data[index] = resultVector;
         }
 
-        public RowVector GetColumn(int index)
+        public Vector.Vector GetColumn(int index)
         {
-            var resultVector = new RowVector(_data.Length);
+            var resultVector = new Vector.Vector(_data.Length);
             for (int i = 0; i < _data.Length; i++)
             {
                 resultVector.Components[i] = _data[i].Components[index];
@@ -84,7 +84,7 @@ namespace Matrix
             return resultVector;
         }
 
-        public void SetColumn(RowVector vector, int index)
+        public void SetColumn(Vector.Vector vector, int index)
         {
             for (int i = 0; i < _data.Length; i++)
             {
@@ -95,10 +95,10 @@ namespace Matrix
         public void Transpone()
         {
             var size = _data[0].GetSize();
-            var resultData = new RowVector[size];
+            var resultData = new Vector.Vector[size];
             for (int i = 0; i < size; i++)
             {
-                resultData[i] = new RowVector(GetColumn(i));
+                resultData[i] = new Vector.Vector(GetColumn(i));
             }
 
             _data = resultData;
@@ -139,11 +139,11 @@ namespace Matrix
         private Matrix GetMinor(int columnIndex, int rowIndex)
         {
             var size = _data.Length - 1;
-            var resultData = new RowVector[size];
+            var resultData = new Vector.Vector[size];
 
             for (int i = 0; i < size; i++)
             {
-                var vector = new RowVector(size);
+                var vector = new Vector.Vector(size);
 
                 for (int j = 0; j < size; j++)
                 {
@@ -156,7 +156,7 @@ namespace Matrix
             return new Matrix(resultData);
         }
 
-        public RowVector MultiplyByVector(RowVector vector)
+        public Vector.Vector MultiplyByVector(Vector.Vector vector)
         {
             if (vector.GetSize() != _data[0].GetSize())
             {
@@ -175,7 +175,7 @@ namespace Matrix
                 }
             }
 
-            return new RowVector(resultComponents);
+            return new Vector.Vector(resultComponents);
         }
 
         public void Add(Matrix matrix)
@@ -236,7 +236,7 @@ namespace Matrix
             {
                 for (int j = 0; j < hSize; j++)
                 {
-                    resultData[i, j] = RowVector.ScalarProduct(matrixA.GetRow(i), matrixB.GetColumn(j));
+                    resultData[i, j] = Vector.Vector.ScalarProduct(matrixA.GetRow(i), matrixB.GetColumn(j));
                 }
             }
 
