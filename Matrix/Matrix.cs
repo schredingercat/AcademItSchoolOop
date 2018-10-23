@@ -6,79 +6,79 @@ namespace Matrix
 {
     class Matrix
     {
-        private Vector.Vector[] _data;
+        private Vector.Vector[] _rows;
 
-        public Matrix(int n, int m)
+        public Matrix(int width, int height)
         {
-            _data = new Vector.Vector[m];
+            _rows = new Vector.Vector[height];
 
-            for (var i = 0; i < m; i++)
+            for (var i = 0; i < height; i++)
             {
-                _data[i] = new Vector.Vector(n);
+                _rows[i] = new Vector.Vector(width);
             }
         }
 
         public Matrix(Matrix matrix)
         {
-            var size = matrix._data.Length;
-            _data = new Vector.Vector[size];
+            var size = matrix._rows.Length;
+            _rows = new Vector.Vector[size];
 
             for (var i = 0; i < size; i++)
             {
-                _data[i] = new Vector.Vector(matrix._data[i]);
+                _rows[i] = new Vector.Vector(matrix._rows[i]);
             }
         }
 
-        public Matrix(double[,] dataValues)
+        public Matrix(double[,] rowValues)
         {
-            var wSize = dataValues.GetLength(0);
-            var hSize = dataValues.GetLength(1);
-            _data = new Vector.Vector[wSize];
+            var wSize = rowValues.GetLength(0);
+            var hSize = rowValues.GetLength(1);
+            _rows = new Vector.Vector[wSize];
 
             for (var i = 0; i < wSize; i++)
             {
-                _data[i] = new Vector.Vector(hSize);
+                _rows[i] = new Vector.Vector(hSize);
                 for (var j = 0; j < hSize; j++)
                 {
-                    _data[i].Components[j] = dataValues[i, j];
+                    _rows[i].Components[j] = rowValues[i, j];
                 }
             }
         }
 
-        public Matrix(Vector.Vector[] data)
+        public Matrix(Vector.Vector[] rows)
         {
-            var size = data.Length;
-            _data = new Vector.Vector[size];
+            var size = rows.Length;
+            _rows = new Vector.Vector[size];
 
             for (var i = 0; i < size; i++)
             {
-                _data[i] = new Vector.Vector(data[i]);
+                _rows[i] = new Vector.Vector(rows[i]);
             }
         }
 
         public string GetSize()
         {
-            return $"{_data[0].GetSize()}x{_data.Length}";
+            return $"{_rows[0].GetSize()}x{_rows.Length}";
         }
 
         public Vector.Vector GetRow(int index)
         {
-            return _data[index];
+            return _rows[index];
         }
 
         public void SetRow(Vector.Vector vector, int index)
         {
-            var resultVector = new Vector.Vector(_data[0].GetSize());
+            var resultVector = new Vector.Vector(_rows[0].GetSize());
             Array.Copy(vector.Components, resultVector.Components, Math.Min(vector.GetSize(), resultVector.GetSize()));
-            _data[index] = resultVector;
+            _rows[index] = resultVector;
         }
 
         public Vector.Vector GetColumn(int index)
         {
-            var resultVector = new Vector.Vector(_data.Length);
-            for (var i = 0; i < _data.Length; i++)
+            var resultVector = new Vector.Vector(_rows.Length);
+            for (var i = 0; i < _rows.Length; i++)
             {
-                resultVector.Components[i] = _data[i].Components[index];
+                resultVector.Components[i] = _rows[i].Components[index];
             }
 
             return resultVector;
@@ -86,27 +86,27 @@ namespace Matrix
 
         public void SetColumn(Vector.Vector vector, int index)
         {
-            for (var i = 0; i < _data.Length; i++)
+            for (var i = 0; i < _rows.Length; i++)
             {
-                _data[i].Components[index] = vector.Components[i];
+                _rows[i].Components[index] = vector.Components[i];
             }
         }
 
         public void Transpone()
         {
-            var size = _data[0].GetSize();
-            var resultData = new Vector.Vector[size];
+            var size = _rows[0].GetSize();
+            var resultRows = new Vector.Vector[size];
             for (var i = 0; i < size; i++)
             {
-                resultData[i] = new Vector.Vector(GetColumn(i));
+                resultRows[i] = new Vector.Vector(GetColumn(i));
             }
 
-            _data = resultData;
+            _rows = resultRows;
         }
 
         public void Multiply(double factor)
         {
-            foreach (var vector in _data)
+            foreach (var vector in _rows)
             {
                 vector.Multiply(factor);
             }
@@ -114,23 +114,23 @@ namespace Matrix
 
         public double GetDeterminant()
         {
-            if (_data.Length != _data[0].GetSize())
+            if (_rows.Length != _rows[0].GetSize())
             {
                 throw new ArgumentException("Невозможно вычислить определитель не квадратной матрицы");
             }
 
-            var size = _data.Length;
+            var size = _rows.Length;
 
             if (size == 1)
             {
-                return _data[0].Components[0];
+                return _rows[0].Components[0];
             }
 
             double determinant = 0;
 
             for (var i = 0; i < size; i++)
             {
-                determinant += Math.Pow(-1, i) * _data[0].Components[i] * GetMinor(i, 0).GetDeterminant();
+                determinant += Math.Pow(-1, i) * _rows[0].Components[i] * GetMinor(i, 0).GetDeterminant();
             }
 
             return determinant;
@@ -138,8 +138,8 @@ namespace Matrix
 
         private Matrix GetMinor(int columnIndex, int rowIndex)
         {
-            var size = _data.Length - 1;
-            var resultData = new Vector.Vector[size];
+            var size = _rows.Length - 1;
+            var resultRows = new Vector.Vector[size];
 
             for (var i = 0; i < size; i++)
             {
@@ -147,31 +147,31 @@ namespace Matrix
 
                 for (var j = 0; j < size; j++)
                 {
-                    vector.Components[j] = (j < columnIndex) ? _data[(i < rowIndex) ? i : i + 1].Components[j] : _data[(i < rowIndex) ? i : i + 1].Components[j + 1];
+                    vector.Components[j] = (j < columnIndex) ? _rows[(i < rowIndex) ? i : i + 1].Components[j] : _rows[(i < rowIndex) ? i : i + 1].Components[j + 1];
                 }
 
-                resultData[i] = vector;
+                resultRows[i] = vector;
             }
 
-            return new Matrix(resultData);
+            return new Matrix(resultRows);
         }
 
         public Vector.Vector MultiplyByVector(Vector.Vector vector)
         {
-            if (vector.GetSize() != _data[0].GetSize())
+            if (vector.GetSize() != _rows[0].GetSize())
             {
                 throw new ArgumentException("Матрица и вектор не согласованы", nameof(vector));
             }
 
             var wSize = vector.GetSize();
-            var hSize = _data.Length;
+            var hSize = _rows.Length;
 
             var resultComponents = new double[hSize];
             for (var i = 0; i < hSize; i++)
             {
                 for (var j = 0; j < wSize; j++)
                 {
-                    resultComponents[i] += _data[i].Components[j] * vector.Components[j];
+                    resultComponents[i] += _rows[i].Components[j] * vector.Components[j];
                 }
             }
 
@@ -180,29 +180,29 @@ namespace Matrix
 
         public void Add(Matrix matrix)
         {
-            if (matrix._data.Length != _data.Length || matrix._data[0].GetSize() != _data[0].GetSize())
+            if (matrix._rows.Length != _rows.Length || matrix._rows[0].GetSize() != _rows[0].GetSize())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
 
-            var size = _data.Length;
+            var size = _rows.Length;
             for (var i = 0; i < size; i++)
             {
-                _data[i].Add(matrix._data[i]);
+                _rows[i].Add(matrix._rows[i]);
             }
         }
 
         public void Subtract(Matrix matrix)
         {
-            if (matrix._data.Length != _data.Length || matrix._data[0].GetSize() != _data[0].GetSize())
+            if (matrix._rows.Length != _rows.Length || matrix._rows[0].GetSize() != _rows[0].GetSize())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
 
-            var size = _data.Length;
+            var size = _rows.Length;
             for (var i = 0; i < size; i++)
             {
-                _data[i].Subtract(matrix._data[i]);
+                _rows[i].Subtract(matrix._rows[i]);
             }
         }
 
@@ -222,30 +222,30 @@ namespace Matrix
 
         public static Matrix Multiply(Matrix matrixA, Matrix matrixB)
         {
-            if (matrixA._data[0].GetSize() != matrixB._data.Length)
+            if (matrixA._rows[0].GetSize() != matrixB._rows.Length)
             {
                 throw new ArgumentException("Матрицы не согласованы", $"{nameof(matrixA)}, {nameof(matrixB)}");
             }
 
-            var wSize = matrixB._data[0].GetSize();
-            var hSize = matrixA._data.Length;
+            var wSize = matrixB._rows[0].GetSize();
+            var hSize = matrixA._rows.Length;
 
-            var resultData = new double[wSize, hSize];
+            var resultRows = new double[wSize, hSize];
 
             for (var i = 0; i < wSize; i++)
             {
                 for (var j = 0; j < hSize; j++)
                 {
-                    resultData[i, j] = Vector.Vector.ScalarProduct(matrixA.GetRow(i), matrixB.GetColumn(j));
+                    resultRows[i, j] = Vector.Vector.ScalarProduct(matrixA.GetRow(i), matrixB.GetColumn(j));
                 }
             }
 
-            return new Matrix(resultData);
+            return new Matrix(resultRows);
         }
 
         public override string ToString()
         {
-            return $"{{{string.Join(", ", _data.ToList())}}}";
+            return $"{{{string.Join(", ", _rows.ToList())}}}";
         }
     }
 }
