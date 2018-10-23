@@ -10,6 +10,11 @@ namespace Matrix
 
         public Matrix(int width, int height)
         {
+            if (width <= 0 || height <= 0)
+            {
+                throw new ArgumentException("Ширина и высота матрицы должны быть больше нуля", $"{nameof(width)}, {nameof(height)}");
+            }
+
             _rows = new Vector.Vector[height];
 
             for (var i = 0; i < height; i++)
@@ -31,6 +36,11 @@ namespace Matrix
 
         public Matrix(double[,] rowValues)
         {
+            if (rowValues.GetLength(0) <= 0 || rowValues.GetLength(1) <= 0)
+            {
+                throw new ArgumentException("Ширина и высота матрицы должны быть больше нуля", nameof(rowValues));
+            }
+
             var wSize = rowValues.GetLength(0);
             var hSize = rowValues.GetLength(1);
             _rows = new Vector.Vector[wSize];
@@ -47,6 +57,11 @@ namespace Matrix
 
         public Matrix(Vector.Vector[] rows)
         {
+            if (rows.Length <=0)
+            {
+                throw new ArgumentException("Высота матрицы должна быть больше нуля", nameof(rows));
+            }
+
             var size = rows.Length;
             _rows = new Vector.Vector[size];
 
