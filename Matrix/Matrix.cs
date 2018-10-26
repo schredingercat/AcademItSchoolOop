@@ -57,17 +57,19 @@ namespace Matrix
 
         public Matrix(Vector.Vector[] rows)
         {
-            if (rows.Length <=0)
+            if (rows.Length <= 0)
             {
                 throw new ArgumentException("Высота матрицы должна быть больше нуля", nameof(rows));
             }
 
-            var size = rows.Length;
-            _rows = new Vector.Vector[size];
+            var height = rows.Length;
+            _rows = new Vector.Vector[height];
 
-            for (var i = 0; i < size; i++)
+            var width = rows.Max(x => x.GetSize());
+
+            for (var i = 0; i < height; i++)
             {
-                _rows[i] = new Vector.Vector(rows[i]);
+                _rows[i] = new Vector.Vector(width, rows[i].Components);
             }
         }
 
@@ -83,11 +85,20 @@ namespace Matrix
 
         public Vector.Vector GetRow(int index)
         {
-            return _rows[index];
+            if (index >= GetHeight())
+            {
+                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+            }
+            return new Vector.Vector(_rows[index]);
         }
 
         public void SetRow(Vector.Vector vector, int index)
         {
+            if (index >= GetHeight())
+            {
+                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+            }
+
             var resultVector = new Vector.Vector(_rows[0].GetSize());
             Array.Copy(vector.Components, resultVector.Components, Math.Min(vector.GetSize(), resultVector.GetSize()));
             _rows[index] = resultVector;
@@ -95,6 +106,11 @@ namespace Matrix
 
         public Vector.Vector GetColumn(int index)
         {
+            if (index >= GetWidth())
+            {
+                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+            }
+
             var resultVector = new Vector.Vector(_rows.Length);
             for (var i = 0; i < _rows.Length; i++)
             {
@@ -106,6 +122,11 @@ namespace Matrix
 
         public void SetColumn(Vector.Vector vector, int index)
         {
+            if (index >= GetWidth())
+            {
+                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+            }
+
             for (var i = 0; i < _rows.Length; i++)
             {
                 _rows[i].Components[index] = vector.Components[i];
