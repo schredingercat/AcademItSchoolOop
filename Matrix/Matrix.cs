@@ -71,9 +71,14 @@ namespace Matrix
             }
         }
 
-        public string GetSize()
+        public int GetWidth()
         {
-            return $"{_rows[0].GetSize()}x{_rows.Length}";
+            return _rows[0].GetSize();
+        }
+
+        public int GetHeight()
+        {
+            return _rows.Length;
         }
 
         public Vector.Vector GetRow(int index)
