@@ -18,6 +18,8 @@ namespace LinkedList
             list.Add(92);
             list.Add(6);
 
+            list.RemoveAtIndex(0);
+
             for (int i = 0; i < list.GetCount(); i++)
             {
                 Console.WriteLine($"{i}: {list.GetValueAtIndex(i)}");
