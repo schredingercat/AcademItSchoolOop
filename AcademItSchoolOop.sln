@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matrix", "Matrix\Matrix.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temperature", "Temperature\Temperature.csproj", "{492BD6A0-F261-4218-9139-A057950A5394}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList", "LinkedList\LinkedList.csproj", "{E37FAD6D-E4DA-4DA8-93D4-5B395AC89DC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{492BD6A0-F261-4218-9139-A057950A5394}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{492BD6A0-F261-4218-9139-A057950A5394}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{492BD6A0-F261-4218-9139-A057950A5394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E37FAD6D-E4DA-4DA8-93D4-5B395AC89DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E37FAD6D-E4DA-4DA8-93D4-5B395AC89DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E37FAD6D-E4DA-4DA8-93D4-5B395AC89DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E37FAD6D-E4DA-4DA8-93D4-5B395AC89DC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
