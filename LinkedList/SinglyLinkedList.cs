@@ -50,14 +50,50 @@ namespace LinkedList
             count++;
         }
 
-        public void AddBeforeFirst(T data)
+        public void AddToTop(T data)
         {
-            var item = new LinkedListItem<T>(data)
+            var item = new LinkedListItem<T>(data);
+
+            if (count != 0)
             {
-                Next = head
-            };
+                item.Next = head;
+            }
 
             head = item;
+            count++;
+        }
+
+        public void Insert(T data, int index)
+        {
+            if (index < 0 || index > count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
+            }
+
+            if (index == 0)
+            {
+                AddToTop(data);
+                return;
+            }
+
+            if (index == count)
+            {
+                Add(data);
+                return;
+            }
+
+            var item = head;
+
+            for (int i = 0; i < index - 1; i++)
+            {
+                item = item.Next;
+            }
+
+            var newItem = new LinkedListItem<T>(data)
+            {
+                Next = item.Next
+            };
+            item.Next = newItem;
             count++;
         }
 

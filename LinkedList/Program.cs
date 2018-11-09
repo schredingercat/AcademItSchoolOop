@@ -18,13 +18,21 @@ namespace LinkedList
             list.Add(92);
             list.Add(6);
 
-            list.AddBeforeFirst(17);
+            list.AddToTop(17);
 
             for (int i = 0; i < list.GetCount(); i++)
             {
                 Console.WriteLine($"{i}: {list.GetValueAtIndex(i)}");
             }
-            
+
+            Console.WriteLine();
+            list.Insert(256, 5);
+            for (int i = 0; i < list.GetCount(); i++)
+            {
+                Console.WriteLine($"{i}: {list.GetValueAtIndex(i)}");
+            }
+
+
             Console.ReadLine();
         }
     }
