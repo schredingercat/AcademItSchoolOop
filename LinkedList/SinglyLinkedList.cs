@@ -11,18 +11,12 @@ namespace LinkedList
         private LinkedListItem<T> head;
         private int count;
 
-        public SinglyLinkedList()
-        {
-            //head = new LinkedListItem<T>();
-            //count = 0;
-        }
-
         public int GetCount()
         {
             return count;
         }
 
-        public T GetHeadValue()
+        public T GetFirstItemValue()
         {
             return head.Data;
         }
@@ -56,9 +50,20 @@ namespace LinkedList
             count++;
         }
 
+        public void AddBeforeFirst(T data)
+        {
+            var item = new LinkedListItem<T>(data)
+            {
+                Next = head
+            };
+
+            head = item;
+            count++;
+        }
+
         public T GetValueAtIndex(int index)
         {
-            if (index<0 || index >= count)
+            if (index < 0 || index >= count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -75,7 +80,7 @@ namespace LinkedList
 
         public T SetValueAtIndex(T data, int index)
         {
-            if (index <0 || index >= count)
+            if (index < 0 || index >= count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -107,7 +112,7 @@ namespace LinkedList
 
             var item = head;
 
-            for (int i = 0; i < index-1; i++)
+            for (int i = 0; i < index - 1; i++)
             {
                 item = item.Next;
             }

@@ -18,7 +18,7 @@ namespace LinkedList
             list.Add(92);
             list.Add(6);
 
-            Console.WriteLine(list.RemoveAtIndex(1));
+            list.AddBeforeFirst(17);
 
             for (int i = 0; i < list.GetCount(); i++)
             {
