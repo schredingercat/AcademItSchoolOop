@@ -13,8 +13,8 @@ namespace LinkedList
 
         public SinglyLinkedList()
         {
-            head = new LinkedListItem<T>();
-            count = 0;
+            //head = new LinkedListItem<T>();
+            //count = 0;
         }
 
         public int GetCount()
@@ -31,31 +31,34 @@ namespace LinkedList
         {
             var oldData = head.Data;
             head = head.Next;
+            count--;
             return oldData;
         }
 
         public void Add(T data)
         {
-            if (count == 0)
-            {
-                head = new LinkedListItem<T>(data);
-                count++;
-                return;
-            }
+            var newItem = new LinkedListItem<T>(data);
 
-            var item = head;
-            for (int i = 0; i < count-1; i++)
+            if (head == null)
             {
-                item = item.Next;
+                head = newItem;
             }
+            else
+            {
+                var item = head;
 
-            item.Next = new LinkedListItem<T>(data);
+                while (item.Next != null)
+                {
+                    item = item.Next;
+                }
+                item.Next = newItem;
+            }
             count++;
         }
 
         public T GetValueAtIndex(int index)
         {
-            if (index >= count)
+            if (index<0 || index >= count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -72,7 +75,7 @@ namespace LinkedList
 
         public T SetValueAtIndex(T data, int index)
         {
-            if (index >= count)
+            if (index <0 || index >= count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -92,9 +95,14 @@ namespace LinkedList
 
         public T RemoveAtIndex(int index)
         {
-            if (index >= count)
+            if (index < 0 || index >= count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
+            }
+
+            if (index == 0)
+            {
+                return RemoveFirstItem();
             }
 
             var item = head;
@@ -106,6 +114,7 @@ namespace LinkedList
 
             var oldData = item.Next.Data;
             item.Next = item.Next.Next;
+
             count--;
             return oldData;
         }
