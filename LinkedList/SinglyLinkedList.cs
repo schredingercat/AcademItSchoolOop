@@ -63,6 +63,17 @@ namespace LinkedList
             count++;
         }
 
+        public void AddToTop(LinkedListItem<T> item)
+        {
+            if (count != 0)
+            {
+                item.Next = head;
+            }
+
+            head = item;
+            count++;
+        }
+
         public void Insert(T data, int index)
         {
             if (index < 0 || index > count)
@@ -181,6 +192,21 @@ namespace LinkedList
             }
 
             return false;
+        }
+
+        public void Invert()
+        {
+            var item = head.Next;
+
+            for(int i =1; i <count-1; i++)
+            
+            //while (item.Next != null)
+            {
+                var temp = item.Next;
+                temp.Next = head;
+                head = temp;
+                item.Next = item.Next.Next;
+            }
         }
 
     }

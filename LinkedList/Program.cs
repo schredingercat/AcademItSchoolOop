@@ -26,7 +26,7 @@ namespace LinkedList
             }
 
             Console.WriteLine();
-            list.Insert(256, 1);
+            list.Invert();
 
             Console.WriteLine(list.RemoveByValue(17));
 
