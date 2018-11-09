@@ -26,7 +26,10 @@ namespace LinkedList
             }
 
             Console.WriteLine();
-            list.Insert(256, 5);
+            list.Insert(256, 1);
+
+            Console.WriteLine(list.RemoveByValue(17));
+
             for (int i = 0; i < list.GetCount(); i++)
             {
                 Console.WriteLine($"{i}: {list.GetValueAtIndex(i)}");

@@ -159,5 +159,29 @@ namespace LinkedList
             count--;
             return oldData;
         }
+
+        public bool RemoveByValue(T data)
+        {
+            if (count == 0)
+            {
+                return false;
+            }
+
+            var item = head;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (item.Data.Equals(data))
+                {
+                    RemoveAtIndex(i);
+                    return true;
+                }
+
+                item = item.Next;
+            }
+
+            return false;
+        }
+
     }
 }
