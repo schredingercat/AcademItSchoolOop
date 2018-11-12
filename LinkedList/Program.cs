@@ -29,12 +29,33 @@ namespace LinkedList
             list.Invert();
 
             //Console.WriteLine(list.RemoveByValue(17));
-
+            
             Console.WriteLine($"count: {list.GetCount()}");
             for (int i = 0; i < list.GetCount(); i++)
             {
                 Console.WriteLine($"{i}: {list.GetValueAtIndex(i)}");
             }
+            Console.WriteLine();
+
+            
+            var newList = list.Copy();
+
+            list.SetValueAtIndex(566, 1);
+            newList.RemoveFirstItem();
+
+            Console.WriteLine($"list: {list.GetCount()}");
+            for (int i = 0; i < list.GetCount(); i++)
+            {
+                Console.WriteLine($"{i}: {list.GetValueAtIndex(i)}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"list: {newList.GetCount()}");
+            for (int i = 0; i < newList.GetCount(); i++)
+            {
+                Console.WriteLine($"{i}: {newList.GetValueAtIndex(i)}");
+            }
+
 
 
             Console.ReadLine();

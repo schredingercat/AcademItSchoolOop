@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -208,6 +209,24 @@ namespace LinkedList
 
             item.Next = head;
             head = item;
+        }
+
+        public SinglyLinkedList<T> Copy()
+        {
+            var result = new SinglyLinkedList<T>();
+
+            var item = head;
+            var newItem = new LinkedListItem<T>(item.Data);
+            result.head = newItem;
+
+            for (int i = 0; i < count; i++)
+            {
+                newItem.Next = new LinkedListItem<T>(item.Next.Data);
+                newItem = newItem.Next;
+                item = item.Next;
+                result.count++;
+            }
+            return result;
         }
 
     }
