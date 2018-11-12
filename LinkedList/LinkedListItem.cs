@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LinkedList
+﻿namespace LinkedList
 {
     class LinkedListItem<T>
     {
@@ -26,6 +20,5 @@ namespace LinkedList
             Data = data;
             Next = next;
         }
-
     }
 }

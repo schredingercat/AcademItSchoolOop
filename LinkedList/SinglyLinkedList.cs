@@ -1,32 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedList
 {
     class SinglyLinkedList<T>
     {
-        private LinkedListItem<T> head;
-        private int count;
+        private LinkedListItem<T> _head;
+        private int _count;
 
         public int GetCount()
         {
-            return count;
+            return _count;
         }
 
         public T GetFirstItemValue()
         {
-            return head.Data;
+            return _head.Data;
         }
 
         public T RemoveFirstItem()
         {
-            var oldData = head.Data;
-            head = head.Next;
-            count--;
+            var oldData = _head.Data;
+            _head = _head.Next;
+            _count--;
             return oldData;
         }
 
@@ -34,13 +29,13 @@ namespace LinkedList
         {
             var newItem = new LinkedListItem<T>(data);
 
-            if (head == null)
+            if (_head == null)
             {
-                head = newItem;
+                _head = newItem;
             }
             else
             {
-                var item = head;
+                var item = _head;
 
                 while (item.Next != null)
                 {
@@ -48,36 +43,36 @@ namespace LinkedList
                 }
                 item.Next = newItem;
             }
-            count++;
+            _count++;
         }
 
         public void AddToTop(T data)
         {
             var item = new LinkedListItem<T>(data);
 
-            if (count != 0)
+            if (_count != 0)
             {
-                item.Next = head;
+                item.Next = _head;
             }
 
-            head = item;
-            count++;
+            _head = item;
+            _count++;
         }
 
         public void AddToTop(LinkedListItem<T> item)
         {
-            if (count != 0)
+            if (_count != 0)
             {
-                item.Next = head;
+                item.Next = _head;
             }
 
-            head = item;
-            count++;
+            _head = item;
+            _count++;
         }
 
         public void Insert(T data, int index)
         {
-            if (index < 0 || index > count)
+            if (index < 0 || index > _count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -88,13 +83,13 @@ namespace LinkedList
                 return;
             }
 
-            if (index == count)
+            if (index == _count)
             {
                 Add(data);
                 return;
             }
 
-            var item = head;
+            var item = _head;
 
             for (int i = 0; i < index - 1; i++)
             {
@@ -106,17 +101,17 @@ namespace LinkedList
                 Next = item.Next
             };
             item.Next = newItem;
-            count++;
+            _count++;
         }
 
         public T GetValueAtIndex(int index)
         {
-            if (index < 0 || index >= count)
+            if (index < 0 || index >= _count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
 
-            var item = head;
+            var item = _head;
 
             for (int i = 0; i < index; i++)
             {
@@ -128,12 +123,12 @@ namespace LinkedList
 
         public T SetValueAtIndex(T data, int index)
         {
-            if (index < 0 || index >= count)
+            if (index < 0 || index >= _count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
 
-            var item = head;
+            var item = _head;
 
             for (int i = 0; i < index; i++)
             {
@@ -148,7 +143,7 @@ namespace LinkedList
 
         public T RemoveAtIndex(int index)
         {
-            if (index < 0 || index >= count)
+            if (index < 0 || index >= _count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -158,7 +153,7 @@ namespace LinkedList
                 return RemoveFirstItem();
             }
 
-            var item = head;
+            var item = _head;
 
             for (int i = 0; i < index - 1; i++)
             {
@@ -168,20 +163,20 @@ namespace LinkedList
             var oldData = item.Next.Data;
             item.Next = item.Next.Next;
 
-            count--;
+            _count--;
             return oldData;
         }
 
         public bool RemoveByValue(T data)
         {
-            if (count == 0)
+            if (_count == 0)
             {
                 return false;
             }
 
-            var item = head;
+            var item = _head;
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < _count; i++)
             {
                 if (item.Data.Equals(data))
                 {
@@ -197,35 +192,49 @@ namespace LinkedList
 
         public void Invert()
         {
-            var item = head;
+            var item = _head;
 
             while (item.Next != null)
             {
                 var temp = item;
                 item = item.Next;
-                temp.Next = head;
-                head = temp;
+                temp.Next = _head;
+                _head = temp;
             }
 
-            item.Next = head;
-            head = item;
+            item.Next = _head;
+            _head = item;
         }
 
         public SinglyLinkedList<T> Copy()
         {
             var result = new SinglyLinkedList<T>();
 
-            var item = head;
+            var item = _head;
             var newItem = new LinkedListItem<T>(item.Data);
-            result.head = newItem;
+            result._head = newItem;
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < _count; i++)
             {
                 newItem.Next = new LinkedListItem<T>(item.Next.Data);
                 newItem = newItem.Next;
                 item = item.Next;
-                result.count++;
+                result._count++;
             }
+            return result;
+        }
+
+        public override string ToString()
+        {
+            var item = _head;
+            var result = item.Data.ToString();
+
+            for (int i = 0; i < _count - 1; i++)
+            {
+                item = item.Next;
+                result += $", {item.Data}";
+            }
+
             return result;
         }
 
