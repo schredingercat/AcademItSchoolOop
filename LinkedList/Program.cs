@@ -28,8 +28,9 @@ namespace LinkedList
             Console.WriteLine();
             list.Invert();
 
-            Console.WriteLine(list.RemoveByValue(17));
+            //Console.WriteLine(list.RemoveByValue(17));
 
+            Console.WriteLine($"count: {list.GetCount()}");
             for (int i = 0; i < list.GetCount(); i++)
             {
                 Console.WriteLine($"{i}: {list.GetValueAtIndex(i)}");

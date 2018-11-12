@@ -196,17 +196,18 @@ namespace LinkedList
 
         public void Invert()
         {
-            var item = head.Next;
+            var item = head;
 
-            for(int i =1; i <count-1; i++)
-            
-            //while (item.Next != null)
+            while (item.Next != null)
             {
-                var temp = item.Next;
+                var temp = item;
+                item = item.Next;
                 temp.Next = head;
                 head = temp;
-                item.Next = item.Next.Next;
             }
+
+            item.Next = head;
+            head = item;
         }
 
     }
