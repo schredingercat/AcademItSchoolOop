@@ -83,12 +83,7 @@ namespace LinkedList
                 return;
             }
 
-            var item = _head;
-
-            for (int i = 0; i < index - 1; i++)
-            {
-                item = item.Next;
-            }
+            var item = GetItem(index - 1);
 
             var newItem = new LinkedListItem<T>(data)
             {
@@ -105,12 +100,7 @@ namespace LinkedList
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
 
-            var item = _head;
-
-            for (int i = 0; i < index; i++)
-            {
-                item = item.Next;
-            }
+            var item = GetItem(index);
 
             return item.Data;
         }
@@ -122,12 +112,7 @@ namespace LinkedList
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
 
-            var item = _head;
-
-            for (int i = 0; i < index; i++)
-            {
-                item = item.Next;
-            }
+            var item = GetItem(index);
 
             var oldData = item.Data;
             item.Data = data;
@@ -147,12 +132,7 @@ namespace LinkedList
                 return RemoveFirstItem();
             }
 
-            var item = _head;
-
-            for (int i = 0; i < index - 1; i++)
-            {
-                item = item.Next;
-            }
+            var item = GetItem(index - 1);
 
             var oldData = item.Next.Data;
             item.Next = item.Next.Next;
@@ -239,6 +219,17 @@ namespace LinkedList
             }
 
             return result;
+        }
+
+        private LinkedListItem<T> GetItem(int index)
+        {
+            var item = _head;
+            for (int i = 0; i < index; i++)
+            {
+                item = item.Next;
+            }
+
+            return item;
         }
 
     }
