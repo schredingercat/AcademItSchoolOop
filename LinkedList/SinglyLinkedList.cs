@@ -5,23 +5,28 @@ namespace LinkedList
     class SinglyLinkedList<T>
     {
         private LinkedListItem<T> _head;
-        private int _count;
-
-        public int GetCount()
-        {
-            return _count;
-        }
+        public int Count { get; private set; }
 
         public T GetFirstItemValue()
         {
+            if (_head == null)
+            {
+                throw new NullReferenceException("Список пуст");
+            }
+
             return _head.Data;
         }
 
         public T RemoveFirstItem()
         {
+            if (_head == null)
+            {
+                throw new NullReferenceException("Список пуст");
+            }
+
             var oldData = _head.Data;
             _head = _head.Next;
-            _count--;
+            Count--;
             return oldData;
         }
 
@@ -43,36 +48,25 @@ namespace LinkedList
                 }
                 item.Next = newItem;
             }
-            _count++;
+            Count++;
         }
 
         public void AddToTop(T data)
         {
             var item = new LinkedListItem<T>(data);
 
-            if (_count != 0)
+            if (Count != 0)
             {
                 item.Next = _head;
             }
 
             _head = item;
-            _count++;
-        }
-
-        public void AddToTop(LinkedListItem<T> item)
-        {
-            if (_count != 0)
-            {
-                item.Next = _head;
-            }
-
-            _head = item;
-            _count++;
+            Count++;
         }
 
         public void Insert(T data, int index)
         {
-            if (index < 0 || index > _count)
+            if (index < 0 || index > Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -83,7 +77,7 @@ namespace LinkedList
                 return;
             }
 
-            if (index == _count)
+            if (index == Count)
             {
                 Add(data);
                 return;
@@ -101,12 +95,12 @@ namespace LinkedList
                 Next = item.Next
             };
             item.Next = newItem;
-            _count++;
+            Count++;
         }
 
         public T GetValueAtIndex(int index)
         {
-            if (index < 0 || index >= _count)
+            if (index < 0 || index >= Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -123,7 +117,7 @@ namespace LinkedList
 
         public T SetValueAtIndex(T data, int index)
         {
-            if (index < 0 || index >= _count)
+            if (index < 0 || index >= Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -143,7 +137,7 @@ namespace LinkedList
 
         public T RemoveAtIndex(int index)
         {
-            if (index < 0 || index >= _count)
+            if (index < 0 || index >= Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Индекс выходит за границы списка");
             }
@@ -163,31 +157,30 @@ namespace LinkedList
             var oldData = item.Next.Data;
             item.Next = item.Next.Next;
 
-            _count--;
+            Count--;
             return oldData;
         }
 
         public bool RemoveByValue(T data)
         {
-            if (_count == 0)
+            if (Count == 0)
             {
                 return false;
             }
 
             var item = _head;
-
-            for (int i = 0; i < _count; i++)
+            var elementIsRemoved = false;
+            for (int i = 0; i < Count; i++)
             {
-                if (item.Data.Equals(data))
+                if (item.Data != null && item.Data.Equals(data) || item.Data == null && data == null)
                 {
                     RemoveAtIndex(i);
-                    return true;
+                    elementIsRemoved = true;
                 }
-
                 item = item.Next;
             }
 
-            return false;
+            return elementIsRemoved;
         }
 
         public void Invert()
@@ -210,26 +203,36 @@ namespace LinkedList
         {
             var result = new SinglyLinkedList<T>();
 
+            if (_head == null)
+            {
+                return result;
+            }
+
             var item = _head;
             var newItem = new LinkedListItem<T>(item.Data);
             result._head = newItem;
 
-            for (int i = 0; i < _count; i++)
+            for (int i = 0; i < Count; i++)
             {
                 newItem.Next = new LinkedListItem<T>(item.Next.Data);
                 newItem = newItem.Next;
                 item = item.Next;
-                result._count++;
+                result.Count++;
             }
             return result;
         }
 
         public override string ToString()
         {
+            if (_head == null)
+            {
+                return string.Empty;
+            }
+
             var item = _head;
             var result = item.Data.ToString();
 
-            for (int i = 0; i < _count - 1; i++)
+            for (int i = 0; i < Count - 1; i++)
             {
                 item = item.Next;
                 result += $", {item.Data}";

@@ -12,6 +12,7 @@ namespace LinkedList
             list.Add("14");
             list.Add("Ef");
             list.Add("G67");
+            list.Add(null);
             list.Add("abcdefg");
 
             Console.WriteLine("Элементы списка:");
@@ -42,6 +43,9 @@ namespace LinkedList
 
             Console.WriteLine();
             Console.WriteLine($"Элемент Index {(list.RemoveByValue("Index") ? "удален из списка" : "отсутствует в списке")}:");
+            Console.WriteLine(list);
+            Console.WriteLine();
+            Console.WriteLine($"Элемент null {(list.RemoveByValue(null) ? "удален из списка" : "отсутствует в списке")}:");
             Console.WriteLine(list);
             Console.WriteLine();
             Console.WriteLine($"Элемент Hello World! {(list.RemoveByValue("Hello World") ? "удален из списка" : "отсутствует в списке")}:");

@@ -10,11 +10,6 @@
             Data = data;
         }
 
-        public LinkedListItem()
-        {
-
-        }
-
         public LinkedListItem(T data, LinkedListItem<T> next)
         {
             Data = data;
