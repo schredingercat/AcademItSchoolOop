@@ -40,13 +40,7 @@ namespace LinkedList
             }
             else
             {
-                var item = _head;
-
-                while (item.Next != null)
-                {
-                    item = item.Next;
-                }
-                item.Next = newItem;
+                GetItem(Count - 1).Next = newItem;
             }
             Count++;
         }
@@ -149,18 +143,18 @@ namespace LinkedList
             }
 
             var item = _head;
-            var elementIsRemoved = false;
+
             for (int i = 0; i < Count; i++)
             {
-                if (item.Data != null && item.Data.Equals(data) || item.Data == null && data == null)
+                if (Equals(data, item.Data))
                 {
                     RemoveAtIndex(i);
-                    elementIsRemoved = true;
+                    return true;
                 }
                 item = item.Next;
             }
 
-            return elementIsRemoved;
+            return false;
         }
 
         public void Invert()
@@ -197,8 +191,9 @@ namespace LinkedList
                 newItem.Next = new LinkedListItem<T>(item.Next.Data);
                 newItem = newItem.Next;
                 item = item.Next;
-                result.Count++;
             }
+            result.Count = Count;
+
             return result;
         }
 
@@ -210,7 +205,7 @@ namespace LinkedList
             }
 
             var item = _head;
-            var result = item.Data.ToString();
+            var result = $"{item.Data}";
 
             for (int i = 0; i < Count - 1; i++)
             {
