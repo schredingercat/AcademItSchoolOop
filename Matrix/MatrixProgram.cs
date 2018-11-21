@@ -36,7 +36,7 @@ namespace Matrix
             Console.WriteLine();
             Console.WriteLine($"Транспонирование матрицы");
             Console.WriteLine($"{matrix4} - {matrix4.GetColumnNumber()}x{matrix4.GetRowNumber()}");
-            matrix4.Transpone();
+            matrix4.Transpose();
             Console.WriteLine($"{matrix4} - {matrix4.GetColumnNumber()}x{matrix4.GetRowNumber()}");
 
             Console.WriteLine();

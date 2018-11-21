@@ -133,13 +133,13 @@ namespace Matrix
             }
         }
 
-        public void Transpone()
+        public void Transpose()
         {
             var size = GetColumnNumber();
             var resultRows = new Vector.Vector[size];
             for (var i = 0; i < size; i++)
             {
-                resultRows[i] = new Vector.Vector(GetColumn(i));
+                resultRows[i] = GetColumn(i);
             }
 
             _rows = resultRows;
@@ -277,7 +277,7 @@ namespace Matrix
             {
                 for (var j = 0; j < hSize; j++)
                 {
-                    resultRows[i, j] = Vector.Vector.ScalarProduct(matrixA.GetRow(i), matrixB.GetColumn(j));
+                    resultRows[i, j] = Vector.Vector.ScalarProduct(matrixA._rows[i], matrixB.GetColumn(j));
                 }
             }
 
