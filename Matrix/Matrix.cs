@@ -221,7 +221,7 @@ namespace Matrix
 
         public void Add(Matrix matrix)
         {
-            if (matrix._rows.Length != _rows.Length || matrix.GetColumnNumber() != GetColumnNumber())
+            if (matrix.GetRowNumber() != GetRowNumber() || matrix.GetColumnNumber() != GetColumnNumber())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
@@ -235,7 +235,7 @@ namespace Matrix
 
         public void Subtract(Matrix matrix)
         {
-            if (matrix._rows.Length != _rows.Length || matrix.GetColumnNumber() != GetColumnNumber())
+            if (matrix.GetRowNumber() != GetRowNumber() || matrix.GetColumnNumber() != GetColumnNumber())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
@@ -249,6 +249,11 @@ namespace Matrix
 
         public static Matrix Add(Matrix matrixA, Matrix matrixB)
         {
+            if (matrixA.GetRowNumber() != matrixB.GetRowNumber() || matrixA.GetColumnNumber() != matrixB.GetColumnNumber())
+            {
+                throw new ArgumentException("Размеры матриц не совпадают", $"{nameof(matrixA)}, {nameof(matrixB)}");
+            }
+
             var resultMatrix = new Matrix(matrixA);
             resultMatrix.Add(matrixB);
             return resultMatrix;
@@ -256,6 +261,11 @@ namespace Matrix
 
         public static Matrix Subtract(Matrix matrixA, Matrix matrixB)
         {
+            if (matrixA.GetRowNumber() != matrixB.GetRowNumber() || matrixA.GetColumnNumber() != matrixB.GetColumnNumber())
+            {
+                throw new ArgumentException("Размеры матриц не совпадают", $"{nameof(matrixA)}, {nameof(matrixB)}");
+            }
+
             var resultMatrix = new Matrix(matrixA);
             resultMatrix.Subtract(matrixB);
             return resultMatrix;
