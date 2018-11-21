@@ -100,6 +100,11 @@ namespace Matrix
                 throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
 
+            if (vector.GetSize() > GetColumnNumber())
+            {
+                throw new ArgumentException("Размерность вектора превышает ширину матрицы", nameof(vector));
+            }
+
             var resultVector = new Vector.Vector(GetColumnNumber(), vector.GetComponents());
             _rows[index] = resultVector;
         }
@@ -125,6 +130,11 @@ namespace Matrix
             if (index < 0 || index >= GetColumnNumber())
             {
                 throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
+            }
+
+            if (vector.GetSize() > GetRowNumber())
+            {
+                throw new ArgumentException("Размерность вектора превышает высоту матрицы", nameof(vector));
             }
 
             for (var i = 0; i < _rows.Length; i++)
