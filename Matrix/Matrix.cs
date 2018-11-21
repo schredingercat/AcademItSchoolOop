@@ -12,7 +12,7 @@ namespace Matrix
         {
             if (width <= 0 || height <= 0)
             {
-                throw new ArgumentException("Ширина и высота матрицы должны быть больше нуля", $"{nameof(width)}, {nameof(height)}");
+                throw new ArgumentOutOfRangeException($"{nameof(width)}, {nameof(height)}", "Ширина и высота матрицы должны быть больше нуля");
             }
 
             _rows = new Vector.Vector[height];
@@ -38,7 +38,7 @@ namespace Matrix
         {
             if (rowValues.GetLength(0) <= 0 || rowValues.GetLength(1) <= 0)
             {
-                throw new ArgumentException("Ширина и высота матрицы должны быть больше нуля", nameof(rowValues));
+                throw new ArgumentOutOfRangeException(nameof(rowValues), "Ширина и высота матрицы должны быть больше нуля");
             }
 
             var wSize = rowValues.GetLength(0);
@@ -59,7 +59,7 @@ namespace Matrix
         {
             if (rows.Length <= 0)
             {
-                throw new ArgumentException("Высота матрицы должна быть больше нуля", nameof(rows));
+                throw new ArgumentOutOfRangeException(nameof(rows), "Высота матрицы должна быть больше нуля");
             }
 
             var height = rows.Length;
@@ -73,30 +73,30 @@ namespace Matrix
             }
         }
 
-        public int GetWidth()
+        public int GetColumnNumber()
         {
             return _rows[0].GetSize();
         }
 
-        public int GetHeight()
+        public int GetRowNumber()
         {
             return _rows.Length;
         }
 
         public Vector.Vector GetRow(int index)
         {
-            if (index >= GetHeight())
+            if (index >= GetRowNumber())
             {
-                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+                throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
             return new Vector.Vector(_rows[index]);
         }
 
         public void SetRow(Vector.Vector vector, int index)
         {
-            if (index >= GetHeight())
+            if (index >= GetRowNumber())
             {
-                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+                throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
 
             var resultVector = new Vector.Vector(_rows[0].GetSize());
@@ -106,9 +106,9 @@ namespace Matrix
 
         public Vector.Vector GetColumn(int index)
         {
-            if (index >= GetWidth())
+            if (index >= GetColumnNumber())
             {
-                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+                throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
 
             var resultVector = new Vector.Vector(_rows.Length);
@@ -122,9 +122,9 @@ namespace Matrix
 
         public void SetColumn(Vector.Vector vector, int index)
         {
-            if (index >= GetWidth())
+            if (index >= GetColumnNumber())
             {
-                throw new ArgumentException("Индекс выходит за пределы размерности матрицы", nameof(index));
+                throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
 
             for (var i = 0; i < _rows.Length; i++)
