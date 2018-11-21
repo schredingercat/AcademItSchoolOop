@@ -50,7 +50,8 @@ namespace Matrix
                 _rows[i] = new Vector.Vector(hSize);
                 for (var j = 0; j < hSize; j++)
                 {
-                    _rows[i].Components[j] = rowValues[i, j];
+                    _rows[i][j] = rowValues[i, j];
+
                 }
             }
         }
@@ -69,7 +70,7 @@ namespace Matrix
 
             for (var i = 0; i < height; i++)
             {
-                _rows[i] = new Vector.Vector(width, rows[i].Components);
+                _rows[i] = new Vector.Vector(width, rows[i].GetComponents());
             }
         }
 
@@ -99,8 +100,7 @@ namespace Matrix
                 throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
 
-            var resultVector = new Vector.Vector(_rows[0].GetSize());
-            Array.Copy(vector.Components, resultVector.Components, Math.Min(vector.GetSize(), resultVector.GetSize()));
+            var resultVector = new Vector.Vector(_rows[0].GetSize(), vector.GetComponents());
             _rows[index] = resultVector;
         }
 
@@ -114,7 +114,7 @@ namespace Matrix
             var resultVector = new Vector.Vector(_rows.Length);
             for (var i = 0; i < _rows.Length; i++)
             {
-                resultVector.Components[i] = _rows[i].Components[index];
+                resultVector[i] = _rows[i][index];
             }
 
             return resultVector;
@@ -129,7 +129,7 @@ namespace Matrix
 
             for (var i = 0; i < _rows.Length; i++)
             {
-                _rows[i].Components[index] = vector.Components[i];
+                _rows[i][index] = vector[i];
             }
         }
 
@@ -164,14 +164,14 @@ namespace Matrix
 
             if (size == 1)
             {
-                return _rows[0].Components[0];
+                return _rows[0][0];
             }
 
             double determinant = 0;
 
             for (var i = 0; i < size; i++)
             {
-                determinant += Math.Pow(-1, i) * _rows[0].Components[i] * GetMinor(i, 0).GetDeterminant();
+                determinant += Math.Pow(-1, i) * _rows[0][i] * GetMinor(i, 0).GetDeterminant();
             }
 
             return determinant;
@@ -188,7 +188,7 @@ namespace Matrix
 
                 for (var j = 0; j < size; j++)
                 {
-                    vector.Components[j] = (j < columnIndex) ? _rows[(i < rowIndex) ? i : i + 1].Components[j] : _rows[(i < rowIndex) ? i : i + 1].Components[j + 1];
+                    vector[j] = (j < columnIndex) ? _rows[(i < rowIndex) ? i : i + 1][j] : _rows[(i < rowIndex) ? i : i + 1][j + 1];
                 }
 
                 resultRows[i] = vector;
@@ -212,7 +212,7 @@ namespace Matrix
             {
                 for (var j = 0; j < wSize; j++)
                 {
-                    resultComponents[i] += _rows[i].Components[j] * vector.Components[j];
+                    resultComponents[i] += _rows[i][j] * vector[j];
                 }
             }
 
