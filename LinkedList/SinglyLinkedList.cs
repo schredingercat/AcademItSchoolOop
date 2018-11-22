@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace LinkedList
 {
@@ -205,15 +206,15 @@ namespace LinkedList
             }
 
             var item = _head;
-            var result = $"{item.Data}";
+            var result = new StringBuilder($"{item.Data}");
 
             for (int i = 0; i < Count - 1; i++)
             {
                 item = item.Next;
-                result += $", {item.Data}";
+                result.Append($", {item.Data}");
             }
 
-            return result;
+            return result.ToString();
         }
 
         private LinkedListItem<T> GetItem(int index)
