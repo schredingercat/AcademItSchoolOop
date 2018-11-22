@@ -7,14 +7,22 @@ using System.Threading.Tasks;
 
 namespace ArrayList
 {
-    class ArrayList<T>:IList<T>
+    class ArrayList<T> : IList<T>
     {
         private T[] _items = new T[10];
         private int _length;
 
+        public ArrayList(int capacity)
+        {
+            _items = new T[capacity];
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < _length; i++)
+            {
+                yield return _items[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -24,12 +32,18 @@ namespace ArrayList
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            if (_length >= _items.Length)
+            {
+                IncreaseCapacity();
+            }
+
+            _items[_length] = item;
+            _length++;
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _length = 0;
         }
 
         public bool Contains(T item)
@@ -56,6 +70,7 @@ namespace ArrayList
         }
 
         public bool IsReadOnly { get; }
+
         public int IndexOf(T item)
         {
             throw new NotImplementedException();
@@ -68,13 +83,43 @@ namespace ArrayList
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            if (index < 0 || index >= _length)
+            {
+                throw new IndexOutOfRangeException("Индекс выходит за границы списка");
+            }
+
+            if (index < _length - 1)
+            {
+                Array.Copy(_items, index+1, _items, index, _length-index-1);
+            }
+            _length--;
         }
 
         public T this[int index]
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get
+            {
+                if (index < 0 || index >= _length)
+                {
+                    throw new IndexOutOfRangeException("Индекс выходит за границы списка");
+                }
+                return _items[index];
+            }
+            set
+            {
+                if (index < 0 || index >= _length)
+                {
+                    throw new IndexOutOfRangeException("Индекс выходит за границы списка");
+                }
+                _items[index] = value;
+            }
+        }
+
+        public void IncreaseCapacity()
+        {
+            var oldItems = _items;
+            _items = new T[oldItems.Length*2];
+            Array.Copy(oldItems, 0, _items, 0, oldItems.Length);
         }
     }
 }
