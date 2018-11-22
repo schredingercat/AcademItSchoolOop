@@ -160,6 +160,11 @@ namespace LinkedList
 
         public void Invert()
         {
+            if (_head == null)
+            {
+                return;
+            }
+
             var item = _head;
             LinkedListItem<T> prev = null;
 
@@ -183,10 +188,11 @@ namespace LinkedList
             }
 
             var item = _head;
+
             var newItem = new LinkedListItem<T>(item.Data);
             result._head = newItem;
 
-            for (int i = 0; i < Count; i++)
+            while (item.Next != null)
             {
                 newItem.Next = new LinkedListItem<T>(item.Next.Data);
                 newItem = newItem.Next;
