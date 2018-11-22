@@ -211,12 +211,15 @@ namespace LinkedList
             }
 
             var item = _head;
-            var result = new StringBuilder($"{item.Data}");
+            var result = new StringBuilder();
+            result.Append(item.Data);
 
+            const string separator = ", ";
             for (int i = 0; i < Count - 1; i++)
             {
                 item = item.Next;
-                result.Append($", {item.Data}");
+                result.Append(separator);
+                result.Append(item.Data);
             }
 
             return result.ToString();
