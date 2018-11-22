@@ -10,17 +10,21 @@ namespace ArrayList
     {
         static void Main(string[] args)
         {
-            var myList = new ArrayList<int>();
-            myList.Add(12);
-            myList.Add(5);
-            myList.Add(19);
-            myList.Add(27);
-            myList.Add(34);
-            myList.Add(8);
+            var myList = new ArrayList<int>
+            {
+                12,
+                5,
+                19,
+                27,
+                34,
+                8
+            };
 
-            myList.RemoveAt(3);
+            myList.Remove(27);
 
             Console.WriteLine($"{string.Join(", ", myList)}");
+            Console.WriteLine(myList.Contains(19));
+            Console.WriteLine(myList.Contains(95));
 
             Console.ReadLine();
         }

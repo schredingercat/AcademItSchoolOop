@@ -12,6 +12,11 @@ namespace ArrayList
         private T[] _items = new T[10];
         private int _length;
 
+        public ArrayList()
+        {
+
+        }
+
         public ArrayList(int capacity)
         {
             _items = new T[capacity];
@@ -48,7 +53,15 @@ namespace ArrayList
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < _length; i++)
+            {
+                if (Equals(item, _items[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -58,22 +71,33 @@ namespace ArrayList
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
-        }
-
-        public int Count
-        {
-            get
+            for (int i = 0; i < _length; i++)
             {
-                return _length;
+                if (Equals(item, _items[i]))
+                {
+                    RemoveAt(i);
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        public bool IsReadOnly { get; }
+        public int Count => _length;
+
+        public bool IsReadOnly => false;
 
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < _length; i++)
+            {
+                if (Equals(item, _items[i]))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
         public void Insert(int index, T item)
@@ -90,7 +114,7 @@ namespace ArrayList
 
             if (index < _length - 1)
             {
-                Array.Copy(_items, index+1, _items, index, _length-index-1);
+                Array.Copy(_items, index + 1, _items, index, _length - index - 1);
             }
             _length--;
         }
@@ -118,7 +142,7 @@ namespace ArrayList
         public void IncreaseCapacity()
         {
             var oldItems = _items;
-            _items = new T[oldItems.Length*2];
+            _items = new T[oldItems.Length * 2];
             Array.Copy(oldItems, 0, _items, 0, oldItems.Length);
         }
     }
