@@ -161,17 +161,16 @@ namespace LinkedList
         public void Invert()
         {
             var item = _head;
+            LinkedListItem<T> prev = null;
 
-            while (item.Next != null)
+            while (item != null)
             {
-                var temp = item;
-                item = item.Next;
-                temp.Next = _head;
-                _head = temp;
+                var temp = item.Next;
+                item.Next = prev;
+                prev = item;
+                item = temp;
             }
-
-            item.Next = _head;
-            _head = item;
+            _head = prev;
         }
 
         public SinglyLinkedList<T> Copy()

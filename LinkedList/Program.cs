@@ -60,10 +60,10 @@ namespace LinkedList
             list.Invert();
             Console.WriteLine(list);
 
-            Console.WriteLine();
-            Console.WriteLine("Копирование списка:");
-            var newList = list.Copy();
-            Console.WriteLine(newList);
+            //Console.WriteLine();
+            //Console.WriteLine("Копирование списка:");
+            //var newList = list.Copy();
+            //Console.WriteLine(newList);
 
             Console.ReadLine();
         }
