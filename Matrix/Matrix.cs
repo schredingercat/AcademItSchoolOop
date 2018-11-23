@@ -74,19 +74,19 @@ namespace Matrix
             }
         }
 
-        public int GetColumnNumber()
+        public int GetColumnsNumber()
         {
             return _rows[0].GetSize();
         }
 
-        public int GetRowNumber()
+        public int GetRowsNumber()
         {
             return _rows.Length;
         }
 
         public Vector.Vector GetRow(int index)
         {
-            if (index < 0 || index >= GetRowNumber())
+            if (index < 0 || index >= GetRowsNumber())
             {
                 throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
@@ -95,23 +95,23 @@ namespace Matrix
 
         public void SetRow(Vector.Vector vector, int index)
         {
-            if (index < 0 || index >= GetRowNumber())
+            if (index < 0 || index >= GetRowsNumber())
             {
                 throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
 
-            if (vector.GetSize() > GetColumnNumber())
+            if (vector.GetSize() > GetColumnsNumber())
             {
                 throw new ArgumentException("Размерность вектора превышает ширину матрицы", nameof(vector));
             }
 
-            var resultVector = new Vector.Vector(GetColumnNumber(), vector.GetComponents());
+            var resultVector = new Vector.Vector(GetColumnsNumber(), vector.GetComponents());
             _rows[index] = resultVector;
         }
 
         public Vector.Vector GetColumn(int index)
         {
-            if (index < 0 || index >= GetColumnNumber())
+            if (index < 0 || index >= GetColumnsNumber())
             {
                 throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
@@ -127,12 +127,12 @@ namespace Matrix
 
         public void SetColumn(Vector.Vector vector, int index)
         {
-            if (index < 0 || index >= GetColumnNumber())
+            if (index < 0 || index >= GetColumnsNumber())
             {
                 throw new IndexOutOfRangeException("Индекс выходит за пределы размерности матрицы");
             }
 
-            if (vector.GetSize() > GetRowNumber())
+            if (vector.GetSize() > GetRowsNumber())
             {
                 throw new ArgumentException("Размерность вектора превышает высоту матрицы", nameof(vector));
             }
@@ -145,7 +145,7 @@ namespace Matrix
 
         public void Transpose()
         {
-            var size = GetColumnNumber();
+            var size = GetColumnsNumber();
             var resultRows = new Vector.Vector[size];
             for (var i = 0; i < size; i++)
             {
@@ -165,7 +165,7 @@ namespace Matrix
 
         public double GetDeterminant()
         {
-            if (GetRowNumber() != GetColumnNumber())
+            if (GetRowsNumber() != GetColumnsNumber())
             {
                 throw new ArgumentException("Невозможно вычислить определитель не квадратной матрицы");
             }
@@ -209,7 +209,7 @@ namespace Matrix
 
         public Vector.Vector MultiplyByVector(Vector.Vector vector)
         {
-            if (vector.GetSize() != GetColumnNumber())
+            if (vector.GetSize() != GetColumnsNumber())
             {
                 throw new ArgumentException("Матрица и вектор не согласованы", nameof(vector));
             }
@@ -231,7 +231,7 @@ namespace Matrix
 
         public void Add(Matrix matrix)
         {
-            if (matrix.GetRowNumber() != GetRowNumber() || matrix.GetColumnNumber() != GetColumnNumber())
+            if (matrix.GetRowsNumber() != GetRowsNumber() || matrix.GetColumnsNumber() != GetColumnsNumber())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
@@ -245,7 +245,7 @@ namespace Matrix
 
         public void Subtract(Matrix matrix)
         {
-            if (matrix.GetRowNumber() != GetRowNumber() || matrix.GetColumnNumber() != GetColumnNumber())
+            if (matrix.GetRowsNumber() != GetRowsNumber() || matrix.GetColumnsNumber() != GetColumnsNumber())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", nameof(matrix));
             }
@@ -259,7 +259,7 @@ namespace Matrix
 
         public static Matrix Add(Matrix matrixA, Matrix matrixB)
         {
-            if (matrixA.GetRowNumber() != matrixB.GetRowNumber() || matrixA.GetColumnNumber() != matrixB.GetColumnNumber())
+            if (matrixA.GetRowsNumber() != matrixB.GetRowsNumber() || matrixA.GetColumnsNumber() != matrixB.GetColumnsNumber())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", $"{nameof(matrixA)}, {nameof(matrixB)}");
             }
@@ -271,7 +271,7 @@ namespace Matrix
 
         public static Matrix Subtract(Matrix matrixA, Matrix matrixB)
         {
-            if (matrixA.GetRowNumber() != matrixB.GetRowNumber() || matrixA.GetColumnNumber() != matrixB.GetColumnNumber())
+            if (matrixA.GetRowsNumber() != matrixB.GetRowsNumber() || matrixA.GetColumnsNumber() != matrixB.GetColumnsNumber())
             {
                 throw new ArgumentException("Размеры матриц не совпадают", $"{nameof(matrixA)}, {nameof(matrixB)}");
             }
@@ -283,13 +283,13 @@ namespace Matrix
 
         public static Matrix Multiply(Matrix matrixA, Matrix matrixB)
         {
-            if (matrixA.GetColumnNumber() != matrixB.GetRowNumber())
+            if (matrixA.GetColumnsNumber() != matrixB.GetRowsNumber())
             {
                 throw new ArgumentException("Матрицы не согласованы", $"{nameof(matrixA)}, {nameof(matrixB)}");
             }
 
-            var wSize = matrixB.GetColumnNumber();
-            var hSize = matrixA.GetRowNumber();
+            var wSize = matrixB.GetColumnsNumber();
+            var hSize = matrixA.GetRowsNumber();
 
             var resultRows = new double[wSize, hSize];
 

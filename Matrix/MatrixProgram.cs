@@ -19,7 +19,7 @@ namespace Matrix
             Console.WriteLine($"{nameof(matrix4)}: {matrix4}");
             
             Console.WriteLine();
-            Console.WriteLine($"Размеры {nameof(matrix4)}: {matrix4.GetColumnNumber()}x{matrix4.GetRowNumber()}");
+            Console.WriteLine($"Размеры {nameof(matrix4)}: {matrix4.GetColumnsNumber()}x{matrix4.GetRowsNumber()}");
 
             Console.WriteLine();
             Console.WriteLine($"Получение строки: {matrix4.GetRow(1)}");
@@ -35,9 +35,9 @@ namespace Matrix
 
             Console.WriteLine();
             Console.WriteLine($"Транспонирование матрицы");
-            Console.WriteLine($"{matrix4} - {matrix4.GetColumnNumber()}x{matrix4.GetRowNumber()}");
+            Console.WriteLine($"{matrix4} - {matrix4.GetColumnsNumber()}x{matrix4.GetRowsNumber()}");
             matrix4.Transpose();
-            Console.WriteLine($"{matrix4} - {matrix4.GetColumnNumber()}x{matrix4.GetRowNumber()}");
+            Console.WriteLine($"{matrix4} - {matrix4.GetColumnsNumber()}x{matrix4.GetRowsNumber()}");
 
             Console.WriteLine();
             matrix4.Multiply(10);
