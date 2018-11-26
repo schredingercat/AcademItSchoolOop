@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Temperature
+namespace Temperature.Model
 {
     class TemperatureModel
     {

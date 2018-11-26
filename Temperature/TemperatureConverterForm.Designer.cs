@@ -1,6 +1,6 @@
 ﻿namespace Temperature
 {
-    partial class Form1
+    partial class TemperatureConverterForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,7 +50,6 @@
             this.textBoxTemperatureInput.Size = new System.Drawing.Size(270, 20);
             this.textBoxTemperatureInput.TabIndex = 0;
             this.textBoxTemperatureInput.Text = "0";
-            this.textBoxTemperatureInput.Leave += new System.EventHandler(this.textBoxTemperatureInput_Leave);
             // 
             // labelTemperatureOutput
             // 
@@ -161,7 +160,7 @@
             this.radioButtonOutputCelsius.UseVisualStyleBackColor = true;
             this.radioButtonOutputCelsius.CheckedChanged += new System.EventHandler(this.radioButtonsOutput_CheckedChanged);
             // 
-            // Form1
+            // TemperatureConverterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -171,8 +170,8 @@
             this.Controls.Add(this.buttonConvert);
             this.Controls.Add(this.labelTemperatureOutput);
             this.Controls.Add(this.textBoxTemperatureInput);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "TemperatureConverterForm";
+            this.Text = "Перевод температуры";
             this.groupBoxInputScale.ResumeLayout(false);
             this.groupBoxInputScale.PerformLayout();
             this.groupBoxOutputScale.ResumeLayout(false);

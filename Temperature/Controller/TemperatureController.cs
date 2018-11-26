@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using Temperature.Model;
 
-namespace Temperature
+namespace Temperature.Controller
 {
     class TemperatureController : INotifyPropertyChanged
     {
@@ -21,6 +22,7 @@ namespace Temperature
 
         public Scale OutputScale
         {
+            get => _model.OutputScale;
             set => _model.OutputScale = value;
         }
 
@@ -36,7 +38,28 @@ namespace Temperature
             }
         }
 
-        public string OutputTemperature => $"{_model.OutputTemperature:F2}";
+        public string OutputTemperature
+        {
+            get
+            {
+                var units = string.Empty;
+                switch (OutputScale)
+                {
+                    case Scale.Celsius:
+                        units = "°C";
+                        break;
+                    case Scale.Faringate:
+                        units = "°F";
+                        break;
+                    case Scale.Kelvin:
+                        units = "K";
+                        break;
+                }
+
+                return $"{_model.OutputTemperature:F2} {units}";
+            }
+
+        }
 
         public void Convert()
         {
