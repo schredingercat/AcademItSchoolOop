@@ -76,7 +76,7 @@
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(140, 70);
             this.buttonConvert.TabIndex = 4;
-            this.buttonConvert.Text = "Convert";
+            this.buttonConvert.Text = "Конвертировать";
             this.buttonConvert.UseVisualStyleBackColor = true;
             this.buttonConvert.Click += new System.EventHandler(this.buttonConvert_Click);
             // 
@@ -112,7 +112,7 @@
             this.radioButtonInputFaringate.Name = "radioButtonInputFaringate";
             this.radioButtonInputFaringate.Size = new System.Drawing.Size(88, 17);
             this.radioButtonInputFaringate.TabIndex = 1;
-            this.radioButtonInputFaringate.Text = "Фарингейта";
+            this.radioButtonInputFaringate.Text = "Фаренгейта";
             this.radioButtonInputFaringate.UseVisualStyleBackColor = true;
             this.radioButtonInputFaringate.CheckedChanged += new System.EventHandler(this.radioButtonsInput_CheckedChanged);
             // 
@@ -159,7 +159,7 @@
             this.radioButtonOutputFaringate.Name = "radioButtonOutputFaringate";
             this.radioButtonOutputFaringate.Size = new System.Drawing.Size(88, 17);
             this.radioButtonOutputFaringate.TabIndex = 1;
-            this.radioButtonOutputFaringate.Text = "Фарингейта";
+            this.radioButtonOutputFaringate.Text = "Фаренгейта";
             this.radioButtonOutputFaringate.UseVisualStyleBackColor = true;
             this.radioButtonOutputFaringate.CheckedChanged += new System.EventHandler(this.radioButtonsOutput_CheckedChanged);
             // 
