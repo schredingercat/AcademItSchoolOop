@@ -15,6 +15,8 @@ namespace Temperature
             radioButtonOutputFaringate.Checked = true;
 
             labelTemperatureOutput.DataBindings.Add("Text", _controller, "OutputTemperature", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            _controller.Convert();
         }
 
         private void buttonConvert_Click(object sender, EventArgs e)

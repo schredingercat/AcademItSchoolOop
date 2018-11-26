@@ -39,32 +39,42 @@
             this.radioButtonOutputKelvin = new System.Windows.Forms.RadioButton();
             this.radioButtonOutputFaringate = new System.Windows.Forms.RadioButton();
             this.radioButtonOutputCelsius = new System.Windows.Forms.RadioButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxInputScale.SuspendLayout();
             this.groupBoxOutputScale.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxTemperatureInput
             // 
-            this.textBoxTemperatureInput.Location = new System.Drawing.Point(12, 36);
+            this.textBoxTemperatureInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.textBoxTemperatureInput, 2);
+            this.textBoxTemperatureInput.Location = new System.Drawing.Point(15, 15);
+            this.textBoxTemperatureInput.Margin = new System.Windows.Forms.Padding(15, 3, 15, 3);
             this.textBoxTemperatureInput.Name = "textBoxTemperatureInput";
-            this.textBoxTemperatureInput.Size = new System.Drawing.Size(270, 20);
+            this.textBoxTemperatureInput.Size = new System.Drawing.Size(394, 20);
             this.textBoxTemperatureInput.TabIndex = 0;
             this.textBoxTemperatureInput.Text = "0";
             // 
             // labelTemperatureOutput
             // 
             this.labelTemperatureOutput.AutoSize = true;
-            this.labelTemperatureOutput.Location = new System.Drawing.Point(511, 36);
+            this.labelTemperatureOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTemperatureOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTemperatureOutput.Location = new System.Drawing.Point(427, 0);
             this.labelTemperatureOutput.Name = "labelTemperatureOutput";
-            this.labelTemperatureOutput.Size = new System.Drawing.Size(35, 13);
+            this.labelTemperatureOutput.Size = new System.Drawing.Size(194, 50);
             this.labelTemperatureOutput.TabIndex = 1;
             this.labelTemperatureOutput.Text = "label1";
+            this.labelTemperatureOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonConvert
             // 
-            this.buttonConvert.Location = new System.Drawing.Point(12, 130);
+            this.buttonConvert.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonConvert.Location = new System.Drawing.Point(454, 90);
+            this.buttonConvert.Margin = new System.Windows.Forms.Padding(30, 40, 30, 40);
             this.buttonConvert.Name = "buttonConvert";
-            this.buttonConvert.Size = new System.Drawing.Size(75, 23);
+            this.buttonConvert.Size = new System.Drawing.Size(140, 70);
             this.buttonConvert.TabIndex = 4;
             this.buttonConvert.Text = "Convert";
             this.buttonConvert.UseVisualStyleBackColor = true;
@@ -75,9 +85,11 @@
             this.groupBoxInputScale.Controls.Add(this.radioButtonInputKelvin);
             this.groupBoxInputScale.Controls.Add(this.radioButtonInputFaringate);
             this.groupBoxInputScale.Controls.Add(this.radioButtonInputCelsius);
-            this.groupBoxInputScale.Location = new System.Drawing.Point(57, 202);
+            this.groupBoxInputScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxInputScale.Location = new System.Drawing.Point(15, 65);
+            this.groupBoxInputScale.Margin = new System.Windows.Forms.Padding(15);
             this.groupBoxInputScale.Name = "groupBoxInputScale";
-            this.groupBoxInputScale.Size = new System.Drawing.Size(200, 100);
+            this.groupBoxInputScale.Size = new System.Drawing.Size(182, 121);
             this.groupBoxInputScale.TabIndex = 5;
             this.groupBoxInputScale.TabStop = false;
             this.groupBoxInputScale.Text = "Из шкалы";
@@ -120,9 +132,11 @@
             this.groupBoxOutputScale.Controls.Add(this.radioButtonOutputKelvin);
             this.groupBoxOutputScale.Controls.Add(this.radioButtonOutputFaringate);
             this.groupBoxOutputScale.Controls.Add(this.radioButtonOutputCelsius);
-            this.groupBoxOutputScale.Location = new System.Drawing.Point(331, 202);
+            this.groupBoxOutputScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxOutputScale.Location = new System.Drawing.Point(227, 65);
+            this.groupBoxOutputScale.Margin = new System.Windows.Forms.Padding(15);
             this.groupBoxOutputScale.Name = "groupBoxOutputScale";
-            this.groupBoxOutputScale.Size = new System.Drawing.Size(200, 100);
+            this.groupBoxOutputScale.Size = new System.Drawing.Size(182, 121);
             this.groupBoxOutputScale.TabIndex = 6;
             this.groupBoxOutputScale.TabStop = false;
             this.groupBoxOutputScale.Text = "В шкалу";
@@ -160,24 +174,43 @@
             this.radioButtonOutputCelsius.UseVisualStyleBackColor = true;
             this.radioButtonOutputCelsius.CheckedChanged += new System.EventHandler(this.radioButtonsOutput_CheckedChanged);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.Controls.Add(this.textBoxTemperatureInput, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonConvert, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxOutputScale, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelTemperatureOutput, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxInputScale, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(624, 201);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
             // TemperatureConverterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.groupBoxOutputScale);
-            this.Controls.Add(this.groupBoxInputScale);
-            this.Controls.Add(this.buttonConvert);
-            this.Controls.Add(this.labelTemperatureOutput);
-            this.Controls.Add(this.textBoxTemperatureInput);
+            this.ClientSize = new System.Drawing.Size(624, 201);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.MinimumSize = new System.Drawing.Size(640, 240);
             this.Name = "TemperatureConverterForm";
             this.Text = "Перевод температуры";
             this.groupBoxInputScale.ResumeLayout(false);
             this.groupBoxInputScale.PerformLayout();
             this.groupBoxOutputScale.ResumeLayout(false);
             this.groupBoxOutputScale.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -194,6 +227,7 @@
         private System.Windows.Forms.RadioButton radioButtonOutputKelvin;
         private System.Windows.Forms.RadioButton radioButtonOutputFaringate;
         private System.Windows.Forms.RadioButton radioButtonOutputCelsius;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
