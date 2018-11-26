@@ -27,7 +27,8 @@ namespace Temperature
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             try
@@ -36,7 +37,7 @@ namespace Temperature
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -71,6 +72,6 @@ namespace Temperature
                 _controller.OutputScale = Temperature.Scale.Kelvin;
             }
         }
-        
+
     }
 }

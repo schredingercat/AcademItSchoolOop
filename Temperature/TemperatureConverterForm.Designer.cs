@@ -65,7 +65,7 @@
             this.labelTemperatureOutput.Name = "labelTemperatureOutput";
             this.labelTemperatureOutput.Size = new System.Drawing.Size(194, 50);
             this.labelTemperatureOutput.TabIndex = 1;
-            this.labelTemperatureOutput.Text = "label1";
+            this.labelTemperatureOutput.Text = "451 °F";
             this.labelTemperatureOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonConvert
