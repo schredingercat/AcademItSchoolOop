@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 using Temperature.Model;
 
 namespace Temperature.Controller
@@ -65,6 +66,28 @@ namespace Temperature.Controller
         {
             _model.Convert();
             OnPropertyChanged(nameof(OutputTemperature));
+        }
+
+        public void TryConvert(string input)
+        {
+            try
+            {
+                InputTemperature = input;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                Convert();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

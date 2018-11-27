@@ -55,6 +55,7 @@
             this.textBoxTemperatureInput.Size = new System.Drawing.Size(394, 20);
             this.textBoxTemperatureInput.TabIndex = 0;
             this.textBoxTemperatureInput.Text = "0";
+            this.textBoxTemperatureInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTemperatureInput_KeyPress);
             // 
             // labelTemperatureOutput
             // 

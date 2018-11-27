@@ -21,24 +21,7 @@ namespace Temperature
 
         private void buttonConvert_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _controller.InputTemperature = textBoxTemperatureInput.Text;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            try
-            {
-                _controller.Convert();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            _controller.TryConvert(textBoxTemperatureInput.Text);
         }
 
         private void radioButtonsInput_CheckedChanged(object sender, EventArgs e)
@@ -73,5 +56,12 @@ namespace Temperature
             }
         }
 
+        private void textBoxTemperatureInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                _controller.TryConvert(textBoxTemperatureInput.Text);
+            }
+        }
     }
 }
