@@ -27,7 +27,7 @@ namespace Temperature.Model
                     absoluteTemperature = InputTemperature - absoluteZeroC;
                     break;
                 case Scale.Faringate:
-                    if (InputTemperature < absoluteZeroC)
+                    if (InputTemperature < absoluteZeroF)
                     {
                         throw new ArgumentOutOfRangeException(nameof(InputTemperature), $@"Температура не может быть ниже {absoluteZeroF} °F");
                     }
