@@ -31,7 +31,7 @@ namespace Temperature.Controller
         {
             set
             {
-                if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double temperature))
+                if (!double.TryParse(value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double temperature))
                 {
                     throw new ArgumentException(@"Введено не числовое значение", nameof(value));
                 }
