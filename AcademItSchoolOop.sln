@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayList", "ArrayList\Arra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temperature", "Temperature\Temperature.csproj", "{28415DCF-8318-4B8B-8FC1-6203DC941F2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvParse", "CsvParse\CsvParse.csproj", "{FDAC1F43-E60A-4AEA-AD51-DB525A61E0DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{28415DCF-8318-4B8B-8FC1-6203DC941F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28415DCF-8318-4B8B-8FC1-6203DC941F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28415DCF-8318-4B8B-8FC1-6203DC941F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDAC1F43-E60A-4AEA-AD51-DB525A61E0DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDAC1F43-E60A-4AEA-AD51-DB525A61E0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDAC1F43-E60A-4AEA-AD51-DB525A61E0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDAC1F43-E60A-4AEA-AD51-DB525A61E0DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
