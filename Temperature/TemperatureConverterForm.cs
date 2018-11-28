@@ -1,9 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using Temperature.Controller;
-using Temperature.Model;
 
 namespace Temperature
 {
@@ -34,7 +31,7 @@ namespace Temperature
         {
             _controller.TryConvert(textBoxTemperatureInput.Text);
         }
-        
+
 
         private void textBoxTemperatureInput_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -48,7 +45,7 @@ namespace Temperature
         {
             try
             {
-            _controller.AddScale(textBoxScaleName.Text, textBoxScaleFactor.Text, textBoxScaleOffset.Text);
+                _controller.AddScale(textBoxScaleName.Text, textBoxScaleFactor.Text, textBoxScaleOffset.Text);
             }
             catch (Exception ex)
             {

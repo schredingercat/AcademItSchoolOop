@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -16,17 +15,16 @@ namespace Temperature.Controller
         public BindingList<TemperatureScale> InputScales => _model.InputScales;
         public BindingList<TemperatureScale> OutputScales => _model.OutputScales;
 
-
         public TemperatureScale SelectedInputScale
         {
-            get { return _model.SelectedInputScale; }
-            set { _model.SelectedInputScale = value; }
+            get => _model.SelectedInputScale;
+            set => _model.SelectedInputScale = value;
         }
 
         public TemperatureScale SelectedOutputScale
         {
-            get { return _model.SelectedOutputScale; }
-            set { _model.SelectedOutputScale = value; }
+            get => _model.SelectedOutputScale;
+            set => _model.SelectedOutputScale = value;
         }
 
         public TemperatureController()
@@ -41,8 +39,9 @@ namespace Temperature.Controller
 
         public void AddScale(string name, string inputZeroC, string inputHundredC)
         {
-            if (name.Length <= 0 || !double.TryParse(inputZeroC.Replace(",","."), NumberStyles.Any, CultureInfo.InvariantCulture, out double zeroC) 
-                                 || !double.TryParse(inputHundredC.Replace(",","."), NumberStyles.Any, CultureInfo.InvariantCulture, out double hundredC))
+            const double absoluteZero = -273.15;
+            if (name.Length <= 0 || !double.TryParse(inputZeroC.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out double zeroC)
+                                 || !double.TryParse(inputHundredC.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out double hundredC))
             {
                 throw new ArgumentException(@"Введены некорректные значения", $"{nameof(name)}, {nameof(inputZeroC)}, {nameof(inputHundredC)}");
             }
@@ -52,7 +51,7 @@ namespace Temperature.Controller
                 throw new ArgumentException($@"Шкала {name} уже есть в списке", nameof(name));
             }
 
-            if (zeroC >= hundredC || zeroC < -273.15 || hundredC < -273.15)
+            if (zeroC >= hundredC || zeroC < absoluteZero || hundredC < absoluteZero)
             {
                 throw new ArgumentOutOfRangeException($"{nameof(zeroC)}, {nameof(hundredC)}", @"Введены некорректные значения для 0 и 100 градусов");
             }
@@ -72,18 +71,11 @@ namespace Temperature.Controller
             }
         }
 
-        public string OutputTemperature
-        {
-            get
-            {
-                return $"{_model.OutputTemperature:F2}";
-            }
-
-        }
+        public string OutputTemperature => $"{_model.OutputTemperature:F2}";
 
         public void Convert()
         {
-            _model.ConvertToK();
+            _model.Convert();
             OnPropertyChanged(nameof(OutputTemperature));
         }
 

@@ -95,6 +95,7 @@
             this.groupBoxInputScale.Location = new System.Drawing.Point(15, 103);
             this.groupBoxInputScale.Margin = new System.Windows.Forms.Padding(15);
             this.groupBoxInputScale.Name = "groupBoxInputScale";
+            this.groupBoxInputScale.Padding = new System.Windows.Forms.Padding(10);
             this.groupBoxInputScale.Size = new System.Drawing.Size(182, 124);
             this.groupBoxInputScale.TabIndex = 5;
             this.groupBoxInputScale.TabStop = false;
@@ -107,6 +108,7 @@
             this.groupBoxOutputScale.Location = new System.Drawing.Point(227, 103);
             this.groupBoxOutputScale.Margin = new System.Windows.Forms.Padding(15);
             this.groupBoxOutputScale.Name = "groupBoxOutputScale";
+            this.groupBoxOutputScale.Padding = new System.Windows.Forms.Padding(10);
             this.groupBoxOutputScale.Size = new System.Drawing.Size(182, 124);
             this.groupBoxOutputScale.TabIndex = 6;
             this.groupBoxOutputScale.TabStop = false;
@@ -137,18 +139,22 @@
             // 
             // comboBoxInputScale
             // 
+            this.comboBoxInputScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxInputScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxInputScale.FormattingEnabled = true;
-            this.comboBoxInputScale.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxInputScale.Location = new System.Drawing.Point(10, 23);
             this.comboBoxInputScale.Name = "comboBoxInputScale";
-            this.comboBoxInputScale.Size = new System.Drawing.Size(141, 21);
+            this.comboBoxInputScale.Size = new System.Drawing.Size(162, 21);
             this.comboBoxInputScale.TabIndex = 7;
             // 
             // comboBoxOutputScale
             // 
+            this.comboBoxOutputScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxOutputScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxOutputScale.FormattingEnabled = true;
-            this.comboBoxOutputScale.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxOutputScale.Location = new System.Drawing.Point(10, 23);
             this.comboBoxOutputScale.Name = "comboBoxOutputScale";
-            this.comboBoxOutputScale.Size = new System.Drawing.Size(141, 21);
+            this.comboBoxOutputScale.Size = new System.Drawing.Size(162, 21);
             this.comboBoxOutputScale.TabIndex = 8;
             // 
             // groupBoxAddScale
@@ -156,12 +162,12 @@
             this.groupBoxAddScale.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxAddScale, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxAddScale, 2);
             this.groupBoxAddScale.Controls.Add(this.tableLayoutPanel2);
             this.groupBoxAddScale.Location = new System.Drawing.Point(15, 257);
             this.groupBoxAddScale.Margin = new System.Windows.Forms.Padding(15);
             this.groupBoxAddScale.Name = "groupBoxAddScale";
-            this.groupBoxAddScale.Size = new System.Drawing.Size(594, 169);
+            this.groupBoxAddScale.Size = new System.Drawing.Size(394, 169);
             this.groupBoxAddScale.TabIndex = 7;
             this.groupBoxAddScale.TabStop = false;
             this.groupBoxAddScale.Text = "Добавить свою шкалу";
@@ -169,9 +175,9 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
@@ -186,65 +192,78 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(588, 150);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(388, 150);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 41);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Location = new System.Drawing.Point(10, 51);
+            this.label1.Margin = new System.Windows.Forms.Padding(10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 13);
+            this.label1.Size = new System.Drawing.Size(107, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "0°C по новой шкале";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 82);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Location = new System.Drawing.Point(10, 92);
+            this.label2.Margin = new System.Windows.Forms.Padding(10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 13);
+            this.label2.Size = new System.Drawing.Size(119, 48);
             this.label2.TabIndex = 1;
             this.label2.Text = "100°C по новой шкале";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label3.Location = new System.Drawing.Point(10, 10);
+            this.label3.Margin = new System.Windows.Forms.Padding(10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 13);
+            this.label3.Size = new System.Drawing.Size(94, 21);
             this.label3.TabIndex = 2;
             this.label3.Text = "Название шкалы";
             // 
             // textBoxScaleName
             // 
-            this.textBoxScaleName.Location = new System.Drawing.Point(234, 3);
+            this.textBoxScaleName.Dock = System.Windows.Forms.DockStyle.Left;
+            this.textBoxScaleName.Location = new System.Drawing.Point(165, 10);
+            this.textBoxScaleName.Margin = new System.Windows.Forms.Padding(10);
             this.textBoxScaleName.Name = "textBoxScaleName";
-            this.textBoxScaleName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxScaleName.Size = new System.Drawing.Size(96, 20);
             this.textBoxScaleName.TabIndex = 3;
             this.textBoxScaleName.Text = "Реомюра";
             // 
             // textBoxScaleFactor
             // 
-            this.textBoxScaleFactor.Location = new System.Drawing.Point(234, 44);
+            this.textBoxScaleFactor.Location = new System.Drawing.Point(165, 51);
+            this.textBoxScaleFactor.Margin = new System.Windows.Forms.Padding(10);
             this.textBoxScaleFactor.Name = "textBoxScaleFactor";
-            this.textBoxScaleFactor.Size = new System.Drawing.Size(100, 20);
+            this.textBoxScaleFactor.Size = new System.Drawing.Size(96, 20);
             this.textBoxScaleFactor.TabIndex = 4;
             this.textBoxScaleFactor.Text = "0";
             // 
             // textBoxScaleOffset
             // 
-            this.textBoxScaleOffset.Location = new System.Drawing.Point(234, 85);
+            this.textBoxScaleOffset.Location = new System.Drawing.Point(165, 92);
+            this.textBoxScaleOffset.Margin = new System.Windows.Forms.Padding(10);
             this.textBoxScaleOffset.Name = "textBoxScaleOffset";
-            this.textBoxScaleOffset.Size = new System.Drawing.Size(100, 20);
+            this.textBoxScaleOffset.Size = new System.Drawing.Size(96, 20);
             this.textBoxScaleOffset.TabIndex = 5;
             this.textBoxScaleOffset.Text = "80";
             // 
             // buttonAddScale
             // 
-            this.buttonAddScale.Location = new System.Drawing.Point(465, 85);
+            this.buttonAddScale.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddScale.Location = new System.Drawing.Point(281, 92);
+            this.buttonAddScale.Margin = new System.Windows.Forms.Padding(10);
             this.buttonAddScale.Name = "buttonAddScale";
-            this.buttonAddScale.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddScale.Size = new System.Drawing.Size(97, 45);
             this.buttonAddScale.TabIndex = 6;
             this.buttonAddScale.Text = "Добавить";
             this.buttonAddScale.UseVisualStyleBackColor = true;

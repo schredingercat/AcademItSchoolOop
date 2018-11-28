@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace Temperature.Model
 {
@@ -30,7 +28,7 @@ namespace Temperature.Model
             OutputScales.Add(new TemperatureScale() { Name = name, Factor = factor, Offset = zeroC });
         }
 
-        public void ConvertToK()
+        public void Convert()
         {
 
             var absoluteTemperature = SelectedInputScale.Factor * (InputTemperature - SelectedInputScale.Offset) + 273.15;
@@ -42,6 +40,5 @@ namespace Temperature.Model
 
             OutputTemperature = (absoluteTemperature - 273.15) / SelectedOutputScale.Factor + SelectedOutputScale.Offset;
         }
-
     }
 }
