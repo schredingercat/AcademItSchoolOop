@@ -43,5 +43,17 @@ namespace Temperature
                 _controller.TryConvert(textBoxTemperatureInput.Text);
             }
         }
+
+        private void buttonAddScale_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            _controller.AddScale(textBoxScaleName.Text, textBoxScaleFactor.Text, textBoxScaleOffset.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

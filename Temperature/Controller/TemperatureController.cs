@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Temperature.Model;
@@ -31,23 +32,32 @@ namespace Temperature.Controller
         public TemperatureController()
         {
             _model = new TemperatureModel();
-            _model.AddScale("Цельсия", 1, 0);
-            _model.AddScale("Фаренгейта", (double)5 / 9, 32);
-            _model.AddScale("Кельвина", 1, 273.15);
+            _model.AddScale("Цельсия", 0, 100);
+            _model.AddScale("Фаренгейта", 32, 212);
+            _model.AddScale("Кельвина", 273.15, 373.15);
             _model.SelectedInputScale = _model.InputScales[0];
             _model.SelectedOutputScale = _model.OutputScales[1];
         }
 
-        public Scale InputScale
+        public void AddScale(string name, string inputZeroC, string inputHundredC)
         {
-            get => _model.InputScale;
-            set => _model.InputScale = value;
-        }
+            if (name.Length <= 0 || !double.TryParse(inputZeroC.Replace(",","."), NumberStyles.Any, CultureInfo.InvariantCulture, out double zeroC) 
+                                 || !double.TryParse(inputHundredC.Replace(",","."), NumberStyles.Any, CultureInfo.InvariantCulture, out double hundredC))
+            {
+                throw new ArgumentException(@"Введены некорректные значения", $"{nameof(name)}, {nameof(inputZeroC)}, {nameof(inputHundredC)}");
+            }
 
-        public Scale OutputScale
-        {
-            get => _model.OutputScale;
-            set => _model.OutputScale = value;
+            if (InputScales.Any(n => n.Name == name))
+            {
+                throw new ArgumentException($@"Шкала {name} уже есть в списке", nameof(name));
+            }
+
+            if (zeroC >= hundredC || zeroC < -273.15 || hundredC < -273.15)
+            {
+                throw new ArgumentOutOfRangeException($"{nameof(zeroC)}, {nameof(hundredC)}", @"Введены некорректные значения для 0 и 100 градусов");
+            }
+
+            _model.AddScale(name, zeroC, hundredC);
         }
 
         public string InputTemperature
@@ -66,21 +76,7 @@ namespace Temperature.Controller
         {
             get
             {
-                var units = string.Empty;
-                switch (OutputScale)
-                {
-                    case Scale.Celsius:
-                        units = "°C";
-                        break;
-                    case Scale.Fahrenheit:
-                        units = "°F";
-                        break;
-                    case Scale.Kelvin:
-                        units = "K";
-                        break;
-                }
-
-                return $"{_model.OutputTemperature:F2} {units}";
+                return $"{_model.OutputTemperature:F2}";
             }
 
         }
@@ -88,7 +84,6 @@ namespace Temperature.Controller
         public void Convert()
         {
             _model.ConvertToK();
-            //_model.Convert();
             OnPropertyChanged(nameof(OutputTemperature));
         }
 

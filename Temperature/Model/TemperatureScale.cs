@@ -13,5 +13,6 @@ namespace Temperature.Model
         public string Name { get; set; }
         public double Factor { get; set; }
         public double Offset { get; set; }
+        public string Symbol { get; set; }
     }
 }

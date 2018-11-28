@@ -55,7 +55,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scale.cs" />
     <Compile Include="Controller\TemperatureController.cs" />
     <Compile Include="Model\TemperatureModel.cs" />
     <EmbeddedResource Include="TemperatureConverterForm.resx">
