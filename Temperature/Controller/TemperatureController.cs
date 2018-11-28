@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -11,13 +12,35 @@ namespace Temperature.Controller
     {
         private readonly TemperatureModel _model;
 
+        public BindingList<TemperatureScale> InputScales => _model.InputScales;
+        public BindingList<TemperatureScale> OutputScales => _model.OutputScales;
+
+
+        public TemperatureScale SelectedInputScale
+        {
+            get { return _model.SelectedInputScale; }
+            set { _model.SelectedInputScale = value; }
+        }
+
+        public TemperatureScale SelectedOutputScale
+        {
+            get { return _model.SelectedOutputScale; }
+            set { _model.SelectedOutputScale = value; }
+        }
+
         public TemperatureController()
         {
             _model = new TemperatureModel();
+            _model.AddScale("Цельсия", 1, 0);
+            _model.AddScale("Фаренгейта", (double)5 / 9, 32);
+            _model.AddScale("Кельвина", 1, 273.15);
+            _model.SelectedInputScale = _model.InputScales[0];
+            _model.SelectedOutputScale = _model.OutputScales[1];
         }
 
         public Scale InputScale
         {
+            get => _model.InputScale;
             set => _model.InputScale = value;
         }
 
@@ -49,7 +72,7 @@ namespace Temperature.Controller
                     case Scale.Celsius:
                         units = "°C";
                         break;
-                    case Scale.Faringate:
+                    case Scale.Fahrenheit:
                         units = "°F";
                         break;
                     case Scale.Kelvin:
@@ -64,7 +87,8 @@ namespace Temperature.Controller
 
         public void Convert()
         {
-            _model.Convert();
+            _model.ConvertToK();
+            //_model.Convert();
             OnPropertyChanged(nameof(OutputTemperature));
         }
 

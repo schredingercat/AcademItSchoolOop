@@ -1,6 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using Temperature.Controller;
+using Temperature.Model;
 
 namespace Temperature
 {
@@ -11,8 +14,16 @@ namespace Temperature
         public TemperatureConverterForm()
         {
             InitializeComponent();
-            radioButtonInputCelsius.Checked = true;
-            radioButtonOutputFaringate.Checked = true;
+
+            comboBoxInputScale.DataSource = _controller.InputScales;
+            comboBoxInputScale.DisplayMember = "Name";
+            comboBoxInputScale.DataBindings.Add("SelectedItem", _controller, "SelectedInputScale", true,
+                DataSourceUpdateMode.OnPropertyChanged);
+
+            comboBoxOutputScale.DataSource = _controller.OutputScales;
+            comboBoxOutputScale.DisplayMember = "Name";
+            comboBoxOutputScale.DataBindings.Add("SelectedItem", _controller, "SelectedOutputScale", true,
+                DataSourceUpdateMode.OnPropertyChanged);
 
             labelTemperatureOutput.DataBindings.Add("Text", _controller, "OutputTemperature", false, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -23,38 +34,7 @@ namespace Temperature
         {
             _controller.TryConvert(textBoxTemperatureInput.Text);
         }
-
-        private void radioButtonsInput_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButtonInputCelsius.Checked)
-            {
-                _controller.InputScale = Temperature.Scale.Celsius;
-            }
-            else if (radioButtonInputFaringate.Checked)
-            {
-                _controller.InputScale = Temperature.Scale.Faringate;
-            }
-            else if (radioButtonInputKelvin.Checked)
-            {
-                _controller.InputScale = Temperature.Scale.Kelvin;
-            }
-        }
-
-        private void radioButtonsOutput_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButtonOutputCelsius.Checked)
-            {
-                _controller.OutputScale = Temperature.Scale.Celsius;
-            }
-            else if (radioButtonOutputFaringate.Checked)
-            {
-                _controller.OutputScale = Temperature.Scale.Faringate;
-            }
-            else if (radioButtonOutputKelvin.Checked)
-            {
-                _controller.OutputScale = Temperature.Scale.Kelvin;
-            }
-        }
+        
 
         private void textBoxTemperatureInput_KeyPress(object sender, KeyPressEventArgs e)
         {

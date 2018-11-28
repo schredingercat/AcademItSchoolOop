@@ -2,8 +2,8 @@
 {
     public enum Scale
     {
-        Celsius = 1,
-        Faringate,
-        Kelvin
+        Celsius = 0,
+        Fahrenheit = 1,
+        Kelvin = 2
     }
 }

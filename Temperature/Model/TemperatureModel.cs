@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Temperature.Model
 {
@@ -8,6 +11,38 @@ namespace Temperature.Model
         public Scale OutputScale { get; set; }
         public double InputTemperature { get; set; }
         public double OutputTemperature { get; private set; }
+
+        public BindingList<TemperatureScale> InputScales { get; set; }
+        public BindingList<TemperatureScale> OutputScales { get; set; }
+        public TemperatureScale SelectedInputScale { get; set; }
+        public TemperatureScale SelectedOutputScale { get; set; }
+
+        public TemperatureModel()
+        {
+            InputScales = new BindingList<TemperatureScale>();
+            OutputScales = new BindingList<TemperatureScale>();
+        }
+
+        public void AddScale(string name, double factor, double offset)
+        {
+            InputScales.Add(new TemperatureScale(){Name = name, Factor = factor, Offset = offset});
+            OutputScales.Add(new TemperatureScale() { Name = name, Factor = factor, Offset = offset });
+        }
+
+        public void ConvertToK()
+        {
+            
+            var absoluteTemperature = ((SelectedInputScale.Factor) * (InputTemperature - SelectedInputScale.Offset) + 273.15);
+
+            if (absoluteTemperature < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(InputTemperature), $@"Температура не может быть ниже абсолютного нуля");
+            }
+
+            OutputTemperature = ((absoluteTemperature - 273.15)/ (SelectedOutputScale.Factor) +
+                                 SelectedOutputScale.Offset);
+            
+        }
 
         public void Convert()
         {
@@ -26,7 +61,7 @@ namespace Temperature.Model
                     }
                     absoluteTemperature = InputTemperature - absoluteZeroC;
                     break;
-                case Scale.Faringate:
+                case Scale.Fahrenheit:
                     if (InputTemperature < absoluteZeroF)
                     {
                         throw new ArgumentOutOfRangeException(nameof(InputTemperature), $@"Температура не может быть ниже {absoluteZeroF} °F");
@@ -47,7 +82,7 @@ namespace Temperature.Model
                 case Scale.Celsius:
                     OutputTemperature = absoluteTemperature + absoluteZeroC;
                     break;
-                case Scale.Faringate:
+                case Scale.Fahrenheit:
                     OutputTemperature = (absoluteTemperature + absoluteZeroC) * 9 / 5 + 32;
                     break;
                 case Scale.Kelvin:
