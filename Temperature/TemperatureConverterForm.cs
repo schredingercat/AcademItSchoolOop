@@ -45,7 +45,7 @@ namespace Temperature
         {
             try
             {
-                _controller.AddScale(textBoxScaleName.Text, textBoxScaleFactor.Text, textBoxScaleOffset.Text);
+                _controller.AddScale(textBoxScaleName.Text, textBoxZeroC.Text, textBoxHundredC.Text);
             }
             catch (Exception ex)
             {

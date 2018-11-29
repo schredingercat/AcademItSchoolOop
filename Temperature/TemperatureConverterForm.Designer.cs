@@ -32,18 +32,18 @@
             this.labelTemperatureOutput = new System.Windows.Forms.Label();
             this.buttonConvert = new System.Windows.Forms.Button();
             this.groupBoxInputScale = new System.Windows.Forms.GroupBox();
-            this.groupBoxOutputScale = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxInputScale = new System.Windows.Forms.ComboBox();
+            this.groupBoxOutputScale = new System.Windows.Forms.GroupBox();
             this.comboBoxOutputScale = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxAddScale = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxScaleName = new System.Windows.Forms.TextBox();
-            this.textBoxScaleFactor = new System.Windows.Forms.TextBox();
-            this.textBoxScaleOffset = new System.Windows.Forms.TextBox();
+            this.textBoxZeroC = new System.Windows.Forms.TextBox();
+            this.textBoxHundredC = new System.Windows.Forms.TextBox();
             this.buttonAddScale = new System.Windows.Forms.Button();
             this.groupBoxInputScale.SuspendLayout();
             this.groupBoxOutputScale.SuspendLayout();
@@ -101,6 +101,16 @@
             this.groupBoxInputScale.TabStop = false;
             this.groupBoxInputScale.Text = "Из шкалы";
             // 
+            // comboBoxInputScale
+            // 
+            this.comboBoxInputScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxInputScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxInputScale.FormattingEnabled = true;
+            this.comboBoxInputScale.Location = new System.Drawing.Point(10, 23);
+            this.comboBoxInputScale.Name = "comboBoxInputScale";
+            this.comboBoxInputScale.Size = new System.Drawing.Size(162, 21);
+            this.comboBoxInputScale.TabIndex = 7;
+            // 
             // groupBoxOutputScale
             // 
             this.groupBoxOutputScale.Controls.Add(this.comboBoxOutputScale);
@@ -113,6 +123,16 @@
             this.groupBoxOutputScale.TabIndex = 6;
             this.groupBoxOutputScale.TabStop = false;
             this.groupBoxOutputScale.Text = "В шкалу";
+            // 
+            // comboBoxOutputScale
+            // 
+            this.comboBoxOutputScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxOutputScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOutputScale.FormattingEnabled = true;
+            this.comboBoxOutputScale.Location = new System.Drawing.Point(10, 23);
+            this.comboBoxOutputScale.Name = "comboBoxOutputScale";
+            this.comboBoxOutputScale.Size = new System.Drawing.Size(162, 21);
+            this.comboBoxOutputScale.TabIndex = 8;
             // 
             // tableLayoutPanel1
             // 
@@ -136,26 +156,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(624, 441);
             this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // comboBoxInputScale
-            // 
-            this.comboBoxInputScale.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxInputScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxInputScale.FormattingEnabled = true;
-            this.comboBoxInputScale.Location = new System.Drawing.Point(10, 23);
-            this.comboBoxInputScale.Name = "comboBoxInputScale";
-            this.comboBoxInputScale.Size = new System.Drawing.Size(162, 21);
-            this.comboBoxInputScale.TabIndex = 7;
-            // 
-            // comboBoxOutputScale
-            // 
-            this.comboBoxOutputScale.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxOutputScale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxOutputScale.FormattingEnabled = true;
-            this.comboBoxOutputScale.Location = new System.Drawing.Point(10, 23);
-            this.comboBoxOutputScale.Name = "comboBoxOutputScale";
-            this.comboBoxOutputScale.Size = new System.Drawing.Size(162, 21);
-            this.comboBoxOutputScale.TabIndex = 8;
             // 
             // groupBoxAddScale
             // 
@@ -182,8 +182,8 @@
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBoxScaleName, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBoxScaleFactor, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBoxScaleOffset, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxZeroC, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxHundredC, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.buttonAddScale, 2, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
@@ -195,17 +195,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(388, 150);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Location = new System.Drawing.Point(10, 51);
-            this.label1.Margin = new System.Windows.Forms.Padding(10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "0°C по новой шкале";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -216,6 +205,17 @@
             this.label2.Size = new System.Drawing.Size(119, 48);
             this.label2.TabIndex = 1;
             this.label2.Text = "100°C по новой шкале";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Location = new System.Drawing.Point(10, 51);
+            this.label1.Margin = new System.Windows.Forms.Padding(10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "0°C по новой шкале";
             // 
             // label3
             // 
@@ -238,23 +238,23 @@
             this.textBoxScaleName.TabIndex = 3;
             this.textBoxScaleName.Text = "Реомюра";
             // 
-            // textBoxScaleFactor
+            // textBoxZeroC
             // 
-            this.textBoxScaleFactor.Location = new System.Drawing.Point(165, 51);
-            this.textBoxScaleFactor.Margin = new System.Windows.Forms.Padding(10);
-            this.textBoxScaleFactor.Name = "textBoxScaleFactor";
-            this.textBoxScaleFactor.Size = new System.Drawing.Size(96, 20);
-            this.textBoxScaleFactor.TabIndex = 4;
-            this.textBoxScaleFactor.Text = "0";
+            this.textBoxZeroC.Location = new System.Drawing.Point(165, 51);
+            this.textBoxZeroC.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxZeroC.Name = "textBoxZeroC";
+            this.textBoxZeroC.Size = new System.Drawing.Size(96, 20);
+            this.textBoxZeroC.TabIndex = 4;
+            this.textBoxZeroC.Text = "0";
             // 
-            // textBoxScaleOffset
+            // textBoxHundredC
             // 
-            this.textBoxScaleOffset.Location = new System.Drawing.Point(165, 92);
-            this.textBoxScaleOffset.Margin = new System.Windows.Forms.Padding(10);
-            this.textBoxScaleOffset.Name = "textBoxScaleOffset";
-            this.textBoxScaleOffset.Size = new System.Drawing.Size(96, 20);
-            this.textBoxScaleOffset.TabIndex = 5;
-            this.textBoxScaleOffset.Text = "80";
+            this.textBoxHundredC.Location = new System.Drawing.Point(165, 92);
+            this.textBoxHundredC.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxHundredC.Name = "textBoxHundredC";
+            this.textBoxHundredC.Size = new System.Drawing.Size(96, 20);
+            this.textBoxHundredC.TabIndex = 5;
+            this.textBoxHundredC.Text = "80";
             // 
             // buttonAddScale
             // 
@@ -305,8 +305,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxScaleName;
-        private System.Windows.Forms.TextBox textBoxScaleFactor;
-        private System.Windows.Forms.TextBox textBoxScaleOffset;
+        private System.Windows.Forms.TextBox textBoxZeroC;
+        private System.Windows.Forms.TextBox textBoxHundredC;
         private System.Windows.Forms.Button buttonAddScale;
     }
 }
