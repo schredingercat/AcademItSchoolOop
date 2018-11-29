@@ -43,14 +43,15 @@ namespace Matrix
 
             var wSize = rowValues.GetLength(0);
             var hSize = rowValues.GetLength(1);
-            _rows = new Vector.Vector[wSize];
 
-            for (var i = 0; i < wSize; i++)
+            _rows = new Vector.Vector[hSize];
+
+            for (var i = 0; i < hSize; i++)
             {
-                _rows[i] = new Vector.Vector(hSize);
-                for (var j = 0; j < hSize; j++)
+                _rows[i] = new Vector.Vector(wSize);
+                for (var j = 0; j < wSize; j++)
                 {
-                    _rows[i][j] = rowValues[i, j];
+                    _rows[i][j] = rowValues[j, i];
 
                 }
             }
@@ -291,13 +292,13 @@ namespace Matrix
             var wSize = matrixB.GetColumnsNumber();
             var hSize = matrixA.GetRowsNumber();
 
-            var resultRows = new double[wSize, hSize];
+            var resultRows = new double[hSize, wSize];
 
             for (var i = 0; i < wSize; i++)
             {
                 for (var j = 0; j < hSize; j++)
                 {
-                    resultRows[i, j] = Vector.Vector.ScalarProduct(matrixA._rows[i], matrixB.GetColumn(j));
+                    resultRows[j, i] = Vector.Vector.ScalarProduct(matrixA._rows[i], matrixB.GetColumn(j));
                 }
             }
 

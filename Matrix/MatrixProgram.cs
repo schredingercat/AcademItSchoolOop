@@ -17,7 +17,7 @@ namespace Matrix
 
             var matrix4 = new Matrix(new[] { new Vector.Vector(new double[] { 12, 23, 34, 56 }), new Vector.Vector(new double[] { 65, 83, 45, 44, 5, 6 }), new Vector.Vector(new double[] { 3, 5, 8, 9 }) });
             Console.WriteLine($"{nameof(matrix4)}: {matrix4}");
-            
+
             Console.WriteLine();
             Console.WriteLine($"Размеры {nameof(matrix4)}: {matrix4.GetColumnsNumber()}x{matrix4.GetRowsNumber()}");
 
@@ -68,8 +68,6 @@ namespace Matrix
             Console.WriteLine();
             Console.WriteLine($"{matrix} + {matrix3} = {Matrix.Add(matrix, matrix3)}");
             Console.WriteLine($"{matrix} - {matrix3} = {Matrix.Subtract(matrix, matrix3)}");
-            Console.WriteLine();
-
 
             Console.WriteLine();
             Console.WriteLine("Произведение матриц");
