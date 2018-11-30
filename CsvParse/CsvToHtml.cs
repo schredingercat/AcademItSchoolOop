@@ -6,15 +6,16 @@ namespace CsvParse
     {
         public static string ConvertCsvToHtml(string input)
         {
-            const string openTags = "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>Converted from CSV</title>\n</head>\n<body>\n<table border=\"1\">\n<tr>\n<td>";
+            const string openTags = "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>Converted from CSV</title>\n</head>\n<body>\n<table border=\"1\">\n<tr>\n<td>";
             const string closeTags = "</td>\n</tr>\n</table>\n</body>\n</html>";
 
-            input = input.Replace("&", "&amp");
-            input = input.Replace("<", "&lt");
-            input = input.Replace(">", "&gt");
+            input = input.Replace("&", "&amp;");
+            input = input.Replace("<", "&lt;");
+            input = input.Replace(">", "&gt;");
 
             input = input.Replace("\r\n", "\n");
             input = input.Replace("\r", "\n");
+            input = input.Replace("\n", "\r\n");
 
             var stringLength = input.Length;
 
