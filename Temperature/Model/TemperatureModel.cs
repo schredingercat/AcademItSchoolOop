@@ -30,7 +30,6 @@ namespace Temperature.Model
 
         public void Convert()
         {
-
             var absoluteTemperature = SelectedInputScale.Factor * (InputTemperature - SelectedInputScale.Offset) + 273.15;
 
             if (absoluteTemperature < 0)
