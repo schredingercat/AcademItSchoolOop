@@ -24,8 +24,8 @@ namespace Temperature.Model
             const double hundred = 100;
             var factor = hundred / (hundredC - zeroC);
 
-            InputScales.Add(new TemperatureScale() { Name = name, Factor = factor, Offset = zeroC });
-            OutputScales.Add(new TemperatureScale() { Name = name, Factor = factor, Offset = zeroC });
+            InputScales.Add(new TemperatureScale { Name = name, Factor = factor, Offset = zeroC });
+            OutputScales.Add(new TemperatureScale { Name = name, Factor = factor, Offset = zeroC });
         }
 
         public void Convert()

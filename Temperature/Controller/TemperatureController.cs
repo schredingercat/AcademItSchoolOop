@@ -40,8 +40,8 @@ namespace Temperature.Controller
         public void AddScale(string name, string inputZeroC, string inputHundredC)
         {
             const double absoluteZero = -273.15;
-            if (name.Length <= 0 || !double.TryParse(inputZeroC.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out double zeroC)
-                                 || !double.TryParse(inputHundredC.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out double hundredC))
+            if (name.Length <= 0 || !double.TryParse(inputZeroC.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out var zeroC)
+                                 || !double.TryParse(inputHundredC.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out var hundredC))
             {
                 throw new ArgumentException(@"Введены некорректные значения", $"{nameof(name)}, {nameof(inputZeroC)}, {nameof(inputHundredC)}");
             }
@@ -63,7 +63,7 @@ namespace Temperature.Controller
         {
             set
             {
-                if (!double.TryParse(value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double temperature))
+                if (!double.TryParse(value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out var temperature))
                 {
                     throw new ArgumentException(@"Введено не числовое значение", nameof(value));
                 }
