@@ -23,6 +23,20 @@ namespace Minesweeper
         public MainWindow()
         {
             InitializeComponent();
+
+            var field = new Field(8, 8);
+            GameField.ItemsSource = field.Cells;
+
+
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var bindingExpression = ((Button) sender).GetBindingExpression(Button.ContentProperty);
+
+            var item = (Cell)bindingExpression?.DataItem;
+            
+            MessageBox.Show($"{item?.Text}");
         }
     }
 }

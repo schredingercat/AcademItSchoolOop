@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Key="DataTemplateCells">
+            <Button Content="{Binding Path=Text}" Height="40" Width="40" Margin="1,1,1,1" Click="ButtonBase_OnClick"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplateRaws">
+            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplateCells}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+
+    </Window.Resources>
     <Grid>
-        
+        <ItemsControl Name="GameField" ItemTemplate="{DynamicResource DataTemplateRaws}"/>
     </Grid>
 </Window>
