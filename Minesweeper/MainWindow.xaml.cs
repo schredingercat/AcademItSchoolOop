@@ -32,11 +32,11 @@ namespace Minesweeper
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var bindingExpression = ((Button) sender).GetBindingExpression(Button.ContentProperty);
+            var bindingExpression = ((Button) sender).GetBindingExpression(ContentProperty);
 
             var item = (Cell)bindingExpression?.DataItem;
             
-            MessageBox.Show($"{item?.Text}");
+            MessageBox.Show($"{item?.MineCount}");
         }
     }
 }

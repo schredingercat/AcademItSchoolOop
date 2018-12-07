@@ -12,6 +12,7 @@ namespace Minesweeper
         public bool Open { get; set; }
         public bool Marked { get; set; }
         public string Text { get; set; }
+        public int MineCount { get; set; }
 
         public Cell()
         {

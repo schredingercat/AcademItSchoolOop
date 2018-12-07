@@ -27,7 +27,7 @@ namespace Minesweeper
                 }
             }
 
-            PlaceMines(5, 5, 5);
+            PlaceMines(2, 5, 5);
 
         }
 
@@ -39,22 +39,37 @@ namespace Minesweeper
         public void PlaceMines(int minesCount, int firstX, int firstY)
         {
             var columns = _cells[0].Count;
-            var rows = _cells.Count;
+            var raws = _cells.Count;
             var random = new Random();
 
             while (minesCount > 0)
             {
                 var x = random.Next(columns);
-                var y = random.Next(rows);
+                var y = random.Next(raws);
 
                 if (!_cells[y][x].Mine && x != firstX && y != firstY)
                 {
                     _cells[y][x].Mine = true;
                     _cells[y][x].Text = "Mine!";
                     minesCount--;
+
+                    try
+                    {
+                        _cells[y + 1][x + 1].MineCount++;
+                        _cells[y + 1][x + 1].MineCount++;
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
                 }
             }
         }
+
+
+
+
 
     }
 }
