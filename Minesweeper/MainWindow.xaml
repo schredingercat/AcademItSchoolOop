@@ -28,7 +28,26 @@
         </DataTemplate>
 
     </Window.Resources>
-    <Grid>
-        <ItemsControl Name="GameField" ItemTemplate="{DynamicResource DataTemplateRaws}"/>
-    </Grid>
+    <StackPanel>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Игра">
+                    <MenuItem Name="MenuItemNewGame" 
+                              Header="_Новая игра"/>
+                    <MenuItem Name="MenuItemScores" 
+                              Header="Таблица рекордов"
+                              IsEnabled="False"/>
+                    <MenuItem Name="MenuItemOptions" 
+                              Header="Настройки"
+                              IsEnabled="False"/>
+                    <MenuItem Name="MenuItemExit" 
+                              Header="_Выход" 
+                              Click="MenuItemExit_OnClick"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid>
+            <ItemsControl Name="GameField" ItemTemplate="{DynamicResource DataTemplateRaws}"/>
+        </Grid>
+    </StackPanel>
 </Window>

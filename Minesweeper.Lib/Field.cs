@@ -9,10 +9,7 @@ namespace Minesweeper.Lib
 {
     public class Field
     {
-        private List<List<Cell>> _cells;
-
-        public bool initialized { get; private set; }
-
+        private readonly List<List<Cell>> _cells;
 
         public Field(int columns, int rows)
         {
@@ -34,6 +31,18 @@ namespace Minesweeper.Lib
         public List<List<Cell>> Cells
         {
             get { return _cells; }
+        }
+
+        public void Open(Cell cell)
+        {
+            cell.Open = true;
+            Refresh();
+        }
+
+        public void Mark(Cell cell)
+        {
+            cell.Marked = !cell.Marked;
+            Refresh();
         }
 
         public void PlaceMines(int minesCount, int firstX, int firstY)

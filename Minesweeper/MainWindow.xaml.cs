@@ -34,29 +34,23 @@ namespace Minesweeper
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var field = (Field) DataContext;
-            var bindingExpression = ((Button) sender).GetBindingExpression(ContentProperty);
-
+            var field = (Field)DataContext;
+            var bindingExpression = ((Button)sender).GetBindingExpression(ContentProperty);
             var cell = (Cell)bindingExpression?.DataItem;
-            if (cell != null)
-            {
-                cell.Open = true;
-            }
-            field.Refresh();
-
+            field.Open(cell);
         }
 
         private void UIElement_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             var field = (Field)DataContext;
             var bindingExpression = ((Button)sender).GetBindingExpression(ContentProperty);
-
             var cell = (Cell)bindingExpression?.DataItem;
-            if (cell != null)
-            {
-                cell.Marked = !cell.Marked;
-            }
-            field.Refresh();
+            field.Mark(cell);
+        }
+
+        private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
