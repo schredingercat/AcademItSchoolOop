@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Minesweeper</value>
+    <value>Сапёр</value>
   </data>
   <data name="MenuExit" xml:space="preserve">
-    <value>_Exit</value>
+    <value>_Выход</value>
   </data>
   <data name="MenuGame" xml:space="preserve">
-    <value>_Game</value>
+    <value>_Игра</value>
   </data>
   <data name="MenuNewGame" xml:space="preserve">
-    <value>_New Game</value>
+    <value>_Новая игра</value>
   </data>
   <data name="MenuOptions" xml:space="preserve">
-    <value>Options</value>
+    <value>Настройки</value>
   </data>
   <data name="MenuScores" xml:space="preserve">
-    <value>Scores</value>
+    <value>Таблица рекордов</value>
   </data>
 </root>

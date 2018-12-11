@@ -9,7 +9,7 @@ namespace Minesweeper.Lib
 {
     public class Field
     {
-        private readonly List<List<Cell>> _cells;
+        private List<List<Cell>> _cells;
 
         public Field(int columns, int rows)
         {

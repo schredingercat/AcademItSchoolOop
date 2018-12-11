@@ -24,12 +24,14 @@ namespace Minesweeper
         public MainWindow()
         {
             InitializeComponent();
+            StartNewGame();
+        }
 
+        private void StartNewGame()
+        {
             var field = new Field(8, 8);
             DataContext = field;
             GameField.ItemsSource = field.Cells;
-
-
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

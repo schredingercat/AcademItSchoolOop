@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
+        xmlns:res="clr-namespace:Minesweeper.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{x:Static res:Resources.ApplicationTitle}" Height="450" Width="800">
 
     <Window.Resources>
         <DataTemplate x:Key="DataTemplateCells">
@@ -31,17 +32,17 @@
     <StackPanel>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_Игра">
+                <MenuItem Header="{x:Static res:Resources.MenuGame}">
                     <MenuItem Name="MenuItemNewGame" 
-                              Header="_Новая игра"/>
+                              Header="{x:Static res:Resources.MenuNewGame}"/>
                     <MenuItem Name="MenuItemScores" 
-                              Header="Таблица рекордов"
+                              Header="{x:Static res:Resources.MenuScores}"
                               IsEnabled="False"/>
                     <MenuItem Name="MenuItemOptions" 
-                              Header="Настройки"
+                              Header="{x:Static res:Resources.MenuOptions}"
                               IsEnabled="False"/>
                     <MenuItem Name="MenuItemExit" 
-                              Header="_Выход" 
+                              Header="{x:Static res:Resources.MenuExit}" 
                               Click="MenuItemExit_OnClick"/>
                 </MenuItem>
             </Menu>
