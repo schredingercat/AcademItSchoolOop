@@ -5,11 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Minesweeper.Annotations;
+using Minesweeper.Lib.Annotations;
 
-namespace Minesweeper
+namespace Minesweeper.Lib
 {
-    public class Cell:INotifyPropertyChanged
+    public class Cell : INotifyPropertyChanged
     {
         private bool _mine;
         private bool _open;
@@ -26,7 +26,7 @@ namespace Minesweeper
 
         public bool Mine
         {
-            get { return _mine;}
+            get { return _mine; }
             set
             {
                 _mine = value;
@@ -73,5 +73,4 @@ namespace Minesweeper
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
 }

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
 
-namespace Minesweeper
+namespace Minesweeper.Lib
 {
     public class Field
     {
@@ -69,7 +67,7 @@ namespace Minesweeper
             {
                 foreach (var cell in row)
                 {
-                    cell.Text = (cell.Mine) ? "Mine!" : cell.MineCount.ToString();
+                    cell.Text = cell.Mine ? "Mine!" : cell.MineCount.ToString();
                 }
 
             }
