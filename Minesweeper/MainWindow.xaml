@@ -9,7 +9,12 @@
 
     <Window.Resources>
         <DataTemplate x:Key="DataTemplateCells">
-            <Button Content="{Binding Path=Text}" Height="40" Width="40" Margin="1,1,1,1" Click="ButtonBase_OnClick"/>
+            <Button Content="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" 
+                    Height="40" 
+                    Width="40" 
+                    Margin="1,1,1,1" 
+                    MouseRightButtonUp="UIElement_OnMouseRightButtonUp"
+                    Click="ButtonBase_OnClick"/>
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplateRaws">

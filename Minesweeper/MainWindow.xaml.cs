@@ -25,6 +25,7 @@ namespace Minesweeper
             InitializeComponent();
 
             var field = new Field(8, 8);
+            DataContext = field;
             GameField.ItemsSource = field.Cells;
 
 
@@ -32,11 +33,29 @@ namespace Minesweeper
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            var field = (Field) DataContext;
             var bindingExpression = ((Button) sender).GetBindingExpression(ContentProperty);
 
-            var item = (Cell)bindingExpression?.DataItem;
-            
-            MessageBox.Show($"{item?.MineCount}");
+            var cell = (Cell)bindingExpression?.DataItem;
+            if (cell != null)
+            {
+                cell.Open = true;
+            }
+            field.Refresh();
+
+        }
+
+        private void UIElement_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var field = (Field)DataContext;
+            var bindingExpression = ((Button)sender).GetBindingExpression(ContentProperty);
+
+            var cell = (Cell)bindingExpression?.DataItem;
+            if (cell != null)
+            {
+                cell.Marked = !cell.Marked;
+            }
+            field.Refresh();
         }
     }
 }
