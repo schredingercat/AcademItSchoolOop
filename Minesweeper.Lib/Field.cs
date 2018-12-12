@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,22 +11,24 @@ namespace Minesweeper.Lib
     public class Field
     {
         private List<List<Cell>> _cells;
+        private int _minesCount { get; set; }
+        public GameStatus GameStatus { get; private set; }
 
-        public Field(int columns, int rows)
+        public Field(int width, int height, int minesCount)
         {
             _cells = new List<List<Cell>>();
-            for (var i = 0; i < rows; i++)
+            for (var i = 0; i < height; i++)
             {
                 _cells.Add(new List<Cell>());
 
-                for (var j = 0; j < columns; j++)
+                for (var j = 0; j < width; j++)
                 {
-                    _cells[i].Add(new Cell());
+                    _cells[i].Add(new Cell { X = j, Y = i });
                 }
             }
 
-            PlaceMines(5, 5, 5);
-
+            _minesCount = minesCount;
+            GameStatus = GameStatus.Wait;
         }
 
         public List<List<Cell>> Cells
@@ -35,8 +38,29 @@ namespace Minesweeper.Lib
 
         public void Open(Cell cell)
         {
-            cell.Open = true;
+            if (GameStatus == GameStatus.Wait)
+            {
+                PlaceMines(cell.X, cell.Y, _minesCount);
+                GameStatus = GameStatus.Playing;
+            }
+            OpenNearCells(cell);
             Refresh();
+        }
+
+        private void OpenNearCells(Cell cell)
+        {
+            cell.Open = true;
+            if (cell.MineCount == 0)
+            {
+                var nearCells = GetNearCells(cell.X, cell.Y);
+                foreach (var curentCell in nearCells)
+                {
+                    if (!curentCell.Open)
+                    {
+                        OpenNearCells(curentCell);
+                    }
+                }
+            }
         }
 
         public void Mark(Cell cell)
@@ -45,7 +69,30 @@ namespace Minesweeper.Lib
             Refresh();
         }
 
-        public void PlaceMines(int minesCount, int firstX, int firstY)
+        public Cell GetCell(int x, int y)
+        {
+            return _cells[y][x];
+        }
+
+        public List<Cell> GetNearCells(int x, int y)
+        {
+            var columns = _cells[0].Count;
+            var raws = _cells.Count;
+
+            var result = new List<Cell>();
+
+            for (int i = Math.Max(0, x - 1); i <= Math.Min(columns - 1, x + 1); i++)
+            {
+                for (int j = Math.Max(0, y - 1); j <= Math.Min(raws - 1, y + 1); j++)
+                {
+                    result.Add(_cells[j][i]);
+                }
+            }
+
+            return result;
+        }
+
+        public void PlaceMines(int firstX, int firstY, int minesCount)
         {
             var columns = _cells[0].Count;
             var raws = _cells.Count;
@@ -60,12 +107,10 @@ namespace Minesweeper.Lib
                 {
                     _cells[y][x].Mine = true;
 
-                    for (int i = Math.Max(0, x - 1); i <= Math.Min(columns - 1, x + 1); i++)
+                    var nearCells = GetNearCells(x, y);
+                    foreach (var cell in nearCells)
                     {
-                        for (int j = Math.Max(0, y - 1); j <= Math.Min(raws - 1, y + 1); j++)
-                        {
-                            _cells[j][i].MineCount++;
-                        }
+                        cell.MineCount++;
                     }
 
                     minesCount--;
@@ -93,8 +138,8 @@ namespace Minesweeper.Lib
                     {
                         if (cell.Mine)
                         {
-                            cell.Text = "Mine";
-                            MessageBox.Show("Boom!");
+                            cell.Text = "Mine!";
+                            GameStatus = GameStatus.GameOver;
                         }
                         else
                         {
@@ -124,7 +169,7 @@ namespace Minesweeper.Lib
 
             if (areYouWin)
             {
-                MessageBox.Show("You Win!!!");
+                GameStatus = GameStatus.Win;
             }
 
         }

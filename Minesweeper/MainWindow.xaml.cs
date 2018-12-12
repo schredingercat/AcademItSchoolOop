@@ -24,30 +24,35 @@ namespace Minesweeper
         public MainWindow()
         {
             InitializeComponent();
-            StartNewGame();
+            NewGame(8, 8, 9);
         }
 
-        private void StartNewGame()
+        private void NewGame(int width, int height, int minesCount)
         {
-            var field = new Field(8, 8);
-            DataContext = field;
-            GameField.ItemsSource = field.Cells;
+            var controller = new GuiController(width, height, minesCount);
+            DataContext = controller;
+            GameField.ItemsSource = controller.Field.Cells;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var field = (Field)DataContext;
+            var controller = (GuiController)DataContext;
+            if (controller.GameStatus == GameStatus.Win || controller.GameStatus == GameStatus.GameOver)
+            {
+                NewGame(8, 8, 9);
+                return;
+            }
             var bindingExpression = ((Button)sender).GetBindingExpression(ContentProperty);
             var cell = (Cell)bindingExpression?.DataItem;
-            field.Open(cell);
+            controller.Open(cell);
         }
 
         private void UIElement_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var field = (Field)DataContext;
+            var controller = (GuiController)DataContext;
             var bindingExpression = ((Button)sender).GetBindingExpression(ContentProperty);
             var cell = (Cell)bindingExpression?.DataItem;
-            field.Mark(cell);
+            controller.Mark(cell);
         }
 
         private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)

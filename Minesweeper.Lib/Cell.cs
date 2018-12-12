@@ -16,6 +16,9 @@ namespace Minesweeper.Lib
         private bool _marked;
         private string _text;
         public int MineCount { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+
 
         public Cell()
         {
