@@ -9,13 +9,21 @@
         Title="{x:Static res:Resources.ApplicationTitle}" Height="450" Width="800">
 
     <Window.Resources>
+        <local:CellStatusToImageConverter x:Key="CellStatusToImageConverter"/>
+
         <DataTemplate x:Key="DataTemplateCells">
-            <Button Content="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" 
+            <Button
+                    Tag="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"
                     Height="40" 
                     Width="40" 
                     Margin="1,1,1,1" 
                     MouseRightButtonUp="UIElement_OnMouseRightButtonUp"
-                    Click="ButtonBase_OnClick"/>
+                    Click="ButtonBase_OnClick">
+                <Button.Content>
+                    <Image Source="{Binding Path=Status, Converter={StaticResource CellStatusToImageConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+                </Button.Content>
+
+                </Button>
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplateRaws">

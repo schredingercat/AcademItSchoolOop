@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
+    <Compile Include="CellStatus.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="GameStatus.cs" />
     <Compile Include="Properties\Annotations.cs" />

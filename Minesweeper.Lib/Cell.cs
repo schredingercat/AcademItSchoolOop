@@ -44,6 +44,7 @@ namespace Minesweeper.Lib
             {
                 _open = value;
                 OnPropertyChanged(nameof(Open));
+                OnPropertyChanged(nameof(Status));
             }
         }
 
@@ -54,6 +55,7 @@ namespace Minesweeper.Lib
             {
                 _marked = value;
                 OnPropertyChanged(nameof(Marked));
+                OnPropertyChanged(nameof(Status));
             }
         }
 
@@ -64,7 +66,45 @@ namespace Minesweeper.Lib
             {
                 _text = value;
                 OnPropertyChanged(nameof(Text));
+                OnPropertyChanged(nameof(Status));
             }
+        }
+
+        public CellStatus Status
+        {
+            get
+            {
+                if (!Open)
+                {
+                    if (Marked)
+                    {
+                        return CellStatus.Marked;
+                    }
+
+                    return CellStatus.Hidden;
+                }
+
+                if (Mine)
+                {
+                    return CellStatus.Mine;
+                }
+
+                switch (MineCount)
+                {
+                    case 0: return CellStatus.Number0;
+                    case 1: return CellStatus.Number1;
+                    case 2: return CellStatus.Number2;
+                    case 3: return CellStatus.Number3;
+                    case 4: return CellStatus.Number4;
+                    case 5: return CellStatus.Number5;
+                    case 6: return CellStatus.Number6;
+                    case 7: return CellStatus.Number7;
+                    case 8: return CellStatus.Number8;
+                }
+
+                return CellStatus.Hidden;
+            }
+            
         }
 
 

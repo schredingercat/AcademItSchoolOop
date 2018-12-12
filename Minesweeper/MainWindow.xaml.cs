@@ -42,7 +42,8 @@ namespace Minesweeper
                 NewGame(8, 8, 9);
                 return;
             }
-            var bindingExpression = ((Button)sender).GetBindingExpression(ContentProperty);
+
+            var bindingExpression = ((Button)sender).GetBindingExpression(TagProperty);
             var cell = (Cell)bindingExpression?.DataItem;
             controller.Open(cell);
         }
@@ -50,7 +51,7 @@ namespace Minesweeper
         private void UIElement_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             var controller = (GuiController)DataContext;
-            var bindingExpression = ((Button)sender).GetBindingExpression(ContentProperty);
+            var bindingExpression = ((Button)sender).GetBindingExpression(TagProperty);
             var cell = (Cell)bindingExpression?.DataItem;
             controller.Mark(cell);
         }
