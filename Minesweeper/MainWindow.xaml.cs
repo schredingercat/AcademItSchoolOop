@@ -60,5 +60,11 @@ namespace Minesweeper
         {
             Application.Current.Shutdown();
         }
+
+        private void MenuItemOptions_OnClick(object sender, RoutedEventArgs e)
+        {
+            var settingsWindow = new SettingsWindow();
+            settingsWindow.ShowDialog();
+        }
     }
 }

@@ -14,16 +14,16 @@
         <DataTemplate x:Key="DataTemplateCells">
             <Button
                     Tag="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"
-                    Height="40" 
-                    Width="40" 
+                    Height="32" 
+                    Width="32" 
                     Margin="1,1,1,1" 
                     MouseRightButtonUp="UIElement_OnMouseRightButtonUp"
                     Click="ButtonBase_OnClick">
                 <Button.Content>
-                    <Image Source="{Binding Path=Status, Converter={StaticResource CellStatusToImageConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Image  Source="{Binding Path=Status, Converter={StaticResource CellStatusToImageConverter}, UpdateSourceTrigger=PropertyChanged}"/>
                 </Button.Content>
 
-                </Button>
+            </Button>
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplateRaws">
@@ -48,7 +48,7 @@
                               IsEnabled="False"/>
                     <MenuItem Name="MenuItemOptions" 
                               Header="{x:Static res:Resources.MenuOptions}"
-                              IsEnabled="False"/>
+                              Click="MenuItemOptions_OnClick"/>
                     <MenuItem Name="MenuItemExit" 
                               Header="{x:Static res:Resources.MenuExit}" 
                               Click="MenuItemExit_OnClick"/>
