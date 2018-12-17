@@ -70,6 +70,51 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Difficult Level.
+        /// </summary>
+        public static string DifficultLevel {
+            get {
+                return ResourceManager.GetString("DifficultLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom settings.
+        /// </summary>
+        public static string LevelCustom {
+            get {
+                return ResourceManager.GetString("LevelCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Easy.
+        /// </summary>
+        public static string LevelEasy {
+            get {
+                return ResourceManager.GetString("LevelEasy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard.
+        /// </summary>
+        public static string LevelHard {
+            get {
+                return ResourceManager.GetString("LevelHard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        public static string LevelMedium {
+            get {
+                return ResourceManager.GetString("LevelMedium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Exit.
         /// </summary>
         public static string MenuExit {
@@ -88,6 +133,15 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Help.
+        /// </summary>
+        public static string MenuHelp {
+            get {
+                return ResourceManager.GetString("MenuHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _New Game.
         /// </summary>
         public static string MenuNewGame {
@@ -97,20 +151,38 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Options.
-        /// </summary>
-        public static string MenuOptions {
-            get {
-                return ResourceManager.GetString("MenuOptions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Scores.
         /// </summary>
         public static string MenuScores {
             get {
                 return ResourceManager.GetString("MenuScores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Settings....
+        /// </summary>
+        public static string MenuSettings {
+            get {
+                return ResourceManager.GetString("MenuSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _About.
+        /// </summary>
+        public static string MunuAbout {
+            get {
+                return ResourceManager.GetString("MunuAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsWindowTitle {
+            get {
+                return ResourceManager.GetString("SettingsWindowTitle", resourceCulture);
             }
         }
     }

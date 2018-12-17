@@ -64,6 +64,7 @@ namespace Minesweeper
         private void MenuItemOptions_OnClick(object sender, RoutedEventArgs e)
         {
             var settingsWindow = new SettingsWindow();
+            settingsWindow.DataContext = this.DataContext;
             settingsWindow.ShowDialog();
         }
     }

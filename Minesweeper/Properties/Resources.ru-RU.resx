@@ -120,19 +120,43 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Сапёр</value>
   </data>
+  <data name="DifficultLevel" xml:space="preserve">
+    <value>Уровень сложности</value>
+  </data>
+  <data name="LevelCustom" xml:space="preserve">
+    <value>Свои настройки</value>
+  </data>
+  <data name="LevelEasy" xml:space="preserve">
+    <value>Новичок</value>
+  </data>
+  <data name="LevelHard" xml:space="preserve">
+    <value>Профессионал</value>
+  </data>
+  <data name="LevelMedium" xml:space="preserve">
+    <value>Любитель</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>_О программе</value>
+  </data>
   <data name="MenuExit" xml:space="preserve">
     <value>_Выход</value>
   </data>
   <data name="MenuGame" xml:space="preserve">
     <value>_Игра</value>
   </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>_Справка</value>
+  </data>
   <data name="MenuNewGame" xml:space="preserve">
     <value>_Новая игра</value>
   </data>
-  <data name="MenuOptions" xml:space="preserve">
-    <value>Настройки</value>
-  </data>
   <data name="MenuScores" xml:space="preserve">
     <value>Таблица рекордов</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>Настройки...</value>
+  </data>
+  <data name="SettingsWindowTitle" xml:space="preserve">
+    <value>Настройки</value>
   </data>
 </root>

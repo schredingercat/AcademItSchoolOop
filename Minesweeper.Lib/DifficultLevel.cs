@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Minesweeper.Lib
 {
+    [Serializable]
     public class DifficultLevel
     {
         public string Name { get; set; }

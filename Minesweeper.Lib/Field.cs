@@ -1,33 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Minesweeper.Lib.Annotations;
 
 namespace Minesweeper.Lib
 {
-    public class Field
+    public class Field:INotifyPropertyChanged
     {
         private List<List<Cell>> _cells;
-        private int _minesCount { get; set; }
+        
         public GameStatus GameStatus { get; private set; }
 
+        private int _fieldWidth;
+        private int _fieldHeight;
+        public int FieldHeight { get; set; }
+        public int MinesCount { get; set; }
+        
         public Field(int width, int height, int minesCount)
         {
+            _fieldWidth = width;
+            _fieldHeight = height;
+            MinesCount = minesCount;
             _cells = new List<List<Cell>>();
-            for (var i = 0; i < height; i++)
+            for (var i = 0; i < _fieldHeight; i++)
             {
                 _cells.Add(new List<Cell>());
 
-                for (var j = 0; j < width; j++)
+                for (var j = 0; j < _fieldWidth; j++)
                 {
                     _cells[i].Add(new Cell { X = j, Y = i });
                 }
             }
 
-            _minesCount = minesCount;
+            
             GameStatus = GameStatus.Wait;
         }
 
@@ -36,11 +47,21 @@ namespace Minesweeper.Lib
             get { return _cells; }
         }
 
+        public int FieldWidth
+        {
+            get { return _fieldWidth; }
+            set
+            {
+                _fieldWidth = value;
+                OnPropertyChanged(nameof(FieldWidth));
+            }
+        }
+
         public void Open(Cell cell)
         {
             if (GameStatus == GameStatus.Wait)
             {
-                PlaceMines(cell.X, cell.Y, _minesCount);
+                PlaceMines(cell.X, cell.Y, MinesCount);
                 GameStatus = GameStatus.Playing;
             }
             OpenNearCells(cell);
@@ -175,5 +196,12 @@ namespace Minesweeper.Lib
         }
 
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Minesweeper.Annotations;
 using Minesweeper.Lib;
 
 namespace Minesweeper
 {
-    class GuiController
+    public class GuiController
     {
         public Field Field { get; }
+        
+        public DifficultLevel DifficultLevel { get; set; }
 
         public GuiController(int width, int height, int minesCount)
         {
@@ -30,6 +35,24 @@ namespace Minesweeper
             Field.Mark(cell);
         }
 
+        public int FieldWidth
+        {
+            get => Field.FieldWidth;
+            set => Field.FieldWidth = value;
+        }
+
+        public int FieldHeight
+        {
+            get => Field.FieldHeight;
+            set => Field.FieldHeight = value;
+        }
+
+        public int MinesCount
+        {
+            get => Field.MinesCount;
+            set => Field.MinesCount = value;
+        }
+
         private void CheckGameStatus()
         {
             switch (GameStatus)
@@ -46,7 +69,6 @@ namespace Minesweeper
                     break;
             }
         }
-
-
+        
     }
 }

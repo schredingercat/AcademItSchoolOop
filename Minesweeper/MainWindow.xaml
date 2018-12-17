@@ -43,20 +43,29 @@
                 <MenuItem Header="{x:Static res:Resources.MenuGame}">
                     <MenuItem Name="MenuItemNewGame" 
                               Header="{x:Static res:Resources.MenuNewGame}"/>
+                    <Separator/>
                     <MenuItem Name="MenuItemScores" 
                               Header="{x:Static res:Resources.MenuScores}"
                               IsEnabled="False"/>
                     <MenuItem Name="MenuItemOptions" 
-                              Header="{x:Static res:Resources.MenuOptions}"
+                              Header="{x:Static res:Resources.MenuSettings}"
                               Click="MenuItemOptions_OnClick"/>
+                    <Separator/>
                     <MenuItem Name="MenuItemExit" 
                               Header="{x:Static res:Resources.MenuExit}" 
                               Click="MenuItemExit_OnClick"/>
                 </MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuHelp}">
+                    <MenuItem Name="MenuItemAbout"
+                              Header="{x:Static res:Resources.MunuAbout}"/>
+                </MenuItem>
             </Menu>
         </DockPanel>
         <Grid>
-            <ItemsControl Name="GameField" ItemTemplate="{DynamicResource DataTemplateRaws}"/>
+            <ItemsControl Name="GameField" 
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          ItemTemplate="{DynamicResource DataTemplateRaws}"/>
         </Grid>
     </StackPanel>
 </Window>

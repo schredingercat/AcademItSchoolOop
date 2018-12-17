@@ -4,9 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
+        xmlns:res="clr-namespace:Minesweeper.Properties"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="240" Width="320">
+        Title="{x:Static res:Resources.SettingsWindowTitle}" Height="240" Width="320">
     <Grid>
-        
+        <GroupBox Header="{x:Static res:Resources.DifficultLevel}" Padding="3" Margin="5">
+            <StackPanel>
+                <RadioButton IsChecked="True" Content="{x:Static res:Resources.LevelEasy}" Margin="3"/>
+                <RadioButton Content="{x:Static res:Resources.LevelMedium}" Margin="3"/>
+                <RadioButton Content="{x:Static res:Resources.LevelHard}" Margin="3"/>
+                <RadioButton Content="{x:Static res:Resources.LevelCustom}" Margin="3"/>
+                <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Ширина игрового поля" Margin="3"></TextBlock>
+                    <TextBox Grid.Row="0" 
+                             Grid.Column="1" 
+                             Margin="3" 
+                             Text="{Binding Path=FieldWidth, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Высота игрового поля" Margin="3"></TextBlock>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="3"></TextBox>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Количество мин" Margin="3"></TextBlock>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="3"></TextBox>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
     </Grid>
+
 </Window>
