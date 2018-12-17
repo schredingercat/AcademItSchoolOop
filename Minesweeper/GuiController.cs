@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,7 +21,16 @@ namespace Minesweeper
 
         public GuiController(int width, int height, int minesCount)
         {
-            Field = new Field(width, height, minesCount);
+            try
+            {
+                DifficultLevel = LoadSettings();
+            }
+            catch (Exception ex)
+            {
+                DifficultLevel = new DifficultLevel {Width = 8, Height = 8, MinesCount = 10};
+            }
+
+            Field = new Field(DifficultLevel.Width, DifficultLevel.Height, DifficultLevel.MinesCount);
         }
 
         public GameStatus GameStatus => Field.GameStatus;
@@ -51,6 +62,23 @@ namespace Minesweeper
         {
             get => Field.MinesCount;
             set => Field.MinesCount = value;
+        }
+
+        public DifficultLevel LoadSettings()
+        {
+            var readFileStream = File.Open("settings.cfg", FileMode.Open);
+            var deserializer = new BinaryFormatter();
+            return (DifficultLevel)deserializer.Deserialize(readFileStream);
+        }
+
+        public void SaveSettings()
+        {
+            using (var saveFileStream = File.Create("settings.cfg"))
+            {
+                var serializer = new BinaryFormatter();
+                serializer.Serialize(saveFileStream, DifficultLevel);
+                saveFileStream.Close();
+            }
         }
 
         private void CheckGameStatus()

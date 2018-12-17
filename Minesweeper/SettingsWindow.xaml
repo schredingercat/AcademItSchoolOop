@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Minesweeper"
         xmlns:res="clr-namespace:Minesweeper.Properties"
         mc:Ignorable="d"
-        Title="{x:Static res:Resources.SettingsWindowTitle}" Height="240" Width="320">
+        Title="{x:Static res:Resources.SettingsWindowTitle}" Height="240" Width="320"
+        Closing="SettingsWindow_OnClosing">
     <Grid>
         <GroupBox Header="{x:Static res:Resources.DifficultLevel}" Padding="3" Margin="5">
             <StackPanel>
@@ -30,11 +31,17 @@
                     <TextBox Grid.Row="0" 
                              Grid.Column="1" 
                              Margin="3" 
-                             Text="{Binding Path=FieldWidth, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                             Text="{Binding Path=DifficultLevel.Width, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Высота игрового поля" Margin="3"></TextBlock>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="3"></TextBox>
+                    <TextBox Grid.Row="1" 
+                             Grid.Column="1" 
+                             Margin="3"
+                             Text="{Binding Path=DifficultLevel.Height, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Количество мин" Margin="3"></TextBlock>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="3"></TextBox>
+                    <TextBox Grid.Row="2" 
+                             Grid.Column="1" 
+                             Margin="3"
+                             Text="{Binding Path=DifficultLevel.MinesCount, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </StackPanel>
         </GroupBox>
