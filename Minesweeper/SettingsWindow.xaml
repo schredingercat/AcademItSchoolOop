@@ -11,10 +11,18 @@
     <Grid>
         <GroupBox Header="{x:Static res:Resources.DifficultLevel}" Padding="3" Margin="5">
             <StackPanel>
-                <RadioButton IsChecked="True" Content="{x:Static res:Resources.LevelEasy}" Margin="3"/>
-                <RadioButton Content="{x:Static res:Resources.LevelMedium}" Margin="3"/>
-                <RadioButton Content="{x:Static res:Resources.LevelHard}" Margin="3"/>
-                <RadioButton Content="{x:Static res:Resources.LevelCustom}" Margin="3"/>
+                <RadioButton IsChecked="True" 
+                             Tag="0"
+                             Content="{x:Static res:Resources.LevelEasy}" Margin="3"
+                             Checked="ToggleButton_OnChecked"/>
+                <RadioButton Tag="1" 
+                             Content="{x:Static res:Resources.LevelMedium}" Margin="3"
+                             Checked="ToggleButton_OnChecked"/>
+                <RadioButton Tag="2"
+                             Content="{x:Static res:Resources.LevelHard}" Margin="3"
+                             Checked="ToggleButton_OnChecked"/>
+                <RadioButton Name="RadioButtonCustomLevel" 
+                             Content="{x:Static res:Resources.LevelCustom}" Margin="3"/>
                 <Grid Margin="3">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -23,24 +31,28 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="139"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Ширина игрового поля" Margin="3"></TextBlock>
-                    <TextBox Grid.Row="0" 
+                    <TextBox Name="TextBoxWidth" 
+                             Grid.Row="0" 
                              Grid.Column="1" 
-                             Margin="3" 
-                             Text="{Binding Path=DifficultLevel.Width, UpdateSourceTrigger=PropertyChanged}"/>
+                             Margin="3"
+                             IsEnabled="{Binding ElementName=RadioButtonCustomLevel, Path=IsChecked}"
+                             Text="{Binding Path=DifficultLevel.Width, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Высота игрового поля" Margin="3"></TextBlock>
                     <TextBox Grid.Row="1" 
                              Grid.Column="1" 
                              Margin="3"
+                             IsEnabled="{Binding ElementName=RadioButtonCustomLevel, Path=IsChecked}"
                              Text="{Binding Path=DifficultLevel.Height, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Количество мин" Margin="3"></TextBlock>
                     <TextBox Grid.Row="2" 
                              Grid.Column="1" 
                              Margin="3"
+                             IsEnabled="{Binding ElementName=RadioButtonCustomLevel, Path=IsChecked}"
                              Text="{Binding Path=DifficultLevel.MinesCount, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </StackPanel>

@@ -19,7 +19,6 @@ namespace Minesweeper.Lib
 
         private int _fieldWidth;
         private int _fieldHeight;
-        public int FieldHeight { get; set; }
         public int MinesCount { get; set; }
         
         public Field(int width, int height, int minesCount)
@@ -54,6 +53,16 @@ namespace Minesweeper.Lib
             {
                 _fieldWidth = value;
                 OnPropertyChanged(nameof(FieldWidth));
+            }
+        }
+
+        public int FieldHeight
+        {
+            get { return _fieldHeight; }
+            set
+            {
+                _fieldHeight = value;
+                OnPropertyChanged(nameof(FieldHeight));
             }
         }
 

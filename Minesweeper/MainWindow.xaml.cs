@@ -24,12 +24,12 @@ namespace Minesweeper
         public MainWindow()
         {
             InitializeComponent();
-            NewGame(8, 8, 9);
+            NewGame();
         }
 
-        private void NewGame(int width, int height, int minesCount)
+        private void NewGame()
         {
-            var controller = new GuiController(width, height, minesCount);
+            var controller = new GuiController();
             DataContext = controller;
             GameField.ItemsSource = controller.Field.Cells;
         }
@@ -39,7 +39,7 @@ namespace Minesweeper
             var controller = (GuiController)DataContext;
             if (controller.GameStatus == GameStatus.Win || controller.GameStatus == GameStatus.GameOver)
             {
-                NewGame(8, 8, 9);
+                NewGame();
                 return;
             }
 
@@ -51,6 +51,13 @@ namespace Minesweeper
         private void UIElement_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             var controller = (GuiController)DataContext;
+
+            if (controller.GameStatus == GameStatus.Win || controller.GameStatus == GameStatus.GameOver)
+            {
+                NewGame();
+                return;
+            }
+
             var bindingExpression = ((Button)sender).GetBindingExpression(TagProperty);
             var cell = (Cell)bindingExpression?.DataItem;
             controller.Mark(cell);
@@ -66,6 +73,7 @@ namespace Minesweeper
             var settingsWindow = new SettingsWindow();
             settingsWindow.DataContext = this.DataContext;
             settingsWindow.ShowDialog();
+            NewGame();
         }
     }
 }
