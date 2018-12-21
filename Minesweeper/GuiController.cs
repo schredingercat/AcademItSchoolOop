@@ -24,7 +24,6 @@ namespace Minesweeper
 
         public Field Field { get; }
         private DifficultLevel _difficultLevel;
-        private DispatcherTimer _dispatcherTimer;
 
         public List<Score> HighScores { get; set; }
         public string UserName { get; set; }
@@ -36,10 +35,10 @@ namespace Minesweeper
 
             Field = new Field(_difficultLevel.Width, _difficultLevel.Height, _difficultLevel.MinesCount);
 
-            _dispatcherTimer = new DispatcherTimer();
-            _dispatcherTimer.Tick += TickTimer;
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            _dispatcherTimer.Start();
+            var dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += TickTimer;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            dispatcherTimer.Start();
 
             HighScores = LoadScores();
             UserName = Environment.UserName;
@@ -129,7 +128,7 @@ namespace Minesweeper
                 var deserializer = new BinaryFormatter();
                 difficultLevel = (DifficultLevel)deserializer.Deserialize(readFileStream);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 difficultLevel = EasyLevel;
             }
