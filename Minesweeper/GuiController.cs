@@ -27,6 +27,7 @@ namespace Minesweeper
         private DispatcherTimer _dispatcherTimer;
 
         public List<Score> HighScores { get; set; }
+        public string UserName { get; set; }
         
 
         public GuiController()
@@ -41,6 +42,7 @@ namespace Minesweeper
             _dispatcherTimer.Start();
 
             HighScores = LoadScores();
+            UserName = Environment.UserName;
         }
 
         public GameStatus GameStatus => Field.GameStatus;
@@ -112,6 +114,9 @@ namespace Minesweeper
                 case "2":
                     DifficultLevel = HardLevel;
                     break;
+                case "3":
+                    DifficultLevel.Name = Properties.Resources.LevelCustom;
+                    break;
             }
         }
 
@@ -153,10 +158,26 @@ namespace Minesweeper
             }
             catch (Exception ex)
             {
-                highScores.Add(new Score(){Name = "John Smith", Time = new TimeSpan(0,0,2,15), DifficultLevel = EasyLevel});
+                highScores.Add(new Score{Name = "John Smith", Time = new TimeSpan(0,0,2,15), DifficultLevel = EasyLevel});
             }
 
             return highScores;
+        }
+
+        public void SaveScores()
+        {
+            using (var saveFileStream = File.Create("highscores.dat"))
+            {
+                var serializer = new BinaryFormatter();
+                serializer.Serialize(saveFileStream, HighScores);
+                saveFileStream.Close();
+            }
+        }
+
+        public void AddScores()
+        {
+            HighScores.Add(new Score{Name = UserName, DifficultLevel = _difficultLevel, Time = Field.Time});
+            SaveScores();
         }
 
         private void CheckGameStatus()
@@ -165,7 +186,10 @@ namespace Minesweeper
             {
                 case GameStatus.Win:
                     {
-                        MessageBox.Show($"You Win!\nYour result: {Field.Time.Minutes:00}: {Field.Time.Seconds:00}:{Field.Time.Milliseconds:000}");
+                        //MessageBox.Show($"You Win!\nYour result: {Field.Time.Minutes:00}: {Field.Time.Seconds:00}:{Field.Time.Milliseconds:000}");
+                        var congratulationsWindow = new CongratulationsWindow();
+                        congratulationsWindow.DataContext = this;
+                        congratulationsWindow.ShowDialog();
                     }
                     break;
                 case GameStatus.GameOver:

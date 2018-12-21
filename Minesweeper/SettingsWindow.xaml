@@ -21,8 +21,10 @@
                 <RadioButton Tag="2"
                              Content="{x:Static res:Resources.LevelHard}" Margin="3"
                              Checked="ToggleButton_OnChecked"/>
-                <RadioButton Name="RadioButtonCustomLevel" 
-                             Content="{x:Static res:Resources.LevelCustom}" Margin="3"/>
+                <RadioButton Tag="3"
+                             Name="RadioButtonCustomLevel" 
+                             Content="{x:Static res:Resources.LevelCustom}" Margin="3"
+                             Checked="ToggleButton_OnChecked"/>
                 <Grid Margin="3">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>

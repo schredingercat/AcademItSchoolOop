@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,18 +15,24 @@ using System.Windows.Shapes;
 namespace Minesweeper
 {
     /// <summary>
-    /// Interaction logic for HighScoresWindow.xaml
+    /// Interaction logic for CongratulationsWindow.xaml
     /// </summary>
-    public partial class HighScoresWindow : Window
+    public partial class CongratulationsWindow : Window
     {
-        public HighScoresWindow()
+        public CongratulationsWindow()
         {
             InitializeComponent();
         }
 
-        private void HighScoresWindow_OnClosing(object sender, CancelEventArgs e)
+        private void ButtonSaveScores_OnClick(object sender, RoutedEventArgs e)
         {
-            ((GuiController)DataContext).SaveScores();
+            ((GuiController)DataContext).AddScores();
+            Close();
+        }
+
+        private void ButtonDontSave_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

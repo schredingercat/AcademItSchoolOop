@@ -11,7 +11,7 @@ namespace Minesweeper.Lib
 
         public Score()
         {
-            Name = "Empty";
+            Name = string.Empty;
             Time = new TimeSpan(0);
             DifficultLevel = new DifficultLevel();
         }

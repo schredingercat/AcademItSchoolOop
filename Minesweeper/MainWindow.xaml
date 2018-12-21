@@ -42,7 +42,8 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="{x:Static res:Resources.MenuGame}">
                     <MenuItem Name="MenuItemNewGame" 
-                              Header="{x:Static res:Resources.MenuNewGame}"/>
+                              Header="{x:Static res:Resources.MenuNewGame}"
+                              Click="MenuItemNewGame_OnClick"/>
                     <Separator/>
                     <MenuItem Name="MenuItemScores" 
                               Header="{x:Static res:Resources.MenuScores}"

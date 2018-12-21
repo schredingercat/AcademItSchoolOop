@@ -123,6 +123,9 @@
   <data name="DifficultLevel" xml:space="preserve">
     <value>Difficult Level</value>
   </data>
+  <data name="DontSave" xml:space="preserve">
+    <value>Don't Save</value>
+  </data>
   <data name="LevelCustom" xml:space="preserve">
     <value>Custom settings</value>
   </data>
@@ -159,10 +162,16 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="SettingsWindowTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
+  </data>
+  <data name="YourScores" xml:space="preserve">
+    <value>Your Scores:</value>
   </data>
 </root>
