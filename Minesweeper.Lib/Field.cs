@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -15,12 +16,13 @@ namespace Minesweeper.Lib
     {
         private List<List<Cell>> _cells;
         
-        public GameStatus GameStatus { get; private set; }
+        public GameStatus GameStatus { get; set; }
 
         private int _fieldWidth;
         private int _fieldHeight;
         public int MinesCount { get; set; }
-        
+        private Stopwatch _stopWatch;
+
         public Field(int width, int height, int minesCount)
         {
             _fieldWidth = width;
@@ -37,13 +39,18 @@ namespace Minesweeper.Lib
                 }
             }
 
-            
+            _stopWatch = new Stopwatch();
             GameStatus = GameStatus.Wait;
         }
 
         public List<List<Cell>> Cells
         {
             get { return _cells; }
+        }
+
+        public TimeSpan Time
+        {
+            get { return _stopWatch.Elapsed; }
         }
 
         public int FieldWidth
@@ -72,6 +79,7 @@ namespace Minesweeper.Lib
             {
                 PlaceMines(cell.X, cell.Y, MinesCount);
                 GameStatus = GameStatus.Playing;
+                _stopWatch.Start();
             }
             OpenNearCells(cell);
             Refresh();
@@ -168,6 +176,7 @@ namespace Minesweeper.Lib
                     {
                         if (cell.Mine)
                         {
+                            _stopWatch.Stop();
                             cell.Text = "Mine!";
                             GameStatus = GameStatus.GameOver;
                         }
