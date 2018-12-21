@@ -156,7 +156,13 @@
   <data name="MunuAbout" xml:space="preserve">
     <value>_About</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="SettingsWindowTitle" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
   </data>
 </root>

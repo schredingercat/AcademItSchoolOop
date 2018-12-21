@@ -13,6 +13,7 @@
         Number8 = 8,
         Hidden = 9,
         Marked = 10,
-        Mine = 11
+        Mine = 11,
+        Explode = 12
     }
 }

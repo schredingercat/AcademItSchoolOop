@@ -12,8 +12,14 @@ namespace Minesweeper.Lib
     [Serializable]
     public class DifficultLevel
     {
+        public string Name { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public int MinesCount { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

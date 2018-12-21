@@ -75,5 +75,13 @@ namespace Minesweeper
             settingsWindow.ShowDialog();
             NewGame();
         }
+
+        private void MenuItemScores_OnClick(object sender, RoutedEventArgs e)
+        {
+            var scoresWindow = new HighScoresWindow();
+            scoresWindow.DataContext = this.DataContext;
+            scoresWindow.ShowDialog();
+            //NewGame();
+        }
     }
 }

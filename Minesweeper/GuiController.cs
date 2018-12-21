@@ -16,33 +16,35 @@ using Minesweeper.Lib;
 
 namespace Minesweeper
 {
-    public class GuiController :INotifyPropertyChanged
+    public class GuiController : INotifyPropertyChanged
     {
+        private static readonly DifficultLevel EasyLevel = new DifficultLevel { Width = 9, Height = 9, MinesCount = 10, Name = Properties.Resources.LevelEasy};
+        private static readonly DifficultLevel MediumLevel = new DifficultLevel { Width = 16, Height = 16, MinesCount = 40, Name = Properties.Resources.LevelMedium};
+        private static readonly DifficultLevel HardLevel = new DifficultLevel { Width = 30, Height = 16, MinesCount = 99,Name = Properties.Resources.LevelHard};
+
         public Field Field { get; }
         private DifficultLevel _difficultLevel;
         private DispatcherTimer _dispatcherTimer;
 
+        public List<Score> HighScores { get; set; }
+        
+
         public GuiController()
         {
-            try
-            {
-                _difficultLevel = LoadSettings();
-            }
-            catch (Exception ex)
-            {
-                _difficultLevel = new DifficultLevel { Width = 8, Height = 8, MinesCount = 10 };
-            }
+            _difficultLevel = LoadSettings();
 
             Field = new Field(_difficultLevel.Width, _difficultLevel.Height, _difficultLevel.MinesCount);
-            
+
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Tick += TickTimer;
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             _dispatcherTimer.Start();
+
+            HighScores = LoadScores();
         }
 
         public GameStatus GameStatus => Field.GameStatus;
-        
+
         public DifficultLevel DifficultLevel
         {
             get => _difficultLevel;
@@ -51,7 +53,7 @@ namespace Minesweeper
                 _difficultLevel = value;
                 OnPropertyChanged(nameof(DifficultLevel));
             }
-            
+
         }
 
         private void TickTimer(object sender, EventArgs e)
@@ -64,7 +66,7 @@ namespace Minesweeper
             get
             {
                 var time = Field.Time;
-                return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds/10}";
+                return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds:000}";
             }
         }
 
@@ -102,22 +104,32 @@ namespace Minesweeper
             switch (level)
             {
                 case "0":
-                    DifficultLevel = new DifficultLevel { Width = 9, Height = 9, MinesCount = 10 };
+                    DifficultLevel = EasyLevel;
                     break;
                 case "1":
-                    DifficultLevel = new DifficultLevel { Width = 16, Height = 16, MinesCount = 40 };
+                    DifficultLevel = MediumLevel;
                     break;
                 case "2":
-                    DifficultLevel = new DifficultLevel { Width = 30, Height = 16, MinesCount = 99 };
+                    DifficultLevel = HardLevel;
                     break;
             }
         }
 
         public DifficultLevel LoadSettings()
         {
-            var readFileStream = File.Open("settings.cfg", FileMode.Open);
-            var deserializer = new BinaryFormatter();
-            return (DifficultLevel)deserializer.Deserialize(readFileStream);
+            var difficultLevel = new DifficultLevel();
+            try
+            {
+                var readFileStream = File.Open("settings.cfg", FileMode.Open);
+                var deserializer = new BinaryFormatter();
+                difficultLevel = (DifficultLevel)deserializer.Deserialize(readFileStream);
+            }
+            catch (Exception ex)
+            {
+                difficultLevel = EasyLevel;
+            }
+
+            return difficultLevel;
         }
 
         public void SaveSettings()
@@ -130,13 +142,30 @@ namespace Minesweeper
             }
         }
 
+        public List<Score> LoadScores()
+        {
+            var highScores = new List<Score>();
+            try
+            {
+                var readFileStream = File.Open("highscores.dat", FileMode.Open);
+                var deserializer = new BinaryFormatter();
+                highScores = (List<Score>)deserializer.Deserialize(readFileStream);
+            }
+            catch (Exception ex)
+            {
+                highScores.Add(new Score(){Name = "John Smith", Time = new TimeSpan(0,0,2,15), DifficultLevel = EasyLevel});
+            }
+
+            return highScores;
+        }
+
         private void CheckGameStatus()
         {
             switch (GameStatus)
             {
                 case GameStatus.Win:
                     {
-                        MessageBox.Show("You Win!");
+                        MessageBox.Show($"You Win!\nYour result: {Field.Time.Minutes:00}: {Field.Time.Seconds:00}:{Field.Time.Milliseconds:000}");
                     }
                     break;
                 case GameStatus.GameOver:

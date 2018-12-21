@@ -14,7 +14,6 @@ namespace Minesweeper.Lib
         private bool _mine;
         private bool _open;
         private bool _marked;
-        private string _text;
         public int MineCount { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
@@ -22,7 +21,6 @@ namespace Minesweeper.Lib
 
         public Cell()
         {
-            Text = string.Empty;
             Mine = false;
             Open = false;
         }
@@ -55,17 +53,6 @@ namespace Minesweeper.Lib
             {
                 _marked = value;
                 OnPropertyChanged(nameof(Marked));
-                OnPropertyChanged(nameof(Status));
-            }
-        }
-
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                _text = value;
-                OnPropertyChanged(nameof(Text));
                 OnPropertyChanged(nameof(Status));
             }
         }
@@ -104,7 +91,7 @@ namespace Minesweeper.Lib
 
                 return CellStatus.Hidden;
             }
-            
+
         }
 
 

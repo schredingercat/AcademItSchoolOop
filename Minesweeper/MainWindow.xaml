@@ -46,7 +46,7 @@
                     <Separator/>
                     <MenuItem Name="MenuItemScores" 
                               Header="{x:Static res:Resources.MenuScores}"
-                              IsEnabled="False"/>
+                              Click="MenuItemScores_OnClick"/>
                     <MenuItem Name="MenuItemOptions" 
                               Header="{x:Static res:Resources.MenuSettings}"
                               Click="MenuItemOptions_OnClick"/>

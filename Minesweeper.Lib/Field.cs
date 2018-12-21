@@ -12,10 +12,10 @@ using Minesweeper.Lib.Annotations;
 
 namespace Minesweeper.Lib
 {
-    public class Field:INotifyPropertyChanged
+    public class Field : INotifyPropertyChanged
     {
         private List<List<Cell>> _cells;
-        
+
         public GameStatus GameStatus { get; set; }
 
         private int _fieldWidth;
@@ -101,6 +101,18 @@ namespace Minesweeper.Lib
             }
         }
 
+        private void OpenAllCells()
+        {
+            foreach (var raw in _cells)
+            {
+                foreach (var cell in raw)
+                {
+                    cell.Open = true;
+                }
+
+            }
+        }
+
         public void Mark(Cell cell)
         {
             cell.Marked = !cell.Marked;
@@ -154,15 +166,6 @@ namespace Minesweeper.Lib
                     minesCount--;
                 }
             }
-
-            foreach (var row in _cells)
-            {
-                foreach (var cell in row)
-                {
-                    cell.Text = cell.Mine ? "Mine!" : cell.MineCount.ToString();
-                }
-
-            }
         }
 
         public void Refresh()
@@ -177,25 +180,13 @@ namespace Minesweeper.Lib
                         if (cell.Mine)
                         {
                             _stopWatch.Stop();
-                            cell.Text = "Mine!";
                             GameStatus = GameStatus.GameOver;
+                            OpenAllCells();
                         }
-                        else
-                        {
-                            cell.Text = cell.MineCount.ToString();
-                        }
+
                     }
                     else
                     {
-                        if (cell.Marked)
-                        {
-                            cell.Text = "?";
-                        }
-                        else
-                        {
-                            cell.Text = string.Empty;
-                        }
-
                         if (!cell.Mine)
                         {
                             areYouWin = false;
@@ -208,6 +199,7 @@ namespace Minesweeper.Lib
 
             if (areYouWin)
             {
+                _stopWatch.Stop();
                 GameStatus = GameStatus.Win;
             }
 

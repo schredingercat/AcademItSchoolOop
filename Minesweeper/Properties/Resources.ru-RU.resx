@@ -156,7 +156,13 @@
   <data name="MenuSettings" xml:space="preserve">
     <value>Настройки...</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
   <data name="SettingsWindowTitle" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Время</value>
   </data>
 </root>
