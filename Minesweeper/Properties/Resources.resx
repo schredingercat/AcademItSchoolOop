@@ -177,4 +177,7 @@
   <data name="YourScores" xml:space="preserve">
     <value>Your Scores:</value>
   </data>
+  <data name="YouWin" xml:space="preserve">
+    <value>You Win!</value>
+  </data>
 </root>

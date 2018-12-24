@@ -63,12 +63,7 @@ namespace Minesweeper.Lib
             {
                 if (!Open)
                 {
-                    if (Marked)
-                    {
-                        return CellStatus.Marked;
-                    }
-
-                    return CellStatus.Hidden;
+                    return Marked ? CellStatus.Marked : CellStatus.Hidden;
                 }
 
                 if (Mine)
@@ -92,6 +87,16 @@ namespace Minesweeper.Lib
                 return CellStatus.Hidden;
             }
 
+        }
+
+        public override string ToString()
+        {
+            if (!Open)
+            {
+                return Marked ? "?" : "◌";
+            }
+
+            return Mine ? "☼" : MineCount.ToString();
         }
 
 

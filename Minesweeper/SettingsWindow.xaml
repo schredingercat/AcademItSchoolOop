@@ -13,12 +13,15 @@
             <StackPanel>
                 <RadioButton IsChecked="True" 
                              Tag="0"
+                             Name="RadioButtonEasyLevel"
                              Content="{x:Static res:Resources.LevelEasy}" Margin="3"
                              Checked="ToggleButton_OnChecked"/>
                 <RadioButton Tag="1" 
+                             Name="RadioButtonMediumLevel"
                              Content="{x:Static res:Resources.LevelMedium}" Margin="3"
                              Checked="ToggleButton_OnChecked"/>
                 <RadioButton Tag="2"
+                             Name="RadioButtonHardLevel"
                              Content="{x:Static res:Resources.LevelHard}" Margin="3"
                              Checked="ToggleButton_OnChecked"/>
                 <RadioButton Tag="3"

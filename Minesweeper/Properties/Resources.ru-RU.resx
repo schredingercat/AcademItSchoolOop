@@ -177,4 +177,7 @@
   <data name="YourScores" xml:space="preserve">
     <value>Ваш результат:</value>
   </data>
+  <data name="YouWin" xml:space="preserve">
+    <value>Победа!</value>
+  </data>
 </root>

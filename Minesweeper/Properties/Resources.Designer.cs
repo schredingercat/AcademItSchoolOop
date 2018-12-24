@@ -239,5 +239,14 @@ namespace Minesweeper.Properties {
                 return ResourceManager.GetString("YourScores", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Win!.
+        /// </summary>
+        public static string YouWin {
+            get {
+                return ResourceManager.GetString("YouWin", resourceCulture);
+            }
+        }
     }
 }
