@@ -70,6 +70,15 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Difficult Level.
         /// </summary>
         public static string DifficultLevel {

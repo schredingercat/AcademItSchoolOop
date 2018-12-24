@@ -6,19 +6,42 @@
         xmlns:local="clr-namespace:Minesweeper"
         xmlns:res="clr-namespace:Minesweeper.Properties"
         mc:Ignorable="d"
-        Title="{x:Static res:Resources.MenuScores}" Height="450" Width="800"
+        Title="{x:Static res:Resources.MenuScores}" Height="450" Width="640"
         Closing="HighScoresWindow_OnClosing">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <DataGrid Name="DataGridEasy" 
+                  Grid.Row="0"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3"
                   ItemsSource="{Binding Path=HighScores}"
                   AutoGenerateColumns="False"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalGridLinesBrush="Black"
+                  VerticalGridLinesBrush="Black"
+                  ColumnWidth="*"
                   IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static res:Resources.Name}" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="{x:Static res:Resources.Time}" Binding="{Binding Time}" SortDirection="Ascending"/>
+                <DataGridTextColumn Header="{x:Static res:Resources.Time}" Binding="{Binding Time, StringFormat=mm\\:ss\\:ff}"/>
                 <DataGridTextColumn Header="{x:Static res:Resources.DifficultLevel}" Binding="{Binding DifficultLevel}"/>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <Button Name="ButtonClearScores"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="10"
+                Content="{x:Static res:Resources.Clear}"
+                Click="ButtonClearScores_OnClick"></Button>
 
     </Grid>
 </Window>

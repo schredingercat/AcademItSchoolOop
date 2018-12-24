@@ -120,6 +120,9 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Сапёр</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
   <data name="DifficultLevel" xml:space="preserve">
     <value>Уровень сложности</value>
   </data>

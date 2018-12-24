@@ -120,6 +120,9 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Minesweeper</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="DifficultLevel" xml:space="preserve">
     <value>Difficult Level</value>
   </data>

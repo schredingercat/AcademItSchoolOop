@@ -67,7 +67,7 @@ namespace Minesweeper
             get
             {
                 var time = Field.Time;
-                return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds:000}";
+                return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds/10:00}";
             }
         }
 
@@ -155,11 +155,10 @@ namespace Minesweeper
                 var deserializer = new BinaryFormatter();
                 highScores = (List<Score>)deserializer.Deserialize(readFileStream);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                highScores.Add(new Score{Name = "John Smith", Time = new TimeSpan(0,0,2,15), DifficultLevel = EasyLevel});
+                highScores.Add(new Score{Name = "John Smith", Time = new TimeSpan(0,0,0,2,15), DifficultLevel = EasyLevel});
             }
-
             return highScores;
         }
 
@@ -176,6 +175,13 @@ namespace Minesweeper
         public void AddScores()
         {
             HighScores.Add(new Score{Name = UserName, DifficultLevel = _difficultLevel, Time = Field.Time});
+            HighScores = HighScores.OrderBy(n => n.DifficultLevel).ThenBy(n => n.Time).ToList();
+            SaveScores();
+        }
+
+        public void ClearScores()
+        {
+            HighScores.Clear();
             SaveScores();
         }
 
@@ -185,7 +191,6 @@ namespace Minesweeper
             {
                 case GameStatus.Win:
                     {
-                        //MessageBox.Show($"You Win!\nYour result: {Field.Time.Minutes:00}: {Field.Time.Seconds:00}:{Field.Time.Milliseconds:000}");
                         var congratulationsWindow = new CongratulationsWindow();
                         congratulationsWindow.DataContext = this;
                         congratulationsWindow.ShowDialog();

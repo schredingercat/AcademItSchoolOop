@@ -29,5 +29,10 @@ namespace Minesweeper
         {
             ((GuiController)DataContext).SaveScores();
         }
+
+        private void ButtonClearScores_OnClick(object sender, RoutedEventArgs e)
+        {
+            ((GuiController)DataContext).ClearScores();
+        }
     }
 }

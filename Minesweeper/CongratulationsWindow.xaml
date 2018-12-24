@@ -60,6 +60,7 @@
             
             <TextBox Grid.Row="1"
                      Grid.Column="0"
+                     Name="TextBoxUserName"
                      VerticalAlignment="Stretch"
                      HorizontalAlignment="Stretch"
                      TextAlignment="Center"
