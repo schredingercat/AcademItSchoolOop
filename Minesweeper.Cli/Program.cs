@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Minesweeper.Lib;
 
 namespace Minesweeper.Cli
 {
@@ -14,7 +15,21 @@ namespace Minesweeper.Cli
             Console.OutputEncoding = Encoding.UTF8;
 
             ShowGameField(controller);
-            Console.ReadLine();
+
+            while (controller.GameStatus!= GameStatus.GameOver || controller.GameStatus != GameStatus.Win)
+            {
+                OpenCell(controller, Console.ReadLine());
+            }
+            
+        }
+
+        public static void OpenCell(CliController controller, string input)
+        {
+            input = input.ToUpper();
+            var x = input[0] - 65;
+            var y = int.Parse(input[1].ToString())-1;
+            controller.Open(controller.Field.Cells[y][x]);
+            ShowGameField(controller);
         }
 
 
@@ -27,7 +42,7 @@ namespace Minesweeper.Cli
             Console.Write("     ");
             for (int i = 0; i < width; i++)
             {
-                Console.Write( $"{i + 1}  ");
+                Console.Write( $"{Convert.ToChar(i + 65) }  ");
             }
             Console.WriteLine();
             Console.Write("     ");
