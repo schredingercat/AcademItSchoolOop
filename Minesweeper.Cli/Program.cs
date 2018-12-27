@@ -12,14 +12,21 @@ namespace Minesweeper.Cli
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.CursorVisible = false;
             var controller = new CliController();
 
             while (true)
             {
-                switch (ShowMainMenu())
+                switch (ShowMainMenu(controller))
                 {
                     case MenuItems.NewGame:
-                        StastNewGame(controller);
+                        StartNewGame(controller);
+                        break;
+                    case MenuItems.HightScores:
+                        ShowHighScores(controller);
+                        break;
+                    case MenuItems.Settings:
+                        ChangeDifficultLevel(controller);
                         break;
                     case MenuItems.Exit:
                         return;
@@ -29,8 +36,9 @@ namespace Minesweeper.Cli
 
         }
 
-        public static void StastNewGame(CliController controller)
+        public static void StartNewGame(CliController controller)
         {
+            Console.CursorVisible = true;
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Black;
 
@@ -41,13 +49,40 @@ namespace Minesweeper.Cli
                 OpenCell(controller, Console.ReadLine());
             }
 
-            Console.ReadLine();
+            Console.ReadKey();
+            Console.CursorVisible = false;
         }
 
-        public static MenuItems ShowMainMenu()
+        public static void ShowHighScores(CliController controller)
         {
-            var selectedMenuItem = MenuItems.NewGame;
+            Console.Clear();
+            Console.WriteLine("   High Scores");
+            Console.WriteLine();
+            Console.WriteLine();
 
+            var scores = controller.HighScores;
+            var visibleScoresCount = Math.Min(10, scores.Count);
+            
+            for(int i = 0; i< visibleScoresCount; i++)
+            {
+                Console.WriteLine($"  {scores[i].Name} - " +
+                                  $"{scores[i].Time.Minutes:00}:{scores[i].Time.Seconds:00}:{scores[i].Time.Milliseconds / 10:00} - " +
+                                  $"{scores[i].DifficultLevel}");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Press any key to exit to main menu...");
+
+            Console.ReadKey();
+        }
+
+        public static void ChangeDifficultLevel(CliController controller)
+        {
+            controller.SetDifficultLevel(controller.DifficultLevel.ToString() == "Easy" ? "2" : "0");
+            controller.SaveSettings();
+        }
+
+        public static MenuItems ShowMainMenu(CliController controller)
+        {
             Console.Clear();
             Console.WriteLine("   Minesweeper");
             Console.WriteLine();
@@ -56,37 +91,37 @@ namespace Minesweeper.Cli
             while (true)
             {
                 Console.SetCursorPosition(0, 3);
-                Console.WriteLine($"  {(selectedMenuItem == MenuItems.NewGame ? "☼" : " ")}  New Game");
-                Console.WriteLine($"  {(selectedMenuItem == MenuItems.HightScores ? "☼" : " ")}  High Scores");
-                Console.WriteLine($"  {(selectedMenuItem == MenuItems.Settings ? "☼" : " ")}  Settings");
-                Console.WriteLine($"  {(selectedMenuItem == MenuItems.About ? "☼" : " ")}  About");
-                Console.WriteLine($"  {(selectedMenuItem == MenuItems.Exit ? "☼" : " ")}  Exit");
+                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.NewGame ? "☼" : " ")}  New Game");
+                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.HightScores ? "☼" : " ")}  High Scores");
+                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.Settings ? "☼" : " ")}  Difficult level: {controller.DifficultLevel}");
+                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.About ? "☼" : " ")}  About");
+                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.Exit ? "☼" : " ")}  Exit");
                 var key = Console.ReadKey().Key;
 
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        if (selectedMenuItem == 0)
+                        if (controller.SelectedMenuItem == 0)
                         {
-                            selectedMenuItem = Enum.GetValues(typeof(MenuItems)).Cast<MenuItems>().LastOrDefault();
+                            controller.SelectedMenuItem = Enum.GetValues(typeof(MenuItems)).Cast<MenuItems>().LastOrDefault();
                         }
                         else
                         {
-                            selectedMenuItem--;
+                            controller.SelectedMenuItem--;
                         }
                         break;
                     case ConsoleKey.DownArrow:
-                        if (selectedMenuItem == Enum.GetValues(typeof(MenuItems)).Cast<MenuItems>().LastOrDefault())
+                        if (controller.SelectedMenuItem == Enum.GetValues(typeof(MenuItems)).Cast<MenuItems>().LastOrDefault())
                         {
-                            selectedMenuItem = 0;
+                            controller.SelectedMenuItem = 0;
                         }
                         else
                         {
-                            selectedMenuItem++;
+                            controller.SelectedMenuItem++;
                         }
                         break;
                     case ConsoleKey.Enter:
-                        return selectedMenuItem;
+                        return controller.SelectedMenuItem;
                 }
 
             }
@@ -144,7 +179,7 @@ namespace Minesweeper.Cli
 
             foreach (var row in controller.Field.Cells)
             {
-                Console.Write($"          {controller.Field.Cells.IndexOf(row) + 1: ,##} - ");
+                Console.Write($"          {controller.Field.Cells.IndexOf(row) + 1, 2} - ");
                 foreach (var cell in row)
                 {
                     Console.ForegroundColor = CliController.CellColors[cell.Status];

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Minesweeper.Lib;
 
+
 namespace Minesweeper.Cli
 {
     public class CliController
@@ -21,6 +22,7 @@ namespace Minesweeper.Cli
         public List<Score> HighScores { get; set; }
         public string UserName { get; set; }
 
+        public MenuItems SelectedMenuItem { get; set; }
 
         public CliController()
         {
@@ -109,7 +111,8 @@ namespace Minesweeper.Cli
             {
                 var readFileStream = File.Open("settings.cfg", FileMode.Open);
                 var deserializer = new BinaryFormatter();
-                difficultLevel = (DifficultLevel)deserializer.Deserialize(readFileStream);
+                difficultLevel = (DifficultLevel) deserializer.Deserialize(readFileStream);
+                readFileStream.Dispose();
             }
             catch (Exception)
             {
@@ -137,6 +140,7 @@ namespace Minesweeper.Cli
                 var readFileStream = File.Open("highscores.dat", FileMode.Open);
                 var deserializer = new BinaryFormatter();
                 highScores = (List<Score>)deserializer.Deserialize(readFileStream);
+                readFileStream.Dispose();
             }
             catch (Exception)
             {
@@ -175,7 +179,7 @@ namespace Minesweeper.Cli
                 case GameStatus.Win:
                     {
                         Console.WriteLine("You Win!");
-                        
+
                     }
                     break;
                 case GameStatus.GameOver:
