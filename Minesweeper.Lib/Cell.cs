@@ -93,7 +93,7 @@ namespace Minesweeper.Lib
         {
             if (!Open)
             {
-                return Marked ? "?" : "◌";
+                return Marked ? "?" : "■";
             }
 
             return Mine ? "☼" : MineCount.ToString();

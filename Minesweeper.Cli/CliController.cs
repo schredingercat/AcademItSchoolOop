@@ -174,18 +174,33 @@ namespace Minesweeper.Cli
             {
                 case GameStatus.Win:
                     {
-                        //var congratulationsWindow = new CongratulationsWindow();
-                        //congratulationsWindow.DataContext = this;
-                        //congratulationsWindow.ShowDialog();
+                        Console.WriteLine("You Win!");
+                        
                     }
                     break;
                 case GameStatus.GameOver:
                     {
-                        //MessageBox.Show("Game Over!");
+                        Console.WriteLine("Game Over!");
                     }
                     break;
             }
         }
 
+        public static readonly Dictionary<CellStatus, ConsoleColor> CellColors =
+            new Dictionary<CellStatus, ConsoleColor>
+            {
+                {CellStatus.Mine, ConsoleColor.Red },
+                {CellStatus.Hidden, ConsoleColor.White },
+                {CellStatus.Marked, ConsoleColor.Black },
+                {CellStatus.Number0, ConsoleColor.DarkGray },
+                {CellStatus.Number1, ConsoleColor.DarkBlue },
+                {CellStatus.Number2, ConsoleColor.DarkGreen },
+                {CellStatus.Number3, ConsoleColor.DarkYellow },
+                {CellStatus.Number4, ConsoleColor.Magenta },
+                {CellStatus.Number5, ConsoleColor.DarkRed },
+                {CellStatus.Number6, ConsoleColor.Blue },
+                {CellStatus.Number7, ConsoleColor.Green },
+                {CellStatus.Number8, ConsoleColor.Yellow }
+            };
     }
 }
