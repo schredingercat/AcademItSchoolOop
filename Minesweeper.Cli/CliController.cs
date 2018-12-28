@@ -112,7 +112,7 @@ namespace Minesweeper.Cli
             {
                 var readFileStream = File.Open("settings.cfg", FileMode.Open);
                 var deserializer = new BinaryFormatter();
-                difficultLevel = (DifficultLevel) deserializer.Deserialize(readFileStream);
+                difficultLevel = (DifficultLevel)deserializer.Deserialize(readFileStream);
                 readFileStream.Dispose();
             }
             catch (Exception)
@@ -180,15 +180,71 @@ namespace Minesweeper.Cli
                 case GameStatus.Win:
                     {
                         Console.WriteLine("You Win!");
-
+                        Console.ReadLine();
                     }
                     break;
                 case GameStatus.GameOver:
                     {
                         Console.WriteLine("Game Over!");
+                        Console.ReadLine();
                     }
                     break;
             }
+        }
+
+        public bool TryExecuteCommand(string input)
+        {
+            if (input.Length < 2 || input.Length > 4)
+            {
+                return false;
+            }
+
+            var command = input.ToUpper();
+            command = command.Replace('@', '[');
+            command = command.Replace("#", @"\");
+            command = command.Replace('$', ']');
+            command = command.Replace('%', '^');
+
+            if (command == "EXIT")
+            {
+                Field.GameStatus = GameStatus.GameOver;
+                return true;
+            }
+
+            var isMarkCommand = false;
+            if (command[0] == '?')
+            {
+                isMarkCommand = true;
+                command = command.Substring(1, command.Length - 1);
+            }
+
+            var x = command[0] - 65;
+            if (x < 0 || x > FieldWidth)
+            {
+                return false;
+            }
+
+            command = command.Substring(1, command.Length - 1);
+
+            if (!int.TryParse(command, out int y) || y<1 || y> FieldHeight)
+            {
+                return false;
+            }
+            y--;
+
+            var cell = Field.Cells[y][x];
+
+
+            if (isMarkCommand)
+            {
+                Mark(cell);
+            }
+            else
+            {
+                Open(cell);
+            }
+
+            return true;
         }
 
         public static readonly Dictionary<CellStatus, ConsoleColor> CellColors =

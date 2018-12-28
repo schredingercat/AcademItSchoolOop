@@ -47,11 +47,21 @@ namespace Minesweeper.Cli
 
             while (controller.GameStatus == GameStatus.Playing || controller.GameStatus == GameStatus.Wait)
             {
-                OpenCell(controller, Console.ReadLine());
+                //OpenCell(controller, Console.ReadLine());
+                if (!controller.TryExecuteCommand(Console.ReadLine()))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Неверный ввод!");
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.ReadLine();
+                }
+                ShowGameField(controller);
             }
 
             Console.ReadKey();
             Console.CursorVisible = false;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         
@@ -138,8 +148,9 @@ namespace Minesweeper.Cli
                 Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine("Введите координаты ячейки, чтобы открыть её (например С5)");
-            Console.WriteLine("?С5 чтобы пометить");
+            Console.WriteLine("  Введите координаты ячейки, чтобы открыть её (например 'B7')");
+            Console.WriteLine("  Чтобы пометить ячейку, поставьте перед координатами знак вопроса ('?B7')");
+            Console.WriteLine("  Для завершения игры введите 'Exit'");
             Console.WriteLine();
         }
     }
