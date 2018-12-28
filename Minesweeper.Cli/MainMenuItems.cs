@@ -1,6 +1,6 @@
 ﻿namespace Minesweeper.Cli
 {
-    public enum MenuItems
+    public enum MainMenuItems
         {
             NewGame = 0,
             HightScores = 1,

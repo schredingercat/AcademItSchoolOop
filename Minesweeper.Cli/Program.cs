@@ -17,18 +17,18 @@ namespace Minesweeper.Cli
 
             while (true)
             {
-                switch (ShowMainMenu(controller))
+                switch (Menu.ShowMainMenu(controller))
                 {
-                    case MenuItems.NewGame:
-                        StartNewGame(controller);
+                    case MainMenuItems.NewGame:
+                        StartNewGame();
                         break;
-                    case MenuItems.HightScores:
-                        ShowHighScores(controller);
+                    case MainMenuItems.HightScores:
+                        Menu.ShowHighScores(controller);
                         break;
-                    case MenuItems.Settings:
-                        ChangeDifficultLevel(controller);
+                    case MainMenuItems.Settings:
+                        Menu.ShowSettingsMenu(controller);
                         break;
-                    case MenuItems.Exit:
+                    case MainMenuItems.Exit:
                         return;
                 }
                 
@@ -36,8 +36,9 @@ namespace Minesweeper.Cli
 
         }
 
-        public static void StartNewGame(CliController controller)
+        public static void StartNewGame()
         {
+            var controller = new CliController();
             Console.CursorVisible = true;
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -53,82 +54,26 @@ namespace Minesweeper.Cli
             Console.CursorVisible = false;
         }
 
-        public static void ShowHighScores(CliController controller)
-        {
-            Console.Clear();
-            Console.WriteLine("   High Scores");
-            Console.WriteLine();
-            Console.WriteLine();
-
-            var scores = controller.HighScores;
-            var visibleScoresCount = Math.Min(10, scores.Count);
-            
-            for(int i = 0; i< visibleScoresCount; i++)
-            {
-                Console.WriteLine($"  {scores[i].Name} - " +
-                                  $"{scores[i].Time.Minutes:00}:{scores[i].Time.Seconds:00}:{scores[i].Time.Milliseconds / 10:00} - " +
-                                  $"{scores[i].DifficultLevel}");
-            }
-            Console.WriteLine();
-            Console.WriteLine("Press any key to exit to main menu...");
-
-            Console.ReadKey();
-        }
+        
 
         public static void ChangeDifficultLevel(CliController controller)
         {
-            controller.SetDifficultLevel(controller.DifficultLevel.ToString() == "Easy" ? "2" : "0");
+            switch(controller.DifficultLevel.ToString())
+            {
+                case "Easy":
+                    controller.SetDifficultLevel("1");
+                    break;
+                case "Medium":
+                    controller.SetDifficultLevel("2");
+                    break;
+                case "Hard":
+                    controller.SetDifficultLevel("0");
+                    break;
+            }
             controller.SaveSettings();
         }
 
-        public static MenuItems ShowMainMenu(CliController controller)
-        {
-            Console.Clear();
-            Console.WriteLine("   Minesweeper");
-            Console.WriteLine();
-            Console.WriteLine();
-
-            while (true)
-            {
-                Console.SetCursorPosition(0, 3);
-                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.NewGame ? "☼" : " ")}  New Game");
-                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.HightScores ? "☼" : " ")}  High Scores");
-                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.Settings ? "☼" : " ")}  Difficult level: {controller.DifficultLevel}");
-                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.About ? "☼" : " ")}  About");
-                Console.WriteLine($"  {(controller.SelectedMenuItem == MenuItems.Exit ? "☼" : " ")}  Exit");
-                var key = Console.ReadKey().Key;
-
-                switch (key)
-                {
-                    case ConsoleKey.UpArrow:
-                        if (controller.SelectedMenuItem == 0)
-                        {
-                            controller.SelectedMenuItem = Enum.GetValues(typeof(MenuItems)).Cast<MenuItems>().LastOrDefault();
-                        }
-                        else
-                        {
-                            controller.SelectedMenuItem--;
-                        }
-                        break;
-                    case ConsoleKey.DownArrow:
-                        if (controller.SelectedMenuItem == Enum.GetValues(typeof(MenuItems)).Cast<MenuItems>().LastOrDefault())
-                        {
-                            controller.SelectedMenuItem = 0;
-                        }
-                        else
-                        {
-                            controller.SelectedMenuItem++;
-                        }
-                        break;
-                    case ConsoleKey.Enter:
-                        return controller.SelectedMenuItem;
-                }
-
-            }
-
-        }
-
-
+        
 
         public static void OpenCell(CliController controller, string input)
         {

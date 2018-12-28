@@ -22,7 +22,8 @@ namespace Minesweeper.Cli
         public List<Score> HighScores { get; set; }
         public string UserName { get; set; }
 
-        public MenuItems SelectedMenuItem { get; set; }
+        public MainMenuItems SelectedMainMenuItem { get; set; }
+        public SettingsMenuItems SelectedSettingsMenuItem { get; set; }
 
         public CliController()
         {
