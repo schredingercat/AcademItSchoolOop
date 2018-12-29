@@ -83,6 +83,7 @@ namespace Minesweeper.Cli
             while (true)
             {
                 Console.Clear();
+                Console.CursorVisible = false;
                 Console.WriteLine("   Settings");
                 Console.WriteLine();
                 Console.WriteLine();
@@ -144,12 +145,45 @@ namespace Minesweeper.Cli
                                 controller.SetDifficultLevel("3");
                                 Console.CursorVisible = true;
                                 Console.WriteLine("Game field Width:");
-                                controller.DifficultLevel.Width = int.Parse(Console.ReadLine());
+
+                                if (!int.TryParse(Console.ReadLine(), out int inputWidth))
+                                {
+                                    ShowErrorMessage("Неверный ввод!");
+                                    break;
+                                }
+                                if (inputWidth < 2 || inputWidth > 30)
+                                {
+                                    ShowErrorMessage("Ширина игрового поля должна быть от 2 до 30");
+                                    break;
+                                }
+
                                 Console.WriteLine("Game field Height:");
-                                controller.DifficultLevel.Height = int.Parse(Console.ReadLine());
+                                if (!int.TryParse(Console.ReadLine(), out int inputHeight))
+                                {
+                                    ShowErrorMessage("Неверный ввод!");
+                                    break;
+                                }
+                                if (inputHeight < 2 || inputHeight > 16)
+                                {
+                                    ShowErrorMessage("Высота игрового поля должна быть от 2 до 16");
+                                    break;
+                                }
+
                                 Console.WriteLine("Mines count:");
-                                controller.DifficultLevel.MinesCount = int.Parse(Console.ReadLine());
-                                Console.CursorVisible = false;
+                                if (!int.TryParse(Console.ReadLine(), out int inputMinesCount))
+                                {
+                                    ShowErrorMessage("Неверный ввод!");
+                                    break;
+                                }
+                                if ( inputMinesCount<1 || inputMinesCount > inputHeight*inputHeight - 1)
+                                {
+                                    ShowErrorMessage($"Количество мин должно быть от 1 до {inputHeight * inputHeight - 1}");
+                                    break;
+                                }
+
+                                controller.DifficultLevel.Width = inputWidth;
+                                controller.DifficultLevel.Height = inputHeight;
+                                controller.DifficultLevel.MinesCount = inputMinesCount;
                                 break;
                             case SettingsMenuItems.Exit:
                                 controller.SaveSettings();
@@ -158,6 +192,14 @@ namespace Minesweeper.Cli
                         break;
                 }
             }
+        }
+
+        private static void ShowErrorMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.ReadKey(true);
         }
     }
 }

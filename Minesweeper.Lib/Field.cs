@@ -142,10 +142,11 @@ namespace Minesweeper.Lib
             return result;
         }
 
-        public void PlaceMines(int firstX, int firstY, int minesCount)
+        public void PlaceMines(int firstX, int firstY, int minesCountInput)
         {
             var columns = _cells[0].Count;
             var raws = _cells.Count;
+            var minesCount = minesCountInput;
             var random = new Random();
 
             while (minesCount > 0)
@@ -153,7 +154,7 @@ namespace Minesweeper.Lib
                 var x = random.Next(columns);
                 var y = random.Next(raws);
 
-                if (!_cells[y][x].Mine && x != firstX && y != firstY)
+                if (!_cells[y][x].Mine && (x != firstX || y != firstY))
                 {
                     _cells[y][x].Mine = true;
 
