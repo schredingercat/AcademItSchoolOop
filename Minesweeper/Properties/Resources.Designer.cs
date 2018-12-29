@@ -232,7 +232,7 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Scores:.
+        ///   Looks up a localized string similar to Your time:.
         /// </summary>
         public static string YourScores {
             get {

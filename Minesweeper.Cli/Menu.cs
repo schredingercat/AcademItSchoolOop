@@ -11,6 +11,7 @@ namespace Minesweeper.Cli
         public static MainMenuItems ShowMainMenu(CliController controller)
         {
             Console.Clear();
+            Console.Title = "Minesweeper";
             Console.WriteLine("   Minesweeper");
             Console.WriteLine();
             Console.WriteLine();
@@ -23,7 +24,7 @@ namespace Minesweeper.Cli
                 Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.Settings ? "☼" : " ")}  Settings");
                 Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.About ? "☼" : " ")}  About");
                 Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.Exit ? "☼" : " ")}  Exit");
-                var key = Console.ReadKey().Key;
+                var key = Console.ReadKey(true).Key;
 
                 switch (key)
                 {
@@ -74,7 +75,7 @@ namespace Minesweeper.Cli
             Console.WriteLine();
             Console.WriteLine("Press any key to exit to main menu...");
 
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
 
         public static void ShowSettingsMenu(CliController controller)
@@ -88,24 +89,22 @@ namespace Minesweeper.Cli
 
                 var currentDifficultLevel = controller.DifficultLevel.ToString();
 
-                //Console.SetCursorPosition(0, 3);
-
-                Console.ForegroundColor = currentDifficultLevel == "Easy" ? ConsoleColor.Red : ConsoleColor.Gray;
+                Console.ForegroundColor = currentDifficultLevel == "Easy" ? ConsoleColor.Red : ConsoleColor.Black;
                 Console.WriteLine($"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Easy ? "☼" : " ")}  Easy");
 
-                Console.ForegroundColor = currentDifficultLevel == "Medium" ? ConsoleColor.Red : ConsoleColor.Gray;
+                Console.ForegroundColor = currentDifficultLevel == "Medium" ? ConsoleColor.Red : ConsoleColor.Black;
                 Console.WriteLine(
                     $"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Medium ? "☼" : " ")}  Medium");
 
-                Console.ForegroundColor = currentDifficultLevel == "Hard" ? ConsoleColor.Red : ConsoleColor.Gray;
+                Console.ForegroundColor = currentDifficultLevel == "Hard" ? ConsoleColor.Red : ConsoleColor.Black;
                 Console.WriteLine(
                     $"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Hard ? "☼" : " ")}  Hard");
 
-                Console.ForegroundColor = currentDifficultLevel == "Custom Level" ? ConsoleColor.Red : ConsoleColor.Gray;
+                Console.ForegroundColor = currentDifficultLevel == "Custom Level" ? ConsoleColor.Red : ConsoleColor.Black;
                 Console.WriteLine($"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Custom ? "☼" : " ")}  Custom ({controller.DifficultLevel.Width}x{controller.DifficultLevel.Height}x{controller.DifficultLevel.MinesCount})");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine($"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Exit ? "☼" : " ")}  Exit to main menu");
-                var key = Console.ReadKey().Key;
+                var key = Console.ReadKey(true).Key;
 
                 switch (key)
                 {

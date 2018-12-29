@@ -11,6 +11,9 @@ namespace Minesweeper.Cli
     {
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.SetWindowSize(120, 30);
             Console.OutputEncoding = Encoding.UTF8;
             Console.CursorVisible = false;
             var controller = new CliController();
@@ -40,14 +43,11 @@ namespace Minesweeper.Cli
         {
             var controller = new CliController();
             Console.CursorVisible = true;
-            Console.BackgroundColor = ConsoleColor.Gray;
-            Console.ForegroundColor = ConsoleColor.Black;
 
             ShowGameField(controller);
 
             while (controller.GameStatus == GameStatus.Playing || controller.GameStatus == GameStatus.Wait)
             {
-                //OpenCell(controller, Console.ReadLine());
                 if (!controller.TryExecuteCommand(Console.ReadLine()))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -58,10 +58,8 @@ namespace Minesweeper.Cli
                 ShowGameField(controller);
             }
 
-            Console.ReadKey();
+            //Console.ReadKey(true);
             Console.CursorVisible = false;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         
@@ -117,12 +115,20 @@ namespace Minesweeper.Cli
         {
             var width = controller.FieldWidth;
             var height = controller.FieldHeight;
-
+            var extraChars = new[]{'@','#', '$', '%'};
+            
             Console.Clear();
             Console.Write("               ");
             for (int i = 0; i < width; i++)
             {
-                Console.Write($"{Convert.ToChar(i + 65) }  ");
+                if (i < 26)
+                {
+                    Console.Write($"{Convert.ToChar(i + 65) }  ");
+                }
+                else
+                {
+                    Console.Write($"{extraChars[i-26]}  ");
+                }
             }
             Console.WriteLine();
             Console.Write("               ");
@@ -139,12 +145,9 @@ namespace Minesweeper.Cli
                 {
                     Console.ForegroundColor = CliController.CellColors[cell.Status];
                     Console.Write($"{cell}  ");
-
-                    Console.ResetColor();
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.ForegroundColor = ConsoleColor.Black;
-
                 }
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Write($"- {controller.Field.Cells.IndexOf(row) + 1,2}");
                 Console.WriteLine();
             }
             Console.WriteLine();

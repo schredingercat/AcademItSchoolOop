@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
+
+using System.Timers;
 using Minesweeper.Lib;
+using Timer = System.Threading.Timer;
 
 
 namespace Minesweeper.Cli
@@ -31,10 +33,7 @@ namespace Minesweeper.Cli
 
             Field = new Field(_difficultLevel.Width, _difficultLevel.Height, _difficultLevel.MinesCount);
 
-            //var dispatcherTimer = new DispatcherTimer();
-            //dispatcherTimer.Tick += TickTimer;
-            //dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            //dispatcherTimer.Start();
+            var timer = new Timer(TimerCallback, null, 0, 10);
 
             HighScores = LoadScores();
             UserName = Environment.UserName;
@@ -56,6 +55,17 @@ namespace Minesweeper.Cli
                 return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds / 10:00}";
             }
         }
+
+        private void TimerCallback(Object obj)
+        {
+            var time = Field.Time;
+            if (time > TimeSpan.Zero)
+            {
+                Console.Title = $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds / 10:00}";
+            }
+        }
+
+
 
         public void Open(Cell cell)
         {
@@ -180,7 +190,10 @@ namespace Minesweeper.Cli
                 case GameStatus.Win:
                     {
                         Console.WriteLine("You Win!");
-                        Console.ReadLine();
+                        Console.WriteLine($"Your time: {Timer}");
+                        Console.Write("Enter your name: ");
+                        UserName = Console.ReadLine();
+                        AddScores();
                     }
                     break;
                 case GameStatus.GameOver:

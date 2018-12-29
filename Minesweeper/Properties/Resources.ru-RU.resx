@@ -175,7 +175,7 @@
     <value>Время</value>
   </data>
   <data name="YourScores" xml:space="preserve">
-    <value>Ваш результат:</value>
+    <value>Ваше время:</value>
   </data>
   <data name="YouWin" xml:space="preserve">
     <value>Победа!</value>
