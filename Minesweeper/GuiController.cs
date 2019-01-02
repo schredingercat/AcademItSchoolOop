@@ -57,6 +57,12 @@ namespace Minesweeper
 
         }
 
+        public int FlagsCount
+        {
+            get => Field.FlagsCount;
+            set => Field.FlagsCount = value;
+        }
+
         private void TickTimer(object sender, EventArgs e)
         {
             OnPropertyChanged(nameof(Timer));
@@ -80,6 +86,7 @@ namespace Minesweeper
         public void Mark(Cell cell)
         {
             Field.Mark(cell);
+            OnPropertyChanged(nameof(FlagsCount));
         }
 
         public int FieldWidth

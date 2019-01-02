@@ -20,15 +20,19 @@ namespace Minesweeper.Lib
 
         private int _fieldWidth;
         private int _fieldHeight;
-        public int MinesCount { get; set; }
         private Stopwatch _stopWatch;
+        public int MinesCount { get; set; }
+        private int _flagsCount;
 
         public Field(int width, int height, int minesCount)
         {
             _fieldWidth = width;
             _fieldHeight = height;
             MinesCount = minesCount;
+            FlagsCount = minesCount;
+
             _cells = new List<List<Cell>>();
+
             for (var i = 0; i < _fieldHeight; i++)
             {
                 _cells.Add(new List<Cell>());
@@ -70,6 +74,16 @@ namespace Minesweeper.Lib
             {
                 _fieldHeight = value;
                 OnPropertyChanged(nameof(FieldHeight));
+            }
+        }
+
+        public int FlagsCount
+        {
+            get { return _flagsCount; }
+            set
+            {
+                _flagsCount = value;
+                OnPropertyChanged(nameof(FlagsCount));
             }
         }
 
@@ -115,8 +129,18 @@ namespace Minesweeper.Lib
 
         public void Mark(Cell cell)
         {
-            cell.Marked = !cell.Marked;
+            if (cell.Marked)
+            {
+                FlagsCount++;
+                cell.Marked = false;
+            }
+            else
+            {
+                FlagsCount--;
+                cell.Marked = true;
+            }
             Refresh();
+            OnPropertyChanged(nameof(FlagsCount));
         }
 
         public Cell GetCell(int x, int y)

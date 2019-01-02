@@ -67,13 +67,27 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             
             <TextBlock Name="TextBlockTimer"
                        Grid.Row="0"
+                       Grid.Column="0"
                        Text="{Binding Path=Timer}"/>
+
+            <TextBlock Name="TextBlockFlagsCount"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       Text="{Binding Path=FlagsCount}"/>
 
             <ItemsControl Name="GameField"
                           Grid.Row="1"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="3"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           ItemTemplate="{DynamicResource DataTemplateRaws}"/>
