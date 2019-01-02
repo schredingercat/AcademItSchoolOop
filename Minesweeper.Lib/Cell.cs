@@ -11,9 +11,9 @@ namespace Minesweeper.Lib
 {
     public class Cell : INotifyPropertyChanged
     {
-        private bool _mine;
-        private bool _open;
-        private bool _marked;
+        private bool _isMine;
+        private bool _isOpen;
+        private bool _isMarked;
         public int MineCount { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
@@ -21,38 +21,38 @@ namespace Minesweeper.Lib
 
         public Cell()
         {
-            Mine = false;
-            Open = false;
+            IsMine = false;
+            IsOpen = false;
         }
 
-        public bool Mine
+        public bool IsMine
         {
-            get { return _mine; }
+            get { return _isMine; }
             set
             {
-                _mine = value;
-                OnPropertyChanged(nameof(Mine));
+                _isMine = value;
+                OnPropertyChanged(nameof(IsMine));
             }
         }
 
-        public bool Open
+        public bool IsOpen
         {
-            get { return _open; }
+            get { return _isOpen; }
             set
             {
-                _open = value;
-                OnPropertyChanged(nameof(Open));
+                _isOpen = value;
+                OnPropertyChanged(nameof(IsOpen));
                 OnPropertyChanged(nameof(Status));
             }
         }
 
-        public bool Marked
+        public bool IsMarked
         {
-            get { return _marked; }
+            get { return _isMarked; }
             set
             {
-                _marked = value;
-                OnPropertyChanged(nameof(Marked));
+                _isMarked = value;
+                OnPropertyChanged(nameof(IsMarked));
                 OnPropertyChanged(nameof(Status));
             }
         }
@@ -61,12 +61,12 @@ namespace Minesweeper.Lib
         {
             get
             {
-                if (!Open)
+                if (!IsOpen)
                 {
-                    return Marked ? CellStatus.Marked : CellStatus.Hidden;
+                    return IsMarked ? CellStatus.Marked : CellStatus.Hidden;
                 }
 
-                if (Mine)
+                if (IsMine)
                 {
                     return CellStatus.Mine;
                 }
@@ -91,12 +91,12 @@ namespace Minesweeper.Lib
 
         public override string ToString()
         {
-            if (!Open)
+            if (!IsOpen)
             {
-                return Marked ? "?" : "■";
+                return IsMarked ? "?" : "■";
             }
 
-            return Mine ? "☼" : MineCount.ToString();
+            return IsMine ? "☼" : MineCount.ToString();
         }
 
 

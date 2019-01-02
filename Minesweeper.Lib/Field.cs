@@ -101,13 +101,13 @@ namespace Minesweeper.Lib
 
         private void OpenNearCells(Cell cell)
         {
-            cell.Open = true;
+            cell.IsOpen = true;
             if (cell.MineCount == 0)
             {
                 var nearCells = GetNearCells(cell.X, cell.Y);
                 foreach (var curentCell in nearCells)
                 {
-                    if (!curentCell.Open)
+                    if (!curentCell.IsOpen)
                     {
                         OpenNearCells(curentCell);
                     }
@@ -121,7 +121,7 @@ namespace Minesweeper.Lib
             {
                 foreach (var cell in raw)
                 {
-                    cell.Open = true;
+                    cell.IsOpen = true;
                 }
 
             }
@@ -129,15 +129,20 @@ namespace Minesweeper.Lib
 
         public void Mark(Cell cell)
         {
-            if (cell.Marked)
+            if (cell.IsOpen)
+            {
+                return;
+            }
+
+            if (cell.IsMarked)
             {
                 FlagsCount++;
-                cell.Marked = false;
+                cell.IsMarked = false;
             }
             else
             {
                 FlagsCount--;
-                cell.Marked = true;
+                cell.IsMarked = true;
             }
             Refresh();
             OnPropertyChanged(nameof(FlagsCount));
@@ -178,9 +183,9 @@ namespace Minesweeper.Lib
                 var x = random.Next(columns);
                 var y = random.Next(raws);
 
-                if (!_cells[y][x].Mine && (x != firstX || y != firstY))
+                if (!_cells[y][x].IsMine && (x != firstX || y != firstY))
                 {
-                    _cells[y][x].Mine = true;
+                    _cells[y][x].IsMine = true;
 
                     var nearCells = GetNearCells(x, y);
                     foreach (var cell in nearCells)
@@ -200,9 +205,9 @@ namespace Minesweeper.Lib
             {
                 foreach (var cell in row)
                 {
-                    if (cell.Open)
+                    if (cell.IsOpen)
                     {
-                        if (cell.Mine)
+                        if (cell.IsMine)
                         {
                             _stopWatch.Stop();
                             GameStatus = GameStatus.GameOver;
@@ -212,7 +217,7 @@ namespace Minesweeper.Lib
                     }
                     else
                     {
-                        if (!cell.Mine)
+                        if (!cell.IsMine)
                         {
                             areYouWin = false;
                         }

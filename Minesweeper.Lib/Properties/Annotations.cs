@@ -883,13 +883,13 @@ namespace Minesweeper.Lib.Annotations
   /// </summary>
   public enum AssertionConditionType
   {
-    /// <summary>Marked parameter should be evaluated to true.</summary>
+    /// <summary>IsMarked parameter should be evaluated to true.</summary>
     IS_TRUE = 0,
-    /// <summary>Marked parameter should be evaluated to false.</summary>
+    /// <summary>IsMarked parameter should be evaluated to false.</summary>
     IS_FALSE = 1,
-    /// <summary>Marked parameter should be evaluated to null value.</summary>
+    /// <summary>IsMarked parameter should be evaluated to null value.</summary>
     IS_NULL = 2,
-    /// <summary>Marked parameter should be evaluated to not null value.</summary>
+    /// <summary>IsMarked parameter should be evaluated to not null value.</summary>
     IS_NOT_NULL = 3,
   }
 
