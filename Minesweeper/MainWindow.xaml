@@ -16,7 +16,7 @@
                     Tag="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"
                     Height="32" 
                     Width="32" 
-                    Margin="1,1,1,1" 
+                    Margin="0" 
                     MouseRightButtonUp="UIElement_OnMouseRightButtonUp"
                     Click="ButtonBase_OnClick">
                 <Button.Content>
