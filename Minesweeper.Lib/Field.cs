@@ -210,8 +210,9 @@ namespace Minesweeper.Lib
                         if (cell.IsMine)
                         {
                             _stopWatch.Stop();
-                            GameStatus = GameStatus.GameOver;
                             OpenAllCells();
+                            GameStatus = GameStatus.GameOver;
+                            return;
                         }
 
                     }

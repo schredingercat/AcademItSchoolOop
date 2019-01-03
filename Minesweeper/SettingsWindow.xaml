@@ -48,13 +48,15 @@
                              IsEnabled="{Binding ElementName=RadioButtonCustomLevel, Path=IsChecked}"
                              Text="{Binding Path=DifficultLevel.Width, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Высота игрового поля" Margin="3"></TextBlock>
-                    <TextBox Grid.Row="1" 
+                    <TextBox Name="TextBoxHeight" 
+                             Grid.Row="1" 
                              Grid.Column="1" 
                              Margin="3"
                              IsEnabled="{Binding ElementName=RadioButtonCustomLevel, Path=IsChecked}"
                              Text="{Binding Path=DifficultLevel.Height, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Количество мин" Margin="3"></TextBlock>
-                    <TextBox Grid.Row="2" 
+                    <TextBox Name="TextBoxMinesCount" 
+                             Grid.Row="2" 
                              Grid.Column="1" 
                              Margin="3"
                              IsEnabled="{Binding ElementName=RadioButtonCustomLevel, Path=IsChecked}"
