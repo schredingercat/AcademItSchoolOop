@@ -21,6 +21,7 @@ namespace Minesweeper
         private static readonly DifficultLevel EasyLevel = new DifficultLevel { Width = 9, Height = 9, MinesCount = 10, Name = Properties.Resources.LevelEasy};
         private static readonly DifficultLevel MediumLevel = new DifficultLevel { Width = 16, Height = 16, MinesCount = 40, Name = Properties.Resources.LevelMedium};
         private static readonly DifficultLevel HardLevel = new DifficultLevel { Width = 30, Height = 16, MinesCount = 99,Name = Properties.Resources.LevelHard};
+        private static readonly TimeSpan GameDuration = new TimeSpan(0,0,1,0);
 
         public Field Field { get; }
         private DifficultLevel _difficultLevel;

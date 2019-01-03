@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:Minesweeper"
         xmlns:res="clr-namespace:Minesweeper.Properties"
         mc:Ignorable="d"
-        Title="{x:Static res:Resources.ApplicationTitle}" Height="450" Width="800">
+        Title="{x:Static res:Resources.ApplicationTitle}" 
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        Height="450" 
+        Width="800">
 
     <Window.Resources>
         <local:CellStatusToImageConverter x:Key="CellStatusToImageConverter"/>
@@ -62,7 +66,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Grid>
+        <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -77,11 +81,23 @@
             <TextBlock Name="TextBlockTimer"
                        Grid.Row="0"
                        Grid.Column="0"
+                       Margin="10"
+                       FontFamily="./fonts/#Digital-7 Mono"
+                       FontSize="24"
+                       Foreground="Red"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
                        Text="{Binding Path=Timer}"/>
 
             <TextBlock Name="TextBlockFlagsCount"
                        Grid.Row="0"
                        Grid.Column="2"
+                       Margin="10"
+                       FontFamily="./fonts/#Digital-7 Mono"
+                       FontSize="24"
+                       Foreground="Red"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
                        Text="{Binding Path=FlagsCount}"/>
 
             <ItemsControl Name="GameField"

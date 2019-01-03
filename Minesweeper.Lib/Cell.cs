@@ -18,7 +18,6 @@ namespace Minesweeper.Lib
         public int X { get; set; }
         public int Y { get; set; }
 
-
         public Cell()
         {
             IsMine = false;
