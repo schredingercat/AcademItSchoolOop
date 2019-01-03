@@ -61,7 +61,7 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minesweeper.
+        ///   Looks up a localized string similar to IsMinesweeper.
         /// </summary>
         public static string ApplicationTitle {
             get {
@@ -93,6 +93,15 @@ namespace Minesweeper.Properties {
         public static string DontSave {
             get {
                 return ResourceManager.GetString("DontSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height of game field must be in range 2 to 16.
+        /// </summary>
+        public static string HeightOutOfRange {
+            get {
+                return ResourceManager.GetString("HeightOutOfRange", resourceCulture);
             }
         }
         
@@ -187,6 +196,15 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mines count must be in range 1 to.
+        /// </summary>
+        public static string MinesCountOutOfRange {
+            get {
+                return ResourceManager.GetString("MinesCountOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _About.
         /// </summary>
         public static string MunuAbout {
@@ -228,6 +246,42 @@ namespace Minesweeper.Properties {
         public static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width of game field must be in range 2 to 30.
+        /// </summary>
+        public static string WidthOutOfRange {
+            get {
+                return ResourceManager.GetString("WidthOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong height input.
+        /// </summary>
+        public static string WrongHeightInput {
+            get {
+                return ResourceManager.GetString("WrongHeightInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong mines count input.
+        /// </summary>
+        public static string WrongMinesCountInput {
+            get {
+                return ResourceManager.GetString("WrongMinesCountInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong width input.
+        /// </summary>
+        public static string WrongWidthInput {
+            get {
+                return ResourceManager.GetString("WrongWidthInput", resourceCulture);
             }
         }
         

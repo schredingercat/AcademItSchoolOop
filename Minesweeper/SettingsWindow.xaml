@@ -7,6 +7,7 @@
         xmlns:res="clr-namespace:Minesweeper.Properties"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.SettingsWindowTitle}" Height="240" Width="320"
+        DataContextChanged="SettingsWindow_OnDataContextChanged"
         Closing="SettingsWindow_OnClosing">
     <Grid>
         <GroupBox Header="{x:Static res:Resources.DifficultLevel}" Padding="3" Margin="5">

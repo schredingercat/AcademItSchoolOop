@@ -24,6 +24,7 @@ namespace Minesweeper
         public SettingsWindow()
         {
             InitializeComponent();
+
         }
 
         private void SettingsWindow_OnClosing(object sender, CancelEventArgs e)
@@ -32,39 +33,40 @@ namespace Minesweeper
             
             if (!int.TryParse(TextBoxWidth.Text, out int inputWidth))
             {
-                MessageBox.Show("Неверный ввод ширины");
+                MessageBox.Show(Properties.Resources.WrongWidthInput);
                 e.Cancel = true;
                 return;
+
             }
             if (inputWidth < 2 || inputWidth > 30)
             {
-                MessageBox.Show("Ширина игрового поля должна быть от 2 до 30");
+                MessageBox.Show(Properties.Resources.WidthOutOfRange);
                 e.Cancel = true;
                 return;
             }
             
             if (!int.TryParse(TextBoxHeight.Text, out int inputHeight))
             {
-                MessageBox.Show("Неверный ввод!");
+                MessageBox.Show(Properties.Resources.WrongHeightInput);
                 e.Cancel = true;
                 return;
             }
             if (inputHeight < 2 || inputHeight > 16)
             {
-                MessageBox.Show("Высота игрового поля должна быть от 2 до 16");
+                MessageBox.Show(Properties.Resources.HeightOutOfRange);
                 e.Cancel = true;
                 return;
             }
 
             if (!int.TryParse(TextBoxMinesCount.Text, out int inputMinesCount))
             {
-                MessageBox.Show("Неверный ввод!");
+                MessageBox.Show(Properties.Resources.WrongMinesCountInput);
                 e.Cancel = true;
                 return;
             }
             if (inputMinesCount < 1 || inputMinesCount > inputHeight * inputHeight - 1)
             {
-                MessageBox.Show($"Количество мин должно быть от 1 до {inputHeight * inputHeight - 1}");
+                MessageBox.Show($"{Properties.Resources.MinesCountOutOfRange} {inputHeight * inputHeight - 1}");
                 e.Cancel = true;
                 return;
             }
@@ -75,6 +77,28 @@ namespace Minesweeper
         private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
         {
             ((GuiController) DataContext)?.SetDifficultLevel(((ToggleButton)sender).Tag.ToString());
+        }
+
+        private void SettingsWindow_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var controller = (GuiController)DataContext;
+
+            if (controller.DifficultLevel.Name == Properties.Resources.LevelEasy)
+            {
+                RadioButtonEasyLevel.IsChecked = true;
+            }
+            else if (controller.DifficultLevel.Name == Properties.Resources.LevelMedium)
+            {
+                RadioButtonMediumLevel.IsChecked = true;
+            }
+            else if (controller.DifficultLevel.Name == Properties.Resources.LevelHard)
+            {
+                RadioButtonHardLevel.IsChecked = true;
+            }
+            else if (controller.DifficultLevel.Name == Properties.Resources.LevelCustom)
+            {
+                RadioButtonCustomLevel.IsChecked = true;
+            }
         }
     }
 }

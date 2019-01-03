@@ -180,4 +180,22 @@
   <data name="YouWin" xml:space="preserve">
     <value>Победа!</value>
   </data>
+  <data name="HeightOutOfRange" xml:space="preserve">
+    <value>Высота игрового поля должна быть от 2 до 16</value>
+  </data>
+  <data name="MinesCountOutOfRange" xml:space="preserve">
+    <value>Количество мин должно быть от 1 до</value>
+  </data>
+  <data name="WidthOutOfRange" xml:space="preserve">
+    <value>Ширина игрового поля должна быть от 2 до 30</value>
+  </data>
+  <data name="WrongHeightInput" xml:space="preserve">
+    <value>Неверный ввод высоты</value>
+  </data>
+  <data name="WrongMinesCountInput" xml:space="preserve">
+    <value>Неверный ввод количества мин</value>
+  </data>
+  <data name="WrongWidthInput" xml:space="preserve">
+    <value>Неверный ввод ширины</value>
+  </data>
 </root>
