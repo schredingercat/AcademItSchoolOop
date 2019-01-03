@@ -16,7 +16,7 @@ namespace Minesweeper.Lib
     {
         private List<List<Cell>> _cells;
 
-        public GameStatus GameStatus { get; set; }
+        private GameStatus _gameStatus;
 
         private int _fieldWidth;
         private int _fieldHeight;
@@ -50,6 +50,16 @@ namespace Minesweeper.Lib
         public List<List<Cell>> Cells
         {
             get { return _cells; }
+        }
+
+        public GameStatus GameStatus
+        {
+            get { return _gameStatus; }
+            set
+            {
+                _gameStatus = value;
+                OnPropertyChanged(nameof(GameStatus));
+            }
         }
 
         public TimeSpan Time
