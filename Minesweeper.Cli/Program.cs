@@ -55,6 +55,7 @@ namespace Minesweeper.Cli
 
                 if (input == "EXIT")
                 {
+                    Console.CursorVisible = false;
                     return;
                 }
 
@@ -77,54 +78,6 @@ namespace Minesweeper.Cli
         }
 
         
-
-        public static void ChangeDifficultLevel(CliController controller)
-        {
-            switch(controller.DifficultLevel.ToString())
-            {
-                case "Easy":
-                    controller.SetDifficultLevel("1");
-                    break;
-                case "Medium":
-                    controller.SetDifficultLevel("2");
-                    break;
-                case "Hard":
-                    controller.SetDifficultLevel("0");
-                    break;
-            }
-            controller.SaveSettings();
-        }
-
-        
-
-        public static void OpenCell(CliController controller, string input)
-        {
-            var command = input.ToUpper();
-            var isMarkCommand = false;
-
-            if (command[0].ToString() == "?")
-            {
-                isMarkCommand = true;
-                command = command.Substring(1, command.Length - 1);
-            }
-
-            var x = command[0] - 65;
-            var y = int.Parse(command[1].ToString()) - 1;
-
-            var cell = controller.Field.Cells[y][x];
-
-            if (isMarkCommand)
-            {
-                controller.Mark(cell);
-            }
-            else
-            {
-                controller.Open(cell);
-            }
-
-            ShowGameField(controller);
-        }
-
         public static void ShowGameField(CliController controller)
         {
             var width = controller.FieldWidth;

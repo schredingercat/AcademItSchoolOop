@@ -33,8 +33,6 @@ namespace Minesweeper.Cli
 
             Field = new Field(_difficultLevel.Width, _difficultLevel.Height, _difficultLevel.MinesCount);
 
-            var timer = new Timer(TimerCallback, null, 0, 10);
-
             HighScores = LoadScores();
             UserName = Environment.UserName;
         }
@@ -55,17 +53,6 @@ namespace Minesweeper.Cli
                 return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds / 10:00}";
             }
         }
-
-        private void TimerCallback(Object obj)
-        {
-            var time = Field.Time;
-            if (time > TimeSpan.Zero)
-            {
-                Console.Title = $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds / 10:00}";
-            }
-        }
-
-
 
         public void Open(Cell cell)
         {
@@ -219,6 +206,7 @@ namespace Minesweeper.Cli
             }
 
             var command = input;
+
             command = command.Replace('@', '[');
             command = command.Replace("#", @"\");
             command = command.Replace('$', ']');
