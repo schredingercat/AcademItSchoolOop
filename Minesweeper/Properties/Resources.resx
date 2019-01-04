@@ -159,7 +159,7 @@
   <data name="MenuSettings" xml:space="preserve">
     <value>_Settings...</value>
   </data>
-  <data name="MunuAbout" xml:space="preserve">
+  <data name="MenuAbout" xml:space="preserve">
     <value>_About</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -197,5 +197,9 @@
   </data>
   <data name="WrongWidthInput" xml:space="preserve">
     <value>Wrong width input</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Minesweeper
+Author: Ilya Bogomolov</value>
   </data>
 </root>

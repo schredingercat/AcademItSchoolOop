@@ -63,7 +63,8 @@
                 </MenuItem>
                 <MenuItem Header="{x:Static res:Resources.MenuHelp}">
                     <MenuItem Name="MenuItemAbout"
-                              Header="{x:Static res:Resources.MunuAbout}"/>
+                              Header="{x:Static res:Resources.MenuAbout}"
+                              Click="MenuItemAbout_OnClick"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

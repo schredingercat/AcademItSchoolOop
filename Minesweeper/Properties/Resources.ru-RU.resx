@@ -198,4 +198,8 @@
   <data name="WrongWidthInput" xml:space="preserve">
     <value>Неверный ввод ширины</value>
   </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Сапёр
+Автор: Илья Богомолов</value>
+  </data>
 </root>

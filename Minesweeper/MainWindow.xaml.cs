@@ -88,5 +88,10 @@ namespace Minesweeper
         {
             NewGame();
         }
+
+        private void MenuItemAbout_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(Properties.Resources.AboutText);
+        }
     }
 }

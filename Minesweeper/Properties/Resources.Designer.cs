@@ -61,6 +61,16 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minesweeper
+        ///Author: Ilya Bogomolov.
+        /// </summary>
+        public static string AboutText {
+            get {
+                return ResourceManager.GetString("AboutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IsMinesweeper.
         /// </summary>
         public static string ApplicationTitle {
@@ -142,6 +152,15 @@ namespace Minesweeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _About.
+        /// </summary>
+        public static string MenuAbout {
+            get {
+                return ResourceManager.GetString("MenuAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Exit.
         /// </summary>
         public static string MenuExit {
@@ -201,15 +220,6 @@ namespace Minesweeper.Properties {
         public static string MinesCountOutOfRange {
             get {
                 return ResourceManager.GetString("MinesCountOutOfRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _About.
-        /// </summary>
-        public static string MunuAbout {
-            get {
-                return ResourceManager.GetString("MunuAbout", resourceCulture);
             }
         }
         
