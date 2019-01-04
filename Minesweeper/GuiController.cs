@@ -122,7 +122,11 @@ namespace Minesweeper
                     DifficultLevel = HardLevel;
                     break;
                 case "3":
-                    DifficultLevel.Name = Properties.Resources.LevelCustom;
+                    DifficultLevel = new DifficultLevel
+                    {
+                        Name = Properties.Resources.LevelCustom, Width = DifficultLevel.Width,
+                        Height = DifficultLevel.Height, MinesCount = DifficultLevel.MinesCount
+                    };
                     break;
             }
         }

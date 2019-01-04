@@ -110,7 +110,13 @@ namespace Minesweeper.Cli
                     DifficultLevel = HardLevel;
                     break;
                 case "3":
-                    DifficultLevel.Name = "Custom Level";
+                    DifficultLevel = new DifficultLevel
+                    {
+                        Name = "Custom Level",
+                        Width = DifficultLevel.Width,
+                        Height = DifficultLevel.Height,
+                        MinesCount = DifficultLevel.MinesCount
+                    };
                     break;
             }
         }
@@ -199,7 +205,7 @@ namespace Minesweeper.Cli
                 case GameStatus.GameOver:
                     {
                         Console.WriteLine("Game Over!");
-                        Console.ReadLine();
+                        Console.ReadKey(true);
                     }
                     break;
             }
@@ -212,18 +218,12 @@ namespace Minesweeper.Cli
                 return false;
             }
 
-            var command = input.ToUpper();
+            var command = input;
             command = command.Replace('@', '[');
             command = command.Replace("#", @"\");
             command = command.Replace('$', ']');
             command = command.Replace('%', '^');
-
-            if (command == "EXIT")
-            {
-                Field.GameStatus = GameStatus.GameOver;
-                return true;
-            }
-
+            
             var isMarkCommand = false;
             if (command[0] == '?')
             {
@@ -267,14 +267,14 @@ namespace Minesweeper.Cli
                 {CellStatus.Hidden, ConsoleColor.White },
                 {CellStatus.Marked, ConsoleColor.Black },
                 {CellStatus.Number0, ConsoleColor.DarkGray },
-                {CellStatus.Number1, ConsoleColor.DarkBlue },
+                {CellStatus.Number1, ConsoleColor.Blue },
                 {CellStatus.Number2, ConsoleColor.DarkGreen },
-                {CellStatus.Number3, ConsoleColor.DarkYellow },
-                {CellStatus.Number4, ConsoleColor.Magenta },
+                {CellStatus.Number3, ConsoleColor.Red },
+                {CellStatus.Number4, ConsoleColor.DarkBlue },
                 {CellStatus.Number5, ConsoleColor.DarkRed },
-                {CellStatus.Number6, ConsoleColor.Blue },
-                {CellStatus.Number7, ConsoleColor.Green },
-                {CellStatus.Number8, ConsoleColor.Yellow }
+                {CellStatus.Number6, ConsoleColor.Cyan },
+                {CellStatus.Number7, ConsoleColor.Magenta },
+                {CellStatus.Number8, ConsoleColor.DarkYellow }
             };
     }
 }

@@ -58,20 +58,48 @@ namespace Minesweeper.Cli
 
         public static void ShowHighScores(CliController controller)
         {
-            Console.Clear();
-            Console.WriteLine("   High Scores");
-            Console.WriteLine();
-            Console.WriteLine();
-
-            var scores = controller.HighScores;
-            var visibleScoresCount = Math.Min(10, scores.Count);
-
-            for (int i = 0; i < visibleScoresCount; i++)
+            while (true)
             {
-                Console.WriteLine($"  {scores[i].Name} - " +
-                                  $"{scores[i].Time.Minutes:00}:{scores[i].Time.Seconds:00}:{scores[i].Time.Milliseconds / 10:00} - " +
-                                  $"{scores[i].DifficultLevel}");
+                Console.Clear();
+                Console.WriteLine("   High Scores");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                controller.HighScores = controller.LoadScores();
+
+                var scores = controller.HighScores;
+                var visibleScoresCount = Math.Min(10, scores.Count);
+
+                for (int i = 0; i < visibleScoresCount; i++)
+                {
+                    Console.WriteLine($"  {scores[i].Name} - " +
+                                      $"{scores[i].Time.Minutes:00}:{scores[i].Time.Seconds:00}:{scores[i].Time.Milliseconds / 10:00} - " +
+                                      $"{scores[i].DifficultLevel}");
+                }
+                Console.WriteLine();
+                Console.WriteLine("Press 'C' to clear scores or press any key to exit to main menu...");
+
+                if (Console.ReadKey(true).Key == ConsoleKey.C)
+                {
+                    controller.ClearScores();
+                }
+                else
+                {
+                    return;
+                }
             }
+        }
+
+        public static void ShowAbout()
+        {
+            Console.Clear();
+            Console.WriteLine("   About");
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine(" Minesweeper");
+            Console.WriteLine(" Author: Ilya Bogomolov");
+
             Console.WriteLine();
             Console.WriteLine("Press any key to exit to main menu...");
 
@@ -148,36 +176,36 @@ namespace Minesweeper.Cli
 
                                 if (!int.TryParse(Console.ReadLine(), out int inputWidth))
                                 {
-                                    ShowErrorMessage("Неверный ввод!");
+                                    ShowErrorMessage("Wrong input!");
                                     break;
                                 }
                                 if (inputWidth < 2 || inputWidth > 30)
                                 {
-                                    ShowErrorMessage("Ширина игрового поля должна быть от 2 до 30");
+                                    ShowErrorMessage("Width of game field must be in range 2 to 30");
                                     break;
                                 }
 
                                 Console.WriteLine("Game field Height:");
                                 if (!int.TryParse(Console.ReadLine(), out int inputHeight))
                                 {
-                                    ShowErrorMessage("Неверный ввод!");
+                                    ShowErrorMessage("Wrong input!");
                                     break;
                                 }
                                 if (inputHeight < 2 || inputHeight > 16)
                                 {
-                                    ShowErrorMessage("Высота игрового поля должна быть от 2 до 16");
+                                    ShowErrorMessage("Height of game field must be in range 2 to 16");
                                     break;
                                 }
 
                                 Console.WriteLine("Mines count:");
                                 if (!int.TryParse(Console.ReadLine(), out int inputMinesCount))
                                 {
-                                    ShowErrorMessage("Неверный ввод!");
+                                    ShowErrorMessage("Wrong input!");
                                     break;
                                 }
                                 if ( inputMinesCount<1 || inputMinesCount > inputHeight*inputHeight - 1)
                                 {
-                                    ShowErrorMessage($"Количество мин должно быть от 1 до {inputHeight * inputHeight - 1}");
+                                    ShowErrorMessage($"Mines count must be in range 1 to {inputHeight * inputHeight - 1}");
                                     break;
                                 }
 

@@ -31,6 +31,9 @@ namespace Minesweeper.Cli
                     case MainMenuItems.Settings:
                         Menu.ShowSettingsMenu(controller);
                         break;
+                    case MainMenuItems.About:
+                        Menu.ShowAbout();
+                        break;
                     case MainMenuItems.Exit:
                         return;
                 }
@@ -48,18 +51,29 @@ namespace Minesweeper.Cli
 
             while (controller.GameStatus == GameStatus.Playing || controller.GameStatus == GameStatus.Wait)
             {
-                if (!controller.TryExecuteCommand(Console.ReadLine()))
+                var input = Console.ReadLine()?.ToUpper();
+
+                if (input == "EXIT")
+                {
+                    return;
+                }
+
+                if (!controller.TryExecuteCommand(input))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Неверный ввод!");
+                    Console.WriteLine("Wrong input!");
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.ReadLine();
                 }
                 ShowGameField(controller);
             }
 
-            //Console.ReadKey(true);
             Console.CursorVisible = false;
+
+            if (controller.GameStatus == GameStatus.GameOver)
+            {
+                Console.ReadKey(true);
+            }
         }
 
         
@@ -151,9 +165,12 @@ namespace Minesweeper.Cli
                 Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine("  Введите координаты ячейки, чтобы открыть её (например 'B7')");
-            Console.WriteLine("  Чтобы пометить ячейку, поставьте перед координатами знак вопроса ('?B7')");
-            Console.WriteLine("  Для завершения игры введите 'Exit'");
+            if (controller.GameStatus != GameStatus.GameOver)
+            {
+                Console.WriteLine("  To open a cell, enter its coordinates ('B7' for example)");
+                Console.WriteLine("  To mark a cell, enter its coordinates with '?' prefix ('?B7')");
+                Console.WriteLine("  To exit enter 'Exit'");
+            }
             Console.WriteLine();
         }
     }
