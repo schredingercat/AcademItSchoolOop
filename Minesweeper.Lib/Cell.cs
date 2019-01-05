@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Minesweeper.Lib.Annotations;
 
 namespace Minesweeper.Lib
@@ -26,7 +21,7 @@ namespace Minesweeper.Lib
 
         public bool IsMine
         {
-            get { return _isMine; }
+            get => _isMine;
             set
             {
                 _isMine = value;
@@ -36,7 +31,7 @@ namespace Minesweeper.Lib
 
         public bool IsOpen
         {
-            get { return _isOpen; }
+            get => _isOpen;
             set
             {
                 _isOpen = value;
@@ -47,7 +42,7 @@ namespace Minesweeper.Lib
 
         public bool IsMarked
         {
-            get { return _isMarked; }
+            get => _isMarked;
             set
             {
                 _isMarked = value;
@@ -97,7 +92,6 @@ namespace Minesweeper.Lib
 
             return IsMine ? "☼" : MineCount.ToString();
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

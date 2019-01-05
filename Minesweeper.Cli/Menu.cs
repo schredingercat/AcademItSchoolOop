@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Minesweeper.Cli
 {
@@ -20,7 +17,7 @@ namespace Minesweeper.Cli
             {
                 Console.SetCursorPosition(0, 3);
                 Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.NewGame ? "☼" : " ")}  New Game");
-                Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.HightScores ? "☼" : " ")}  High Scores");
+                Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.HighScores ? "☼" : " ")}  High Scores");
                 Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.Settings ? "☼" : " ")}  Settings");
                 Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.About ? "☼" : " ")}  About");
                 Console.WriteLine($"  {(controller.SelectedMainMenuItem == MainMenuItems.Exit ? "☼" : " ")}  Exit");
@@ -130,7 +127,8 @@ namespace Minesweeper.Cli
                     $"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Hard ? "☼" : " ")}  Hard");
 
                 Console.ForegroundColor = currentDifficultLevel == "Custom Level" ? ConsoleColor.Red : ConsoleColor.Black;
-                Console.WriteLine($"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Custom ? "☼" : " ")}  Custom ({controller.DifficultLevel.Width}x{controller.DifficultLevel.Height}x{controller.DifficultLevel.MinesCount})");
+                Console.WriteLine(
+                    $"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Custom ? "☼" : " ")}  Custom ({controller.DifficultLevel.Width}x{controller.DifficultLevel.Height}x{controller.DifficultLevel.MinesCount})");
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine($"  {(controller.SelectedSettingsMenuItem == SettingsMenuItems.Exit ? "☼" : " ")}  Exit to main menu");
                 var key = Console.ReadKey(true).Key;
@@ -203,7 +201,7 @@ namespace Minesweeper.Cli
                                     ShowErrorMessage("Wrong input!");
                                     break;
                                 }
-                                if ( inputMinesCount<1 || inputMinesCount > inputHeight*inputHeight - 1)
+                                if (inputMinesCount < 1 || inputMinesCount > inputHeight * inputHeight - 1)
                                 {
                                     ShowErrorMessage($"Mines count must be in range 1 to {inputHeight * inputHeight - 1}");
                                     break;

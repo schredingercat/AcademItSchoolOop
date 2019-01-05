@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Minesweeper.Lib.Annotations;
 
 namespace Minesweeper.Lib
@@ -20,7 +15,7 @@ namespace Minesweeper.Lib
 
         private int _fieldWidth;
         private int _fieldHeight;
-        private Stopwatch _stopWatch;
+        private readonly Stopwatch _stopWatch;
         public int MinesCount { get; set; }
         private int _flagsCount;
 
@@ -47,14 +42,11 @@ namespace Minesweeper.Lib
             GameStatus = GameStatus.Wait;
         }
 
-        public List<List<Cell>> Cells
-        {
-            get { return _cells; }
-        }
+        public List<List<Cell>> Cells => _cells;
 
         public GameStatus GameStatus
         {
-            get { return _gameStatus; }
+            get => _gameStatus;
             set
             {
                 _gameStatus = value;
@@ -62,14 +54,11 @@ namespace Minesweeper.Lib
             }
         }
 
-        public TimeSpan Time
-        {
-            get { return _stopWatch.Elapsed; }
-        }
+        public TimeSpan Time => _stopWatch.Elapsed;
 
         public int FieldWidth
         {
-            get { return _fieldWidth; }
+            get => _fieldWidth;
             set
             {
                 _fieldWidth = value;
@@ -79,7 +68,7 @@ namespace Minesweeper.Lib
 
         public int FieldHeight
         {
-            get { return _fieldHeight; }
+            get => _fieldHeight;
             set
             {
                 _fieldHeight = value;
@@ -89,7 +78,7 @@ namespace Minesweeper.Lib
 
         public int FlagsCount
         {
-            get { return _flagsCount; }
+            get => _flagsCount;
             set
             {
                 _flagsCount = value;
@@ -111,16 +100,22 @@ namespace Minesweeper.Lib
 
         private void OpenNearCells(Cell cell)
         {
-            cell.IsOpen = true;
-            if (cell.MineCount == 0)
+            if (cell.IsMarked)
             {
-                var nearCells = GetNearCells(cell.X, cell.Y);
-                foreach (var curentCell in nearCells)
+                cell.IsMarked = false;
+                FlagsCount++;
+            }
+
+            cell.IsOpen = true;
+
+            if (cell.MineCount != 0) return;
+            var nearCells = GetNearCells(cell.X, cell.Y);
+
+            foreach (var currentCell in nearCells)
+            {
+                if (!currentCell.IsOpen)
                 {
-                    if (!curentCell.IsOpen)
-                    {
-                        OpenNearCells(curentCell);
-                    }
+                    OpenNearCells(currentCell);
                 }
             }
         }
@@ -133,7 +128,6 @@ namespace Minesweeper.Lib
                 {
                     cell.IsOpen = true;
                 }
-
             }
         }
 
@@ -158,21 +152,16 @@ namespace Minesweeper.Lib
             OnPropertyChanged(nameof(FlagsCount));
         }
 
-        public Cell GetCell(int x, int y)
-        {
-            return _cells[y][x];
-        }
-
         public List<Cell> GetNearCells(int x, int y)
         {
             var columns = _cells[0].Count;
-            var raws = _cells.Count;
+            var rows = _cells.Count;
 
             var result = new List<Cell>();
 
             for (int i = Math.Max(0, x - 1); i <= Math.Min(columns - 1, x + 1); i++)
             {
-                for (int j = Math.Max(0, y - 1); j <= Math.Min(raws - 1, y + 1); j++)
+                for (int j = Math.Max(0, y - 1); j <= Math.Min(rows - 1, y + 1); j++)
                 {
                     result.Add(_cells[j][i]);
                 }
@@ -184,14 +173,14 @@ namespace Minesweeper.Lib
         public void PlaceMines(int firstX, int firstY, int minesCountInput)
         {
             var columns = _cells[0].Count;
-            var raws = _cells.Count;
+            var rows = _cells.Count;
             var minesCount = minesCountInput;
             var random = new Random();
 
             while (minesCount > 0)
             {
                 var x = random.Next(columns);
-                var y = random.Next(raws);
+                var y = random.Next(rows);
 
                 if (!_cells[y][x].IsMine && (x != firstX || y != firstY))
                 {
@@ -224,7 +213,6 @@ namespace Minesweeper.Lib
                             GameStatus = GameStatus.GameOver;
                             return;
                         }
-
                     }
                     else
                     {
@@ -233,9 +221,7 @@ namespace Minesweeper.Lib
                             areYouWin = false;
                         }
                     }
-
                 }
-
             }
 
             if (areYouWin)
@@ -243,9 +229,7 @@ namespace Minesweeper.Lib
                 _stopWatch.Stop();
                 GameStatus = GameStatus.Win;
             }
-
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

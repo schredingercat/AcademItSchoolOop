@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Minesweeper.Lib;
 
 namespace Minesweeper.Cli
 {
-    partial class Program
+    class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -25,7 +22,7 @@ namespace Minesweeper.Cli
                     case MainMenuItems.NewGame:
                         StartNewGame();
                         break;
-                    case MainMenuItems.HightScores:
+                    case MainMenuItems.HighScores:
                         Menu.ShowHighScores(controller);
                         break;
                     case MainMenuItems.Settings:
@@ -37,9 +34,7 @@ namespace Minesweeper.Cli
                     case MainMenuItems.Exit:
                         return;
                 }
-                
             }
-
         }
 
         public static void StartNewGame()
@@ -77,25 +72,16 @@ namespace Minesweeper.Cli
             }
         }
 
-        
         public static void ShowGameField(CliController controller)
         {
             var width = controller.FieldWidth;
-            var height = controller.FieldHeight;
-            var extraChars = new[]{'@','#', '$', '%'};
-            
+            var extraChars = new[] { '@', '#', '$', '%' };
+
             Console.Clear();
             Console.Write("               ");
             for (int i = 0; i < width; i++)
             {
-                if (i < 26)
-                {
-                    Console.Write($"{Convert.ToChar(i + 65) }  ");
-                }
-                else
-                {
-                    Console.Write($"{extraChars[i-26]}  ");
-                }
+                Console.Write(i < 26 ? $"{Convert.ToChar(i + 65)}  " : $"{extraChars[i - 26]}  ");
             }
             Console.WriteLine();
             Console.Write("               ");
@@ -107,7 +93,7 @@ namespace Minesweeper.Cli
 
             foreach (var row in controller.Field.Cells)
             {
-                Console.Write($"          {controller.Field.Cells.IndexOf(row) + 1, 2} - ");
+                Console.Write($"          {controller.Field.Cells.IndexOf(row) + 1,2} - ");
                 foreach (var cell in row)
                 {
                     Console.ForegroundColor = CliController.CellColors[cell.Status];

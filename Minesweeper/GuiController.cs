@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Minesweeper.Annotations;
@@ -18,22 +14,19 @@ namespace Minesweeper
 {
     public class GuiController : INotifyPropertyChanged
     {
-        private static readonly DifficultLevel EasyLevel = new DifficultLevel { Width = 9, Height = 9, MinesCount = 10, Name = Properties.Resources.LevelEasy};
-        private static readonly DifficultLevel MediumLevel = new DifficultLevel { Width = 16, Height = 16, MinesCount = 40, Name = Properties.Resources.LevelMedium};
-        private static readonly DifficultLevel HardLevel = new DifficultLevel { Width = 30, Height = 16, MinesCount = 99,Name = Properties.Resources.LevelHard};
-        private static readonly TimeSpan GameDuration = new TimeSpan(0,0,1,0);
+        private static readonly DifficultLevel EasyLevel = new DifficultLevel { Width = 9, Height = 9, MinesCount = 10, Name = Properties.Resources.LevelEasy };
+        private static readonly DifficultLevel MediumLevel = new DifficultLevel { Width = 16, Height = 16, MinesCount = 40, Name = Properties.Resources.LevelMedium };
+        private static readonly DifficultLevel HardLevel = new DifficultLevel { Width = 30, Height = 16, MinesCount = 99, Name = Properties.Resources.LevelHard };
 
         public Field Field { get; }
         private DifficultLevel _difficultLevel;
 
         public List<Score> HighScores { get; set; }
         public string UserName { get; set; }
-        
 
         public GuiController()
         {
             _difficultLevel = LoadSettings();
-
             Field = new Field(_difficultLevel.Width, _difficultLevel.Height, _difficultLevel.MinesCount);
 
             var dispatcherTimer = new DispatcherTimer();
@@ -55,13 +48,16 @@ namespace Minesweeper
                 _difficultLevel = value;
                 OnPropertyChanged(nameof(DifficultLevel));
             }
-
         }
 
         public int FlagsCount
         {
             get => Field.FlagsCount;
-            set => Field.FlagsCount = value;
+            set
+            {
+                Field.FlagsCount = value;
+                OnPropertyChanged(nameof(FlagsCount));
+            }
         }
 
         private void TickTimer(object sender, EventArgs e)
@@ -74,7 +70,7 @@ namespace Minesweeper
             get
             {
                 var time = Field.Time;
-                return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds/10:00}";
+                return $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds / 10:00}";
             }
         }
 
@@ -82,30 +78,13 @@ namespace Minesweeper
         {
             Field.Open(cell);
             CheckGameStatus();
+            OnPropertyChanged(nameof(FlagsCount));
         }
 
         public void Mark(Cell cell)
         {
             Field.Mark(cell);
             OnPropertyChanged(nameof(FlagsCount));
-        }
-
-        public int FieldWidth
-        {
-            get => Field.FieldWidth;
-            set => Field.FieldWidth = value;
-        }
-
-        public int FieldHeight
-        {
-            get => Field.FieldHeight;
-            set => Field.FieldHeight = value;
-        }
-
-        public int MinesCount
-        {
-            get => Field.MinesCount;
-            set => Field.MinesCount = value;
         }
 
         public void SetDifficultLevel(string level)
@@ -124,8 +103,10 @@ namespace Minesweeper
                 case "3":
                     DifficultLevel = new DifficultLevel
                     {
-                        Name = Properties.Resources.LevelCustom, Width = DifficultLevel.Width,
-                        Height = DifficultLevel.Height, MinesCount = DifficultLevel.MinesCount
+                        Name = Properties.Resources.LevelCustom,
+                        Width = DifficultLevel.Width,
+                        Height = DifficultLevel.Height,
+                        MinesCount = DifficultLevel.MinesCount
                     };
                     break;
             }
@@ -133,7 +114,7 @@ namespace Minesweeper
 
         public DifficultLevel LoadSettings()
         {
-            var difficultLevel = new DifficultLevel();
+            DifficultLevel difficultLevel;
             try
             {
                 var readFileStream = File.Open("settings.cfg", FileMode.Open);
@@ -169,7 +150,7 @@ namespace Minesweeper
             }
             catch (Exception)
             {
-                highScores.Add(new Score{Name = "John Smith", Time = new TimeSpan(0,0,0,2,15), DifficultLevel = EasyLevel});
+                highScores.Add(new Score { Name = "John Smith", Time = new TimeSpan(0, 0, 0, 2, 15), DifficultLevel = EasyLevel });
             }
             return highScores;
         }
@@ -186,7 +167,7 @@ namespace Minesweeper
 
         public void AddScores()
         {
-            HighScores.Add(new Score{Name = UserName, DifficultLevel = _difficultLevel, Time = Field.Time});
+            HighScores.Add(new Score { Name = UserName, DifficultLevel = _difficultLevel, Time = Field.Time });
             HighScores = HighScores.OrderBy(n => n.DifficultLevel).ThenBy(n => n.Time).ToList();
             SaveScores();
         }
@@ -202,16 +183,12 @@ namespace Minesweeper
             switch (GameStatus)
             {
                 case GameStatus.Win:
-                    {
-                        var congratulationsWindow = new CongratulationsWindow();
-                        congratulationsWindow.DataContext = this;
-                        congratulationsWindow.ShowDialog();
-                    }
+                    var congratulationsWindow = new CongratulationsWindow();
+                    congratulationsWindow.DataContext = this;
+                    congratulationsWindow.ShowDialog();
                     break;
                 case GameStatus.GameOver:
-                    {
-                        MessageBox.Show("Game Over!");
-                    }
+                    MessageBox.Show("Game Over!");
                     break;
             }
         }

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using Minesweeper.Lib;
 
 namespace Minesweeper
 {
-    class GameStatusToImageConverter:IValueConverter
+    class GameStatusToImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -29,7 +25,6 @@ namespace Minesweeper
                 }
 
             return source;
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

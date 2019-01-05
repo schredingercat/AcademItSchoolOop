@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-
-using System.Timers;
 using Minesweeper.Lib;
-using Timer = System.Threading.Timer;
-
 
 namespace Minesweeper.Cli
 {
@@ -19,7 +14,6 @@ namespace Minesweeper.Cli
         private static readonly DifficultLevel HardLevel = new DifficultLevel { Width = 30, Height = 16, MinesCount = 99, Name = "Hard" };
 
         public Field Field { get; }
-        private DifficultLevel _difficultLevel;
 
         public List<Score> HighScores { get; set; }
         public string UserName { get; set; }
@@ -29,9 +23,9 @@ namespace Minesweeper.Cli
 
         public CliController()
         {
-            _difficultLevel = LoadSettings();
+            DifficultLevel = LoadSettings();
 
-            Field = new Field(_difficultLevel.Width, _difficultLevel.Height, _difficultLevel.MinesCount);
+            Field = new Field(DifficultLevel.Width, DifficultLevel.Height, DifficultLevel.MinesCount);
 
             HighScores = LoadScores();
             UserName = Environment.UserName;
@@ -39,11 +33,7 @@ namespace Minesweeper.Cli
 
         public GameStatus GameStatus => Field.GameStatus;
 
-        public DifficultLevel DifficultLevel
-        {
-            get => _difficultLevel;
-            set => _difficultLevel = value;
-        }
+        public DifficultLevel DifficultLevel { get; set; }
 
         public string Timer
         {
@@ -77,12 +67,6 @@ namespace Minesweeper.Cli
             set => Field.FieldHeight = value;
         }
 
-        public int MinesCount
-        {
-            get => Field.MinesCount;
-            set => Field.MinesCount = value;
-        }
-
         public void SetDifficultLevel(string level)
         {
             switch (level)
@@ -110,7 +94,7 @@ namespace Minesweeper.Cli
 
         public DifficultLevel LoadSettings()
         {
-            var difficultLevel = new DifficultLevel();
+            DifficultLevel difficultLevel;
             try
             {
                 var readFileStream = File.Open("settings.cfg", FileMode.Open);
@@ -131,7 +115,7 @@ namespace Minesweeper.Cli
             using (var saveFileStream = File.Create("settings.cfg"))
             {
                 var serializer = new BinaryFormatter();
-                serializer.Serialize(saveFileStream, _difficultLevel);
+                serializer.Serialize(saveFileStream, DifficultLevel);
                 saveFileStream.Close();
             }
         }
@@ -165,7 +149,7 @@ namespace Minesweeper.Cli
 
         public void AddScores()
         {
-            HighScores.Add(new Score { Name = UserName, DifficultLevel = _difficultLevel, Time = Field.Time });
+            HighScores.Add(new Score { Name = UserName, DifficultLevel = DifficultLevel, Time = Field.Time });
             HighScores = HighScores.OrderBy(n => n.DifficultLevel).ThenBy(n => n.Time).ToList();
             SaveScores();
         }
@@ -211,7 +195,7 @@ namespace Minesweeper.Cli
             command = command.Replace("#", @"\");
             command = command.Replace('$', ']');
             command = command.Replace('%', '^');
-            
+
             var isMarkCommand = false;
             if (command[0] == '?')
             {
@@ -227,14 +211,13 @@ namespace Minesweeper.Cli
 
             command = command.Substring(1, command.Length - 1);
 
-            if (!int.TryParse(command, out int y) || y<1 || y> FieldHeight)
+            if (!int.TryParse(command, out int y) || y < 1 || y > FieldHeight)
             {
                 return false;
             }
             y--;
 
             var cell = Field.Cells[y][x];
-
 
             if (isMarkCommand)
             {

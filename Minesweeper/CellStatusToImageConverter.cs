@@ -1,26 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Minesweeper.Lib;
-using Minesweeper.Properties;
 
 namespace Minesweeper
 {
-    class CellStatusToImageConverter:IValueConverter
+    class CellStatusToImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var source = "../images/hidden.png";
             if (value != null)
-                switch ((CellStatus) value)
+                switch ((CellStatus)value)
                 {
                     case CellStatus.Hidden:
                         source = "../images/hidden.png";
