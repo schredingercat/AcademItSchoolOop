@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:Minesweeper.Properties"
         mc:Ignorable="d"
-        Title="CongratulationsWindow" Height="320" Width="640"
+        Title="{x:Static res:Resources.YouWin}" Height="320" Width="640"
         ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.RowDefinitions>
