@@ -3,7 +3,7 @@
 namespace Minesweeper.Lib
 {
     [Serializable]
-    public class DifficultLevel : IComparable
+    public class DifficultLevel : IComparable<DifficultLevel>
     {
         public string Name { get; set; }
         public int Width { get; set; }
@@ -15,7 +15,7 @@ namespace Minesweeper.Lib
             return Name;
         }
 
-        public int CompareTo(object obj)
+        public int CompareTo(DifficultLevel obj)
         {
             if (obj is DifficultLevel difficultLevel)
             {

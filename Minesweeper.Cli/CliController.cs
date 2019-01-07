@@ -211,7 +211,7 @@ namespace Minesweeper.Cli
 
             command = command.Substring(1, command.Length - 1);
 
-            if (!int.TryParse(command, out int y) || y < 1 || y > FieldHeight)
+            if (!int.TryParse(command, out var y) || y < 1 || y > FieldHeight)
             {
                 return false;
             }

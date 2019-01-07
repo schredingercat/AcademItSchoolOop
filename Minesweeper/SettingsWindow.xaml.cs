@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Minesweeper
 {
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow
     {
         public SettingsWindow()
         {
@@ -29,9 +17,9 @@ namespace Minesweeper
 
         private void SettingsWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            var controller = (GuiController) DataContext;
-            
-            if (!int.TryParse(TextBoxWidth.Text, out int inputWidth))
+            var controller = (GuiController)DataContext;
+
+            if (!int.TryParse(TextBoxWidth.Text, out var inputWidth))
             {
                 MessageBox.Show(Properties.Resources.WrongWidthInput);
                 e.Cancel = true;
@@ -44,8 +32,8 @@ namespace Minesweeper
                 e.Cancel = true;
                 return;
             }
-            
-            if (!int.TryParse(TextBoxHeight.Text, out int inputHeight))
+
+            if (!int.TryParse(TextBoxHeight.Text, out var inputHeight))
             {
                 MessageBox.Show(Properties.Resources.WrongHeightInput);
                 e.Cancel = true;
@@ -58,7 +46,7 @@ namespace Minesweeper
                 return;
             }
 
-            if (!int.TryParse(TextBoxMinesCount.Text, out int inputMinesCount))
+            if (!int.TryParse(TextBoxMinesCount.Text, out var inputMinesCount))
             {
                 MessageBox.Show(Properties.Resources.WrongMinesCountInput);
                 e.Cancel = true;
@@ -76,7 +64,7 @@ namespace Minesweeper
 
         private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
         {
-            ((GuiController) DataContext)?.SetDifficultLevel(((ToggleButton)sender).Tag.ToString());
+            ((GuiController)DataContext)?.SetDifficultLevel(((ToggleButton)sender).Tag.ToString());
         }
 
         private void SettingsWindow_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

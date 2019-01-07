@@ -172,7 +172,7 @@ namespace Minesweeper.Cli
                                 Console.CursorVisible = true;
                                 Console.WriteLine("Game field Width:");
 
-                                if (!int.TryParse(Console.ReadLine(), out int inputWidth))
+                                if (!int.TryParse(Console.ReadLine(), out var inputWidth))
                                 {
                                     ShowErrorMessage("Wrong input!");
                                     break;
@@ -184,7 +184,7 @@ namespace Minesweeper.Cli
                                 }
 
                                 Console.WriteLine("Game field Height:");
-                                if (!int.TryParse(Console.ReadLine(), out int inputHeight))
+                                if (!int.TryParse(Console.ReadLine(), out var inputHeight))
                                 {
                                     ShowErrorMessage("Wrong input!");
                                     break;
@@ -196,7 +196,7 @@ namespace Minesweeper.Cli
                                 }
 
                                 Console.WriteLine("Mines count:");
-                                if (!int.TryParse(Console.ReadLine(), out int inputMinesCount))
+                                if (!int.TryParse(Console.ReadLine(), out var inputMinesCount))
                                 {
                                     ShowErrorMessage("Wrong input!");
                                     break;
