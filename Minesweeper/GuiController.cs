@@ -87,6 +87,12 @@ namespace Minesweeper
             OnPropertyChanged(nameof(FlagsCount));
         }
 
+        public void OpenAroundCells(Cell cell)
+        {
+            Field.OpenAroundCells(cell);
+            CheckGameStatus();
+        }
+
         public void SetDifficultLevel(string level)
         {
             switch (level)

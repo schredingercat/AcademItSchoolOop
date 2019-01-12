@@ -108,6 +108,7 @@ namespace Minesweeper.Cli
             {
                 Console.WriteLine("  To open a cell, enter its coordinates ('B7' for example)");
                 Console.WriteLine("  To mark a cell, enter its coordinates with '?' prefix ('?B7')");
+                Console.WriteLine("  To open around unmarked cells, use a '!' prefix ('!B7')");
                 Console.WriteLine("  To exit enter 'Exit'");
             }
             Console.WriteLine();

@@ -52,6 +52,25 @@ namespace Minesweeper
             controller.Mark(cell);
         }
 
+        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Middle)
+            {
+                return;
+            }
+
+            var controller = (GuiController)DataContext;
+            if (controller.GameStatus == GameStatus.Win || controller.GameStatus == GameStatus.GameOver)
+            {
+                NewGame();
+                return;
+            }
+
+            var bindingExpression = ((Button)sender).GetBindingExpression(TagProperty);
+            var cell = (Cell)bindingExpression?.DataItem;
+            controller.OpenAroundCells(cell);
+        }
+
         private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -86,5 +105,7 @@ namespace Minesweeper
         {
             MessageBox.Show(Properties.Resources.AboutText);
         }
+
+
     }
 }

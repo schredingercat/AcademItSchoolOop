@@ -50,6 +50,12 @@ namespace Minesweeper.Cli
             CheckGameStatus();
         }
 
+        public void OpenAroundCells(Cell cell)
+        {
+            Field.OpenAroundCells(cell);
+            CheckGameStatus();
+        }
+
         public void Mark(Cell cell)
         {
             Field.Mark(cell);
@@ -197,9 +203,15 @@ namespace Minesweeper.Cli
             command = command.Replace('%', '^');
 
             var isMarkCommand = false;
+            var isOpenAroundCommand = false;
             if (command[0] == '?')
             {
                 isMarkCommand = true;
+                command = command.Substring(1, command.Length - 1);
+            }
+            else if (command[0] == '!')
+            {
+                isOpenAroundCommand = true;
                 command = command.Substring(1, command.Length - 1);
             }
 
@@ -222,6 +234,10 @@ namespace Minesweeper.Cli
             if (isMarkCommand)
             {
                 Mark(cell);
+            }
+            else if (isOpenAroundCommand)
+            {
+                OpenAroundCells(cell);
             }
             else
             {

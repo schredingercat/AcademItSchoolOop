@@ -23,6 +23,8 @@
                     Width="32" 
                     Margin="0" 
                     MouseRightButtonUp="UIElement_OnMouseRightButtonUp"
+                MouseDown="UIElement_OnMouseDown"
+                
                     Click="ButtonBase_OnClick">
                 <Button.Content>
                     <Image  Source="{Binding Path=Status, Converter={StaticResource CellStatusToImageConverter}, UpdateSourceTrigger=PropertyChanged}"/>

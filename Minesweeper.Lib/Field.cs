@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Minesweeper.Lib.Annotations;
 
@@ -96,6 +97,28 @@ namespace Minesweeper.Lib
             }
             OpenNearCells(cell);
             Refresh();
+        }
+
+        public void OpenAroundCells(Cell cell)
+        {
+            if (!cell.IsOpen)
+            {
+                return;
+            }
+
+            var aroundCloseCells = GetNearCells(cell.X, cell.Y).Where(n => !n.IsOpen).ToList();
+
+            if (aroundCloseCells.Count(n => n.IsMarked) != cell.MineCount)
+            {
+                return;
+            }
+
+            var cellsToOpen = aroundCloseCells.Where(n => !n.IsMarked).ToList();
+
+            foreach (var cellToOpen in cellsToOpen)
+            {
+                Open(cellToOpen);
+            }
         }
 
         private void OpenNearCells(Cell cell)
