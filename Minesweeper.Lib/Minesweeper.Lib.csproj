@@ -46,6 +46,7 @@
     <Compile Include="CellStatus.cs" />
     <Compile Include="DifficultLevel.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="FileOperations.cs" />
     <Compile Include="GameStatus.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

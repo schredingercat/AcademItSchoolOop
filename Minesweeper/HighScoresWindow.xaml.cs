@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using Minesweeper.Lib;
 
 namespace Minesweeper
 {
@@ -15,7 +16,7 @@ namespace Minesweeper
 
         private void HighScoresWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            ((GuiController)DataContext).SaveScores();
+            FileOperations.SaveScores(((GuiController)DataContext).HighScores);
         }
 
         private void ButtonClearScores_OnClick(object sender, RoutedEventArgs e)

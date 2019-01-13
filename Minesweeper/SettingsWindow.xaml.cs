@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using Minesweeper.Lib;
 
 namespace Minesweeper
 {
@@ -59,7 +60,7 @@ namespace Minesweeper
                 return;
             }
 
-            controller.SaveSettings();
+            FileOperations.SaveSettings(controller.DifficultLevel);
         }
 
         private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)

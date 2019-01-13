@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Threading;
 using Minesweeper.Annotations;
@@ -26,7 +24,7 @@ namespace Minesweeper
 
         public GuiController()
         {
-            _difficultLevel = LoadSettings();
+            _difficultLevel = FileOperations.LoadSettings(EasyLevel);
             Field = new Field(_difficultLevel.Width, _difficultLevel.Height, _difficultLevel.MinesCount);
 
             var dispatcherTimer = new DispatcherTimer();
@@ -34,7 +32,7 @@ namespace Minesweeper
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             dispatcherTimer.Start();
 
-            HighScores = LoadScores();
+            HighScores = FileOperations.LoadScores(EasyLevel);
             UserName = Environment.UserName;
         }
 
@@ -118,70 +116,17 @@ namespace Minesweeper
             }
         }
 
-        public DifficultLevel LoadSettings()
-        {
-            DifficultLevel difficultLevel;
-            try
-            {
-                var readFileStream = File.Open("settings.cfg", FileMode.Open);
-                var deserializer = new BinaryFormatter();
-                difficultLevel = (DifficultLevel)deserializer.Deserialize(readFileStream);
-            }
-            catch (Exception)
-            {
-                difficultLevel = EasyLevel;
-            }
-
-            return difficultLevel;
-        }
-
-        public void SaveSettings()
-        {
-            using (var saveFileStream = File.Create("settings.cfg"))
-            {
-                var serializer = new BinaryFormatter();
-                serializer.Serialize(saveFileStream, _difficultLevel);
-                saveFileStream.Close();
-            }
-        }
-
-        public List<Score> LoadScores()
-        {
-            var highScores = new List<Score>();
-            try
-            {
-                var readFileStream = File.Open("highscores.dat", FileMode.Open);
-                var deserializer = new BinaryFormatter();
-                highScores = (List<Score>)deserializer.Deserialize(readFileStream);
-            }
-            catch (Exception)
-            {
-                highScores.Add(new Score { Name = "John Smith", Time = new TimeSpan(0, 0, 0, 2, 15), DifficultLevel = EasyLevel });
-            }
-            return highScores;
-        }
-
-        public void SaveScores()
-        {
-            using (var saveFileStream = File.Create("highscores.dat"))
-            {
-                var serializer = new BinaryFormatter();
-                serializer.Serialize(saveFileStream, HighScores);
-                saveFileStream.Close();
-            }
-        }
-
         public void AddScores()
         {
             HighScores.Add(new Score { Name = UserName, DifficultLevel = _difficultLevel, Time = Field.Time });
             HighScores = HighScores.OrderBy(n => n.DifficultLevel).ThenBy(n => n.Time).ToList();
-            SaveScores();
+            FileOperations.SaveScores(HighScores);
         }
 
         public void ClearScores()
         {
             HighScores.Clear();
-            SaveScores();
+            FileOperations.SaveScores(HighScores);
         }
 
         private void CheckGameStatus()

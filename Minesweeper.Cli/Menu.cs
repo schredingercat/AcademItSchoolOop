@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Minesweeper.Lib;
 
 namespace Minesweeper.Cli
 {
@@ -62,7 +63,7 @@ namespace Minesweeper.Cli
                 Console.WriteLine();
                 Console.WriteLine();
 
-                controller.HighScores = controller.LoadScores();
+                controller.HighScores = FileOperations.LoadScores(new DifficultLevel { Width = 9, Height = 9, MinesCount = 10, Name = "Easy" });
 
                 var scores = controller.HighScores;
                 var visibleScoresCount = Math.Min(10, scores.Count);
@@ -212,7 +213,7 @@ namespace Minesweeper.Cli
                                 controller.DifficultLevel.MinesCount = inputMinesCount;
                                 break;
                             case SettingsMenuItems.Exit:
-                                controller.SaveSettings();
+                                FileOperations.SaveSettings(controller.DifficultLevel);
                                 return;
                         }
                         break;
